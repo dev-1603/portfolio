@@ -2,6 +2,9 @@
 
 A comprehensive, modern portfolio website built with SvelteKit, TypeScript, and Tailwind CSS. This portfolio showcases senior-level experience with detailed work history, professional projects, and interactive skills demonstration.
 
+
+##access  it on https://dev-1603.github.io/portfolio/
+
 ## ✨ Features
 
 - **Professional Design**: Modern, clean design with dark/light mode support
