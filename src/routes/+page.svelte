@@ -237,15 +237,36 @@
             <p class="text-primary-600 dark:text-primary-400 mb-2">{job.company}</p>
             <p class="text-dark-600 dark:text-dark-400 text-sm mb-4">{job.duration}</p>
             <p class="text-dark-700 dark:text-dark-300 text-sm mb-4">{job.description}</p>
+            
+            <!-- Key Highlights -->
+            <div class="mb-4">
+              <div class="flex flex-wrap gap-2">
+                {#each job.highlights as highlight}
+                  <span class="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs rounded-full font-medium">
+                    {highlight}
+                  </span>
+                {/each}
+              </div>
+            </div>
+            
+            <!-- Top Achievement -->
+            {#if job.achievements.length > 0}
+              <div class="mb-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                <p class="text-sm text-green-700 dark:text-green-300 font-medium mb-1">Key Achievement:</p>
+                <p class="text-sm text-green-600 dark:text-green-400">{job.achievements[0]}</p>
+              </div>
+            {/if}
+            
+            <!-- Technologies -->
             <div class="flex flex-wrap gap-2">
-              {#each job.technologies.slice(0, 3) as tech}
+              {#each job.technologies.slice(0, 4) as tech}
                 <span class="px-2 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-xs rounded-md">
                   {tech}
                 </span>
               {/each}
-              {#if job.technologies.length > 3}
+              {#if job.technologies.length > 4}
                 <span class="px-2 py-1 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-xs rounded-md">
-                  +{job.technologies.length - 3} more
+                  +{job.technologies.length - 4} more
                 </span>
               {/if}
             </div>

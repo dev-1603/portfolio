@@ -52,6 +52,27 @@
           
           <div class="flex flex-col gap-6">
             <div>
+              <h3 class="text-lg font-semibold mb-3">Key Highlights</h3>
+              <div class="flex flex-wrap gap-2 mb-4">
+                {#each currentJob.highlights as highlight}
+                  <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm rounded-full font-medium">
+                    {highlight}
+                  </span>
+                {/each}
+              </div>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold mb-3">Roles & Responsibilities</h3>
+              <ul class="space-y-2">
+                {#each currentJob.roles as role}
+                  <li class="flex items-start">
+                    <div class="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                    <span class="text-dark-700 dark:text-dark-300">{role}</span>
+                  </li>
+                {/each}
+              </ul>
+            </div>
+            <div>
               <h3 class="text-lg font-semibold mb-3">Key Achievements</h3>
               <ul class="space-y-2">
                 {#each currentJob.achievements as achievement}
@@ -117,26 +138,75 @@
                   
                   <div class="flex flex-col gap-6">
                     <div>
+                      <h4 class="font-semibold text-dark-900 dark:text-white mb-3">Key Highlights</h4>
+                      <div class="flex flex-wrap gap-2 mb-3">
+                        {#each job.highlights as highlight}
+                          <span class="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs rounded-full font-medium">
+                            {highlight}
+                          </span>
+                        {/each}
+                      </div>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-dark-900 dark:text-white mb-3">Roles & Responsibilities</h4>
+                      <ul class="space-y-2">
+                        {#each job.roles.slice(0, 4) as role}
+                          <li class="flex items-start">
+                            <div class="w-1.5 h-1.5 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <span class="text-sm text-dark-700 dark:text-dark-300">{role}</span>
+                          </li>
+                        {/each}
+                        {#if job.roles.length > 4}
+                          <li class="text-sm text-primary-600 dark:text-primary-400 font-medium">
+                            +{job.roles.length - 4} more responsibilities
+                          </li>
+                        {/if}
+                      </ul>
+                    </div>
+                    <div>
                       <h4 class="font-semibold text-dark-900 dark:text-white mb-3">Key Achievements</h4>
                       <ul class="space-y-2">
-                        {#each job.achievements as achievement}
+                        {#each job.achievements.slice(0, 3) as achievement}
                           <li class="flex items-start">
                             <div class="w-1.5 h-1.5 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
                             <span class="text-sm text-dark-700 dark:text-dark-300">{achievement}</span>
                           </li>
                         {/each}
+                        {#if job.achievements.length > 3}
+                          <li class="text-sm text-primary-600 dark:text-primary-400 font-medium">
+                            +{job.achievements.length - 3} more achievements
+                          </li>
+                        {/if}
                       </ul>
                     </div>
                     <div>
                       <h4 class="font-semibold text-dark-900 dark:text-white mb-3">Technologies</h4>
                       <div class="flex flex-wrap gap-2">
-                        {#each job.technologies as tech}
+                        {#each job.technologies.slice(0, 6) as tech}
                           <span class="px-2 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-xs rounded-md">
                             {tech}
                           </span>
                         {/each}
+                        {#if job.technologies.length > 6}
+                          <span class="px-2 py-1 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-xs rounded-md">
+                            +{job.technologies.length - 6} more
+                          </span>
+                        {/if}
                       </div>
                     </div>
+                    {#if job.majorProjects}
+                      <div>
+                        <h4 class="font-semibold text-dark-900 dark:text-white mb-3">Major Projects</h4>
+                        <div class="space-y-2">
+                          {#each job.majorProjects as project}
+                            <div class="p-3 bg-dark-50 dark:bg-dark-800 rounded-lg">
+                              <h5 class="font-medium text-dark-900 dark:text-white text-sm mb-1">{project.name}</h5>
+                              <p class="text-xs text-dark-600 dark:text-dark-400">{project.description}</p>
+                            </div>
+                          {/each}
+                        </div>
+                      </div>
+                    {/if}
                   </div>
                 </div>
               </div>

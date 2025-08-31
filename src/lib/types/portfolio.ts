@@ -8,9 +8,15 @@ export interface WorkExperience {
   endDate?: string;
   current: boolean;
   logo?: string;
+  roles: string[];
   achievements: string[];
   technologies: string[];
   description: string;
+  highlights: string[];
+  majorProjects?: {
+    name: string;
+    description: string;
+  }[];
 }
 
 export interface Project {
