@@ -52,7 +52,7 @@
   <meta name="description" content="Get in touch with {personalInfo.name} for collaboration opportunities" />
 </svelte:head>
 
-<div class="min-h-screen bg-white dark:bg-dark-900">
+<div class="max-h-screen  bg-white dark:bg-dark-900">
   <!-- Header -->
   <section class="pt-20 pb-12 bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -163,9 +163,9 @@
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                Download Feb 2025 Resume
+                Download Resume
               </a>
-              <a
+              <!-- <a
                 href={contactInfo.resume2024}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -175,7 +175,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 Download 2024 Resume
-              </a>
+              </a> -->
             </div>
           </div>
         </div>

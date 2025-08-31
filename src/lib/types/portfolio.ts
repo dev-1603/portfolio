@@ -44,6 +44,7 @@ export interface Project {
   forks?: number;
   lastUpdated?: string;
   isPublished?: boolean;
+  underDevelopment?: boolean;
 }
 
 export interface Skill {

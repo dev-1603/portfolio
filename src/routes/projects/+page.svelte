@@ -238,16 +238,49 @@
                         GitHub
                       </a>
                     {/if}
-                    {#if project.liveUrl}
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="flex-1 px-4 py-2 bg-primary-600 text-white text-center rounded-lg hover:bg-primary-700 transition-colors duration-200 text-sm font-medium"
-                      >
-                        Live Demo
-                      </a>
+                    
+                    <!-- CTA Button for Personal Projects -->
+                    {#if project.type === 'personal'}
+                      {#if project.underDevelopment}
+                        <a
+                          href="/development-in-progress?title={encodeURIComponent(project.title)}&id={project.id}"
+                          class="flex-1 px-4 py-2 bg-yellow-500 text-white text-center rounded-lg hover:bg-yellow-600 transition-colors duration-200 text-sm font-medium"
+                        >
+                          🚧 In Development
+                        </a>
+                      {:else if project.liveUrl}
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="flex-1 px-4 py-2 bg-primary-600 text-white text-center rounded-lg hover:bg-primary-700 transition-colors duration-200 text-sm font-medium"
+                        >
+                          🚀 Live Demo
+                        </a>
+                      {/if}
                     {/if}
+                    
+                    <!-- Live Demo for Professional Projects -->
+                    {#if project.type === 'professional' && project.liveUrl}
+                      {#if project.underDevelopment}
+                        <a
+                          href="/development-in-progress?title={encodeURIComponent(project.title)}&id={project.id}"
+                          class="flex-1 px-4 py-2 bg-primary-600 text-white text-center rounded-lg hover:bg-primary-700 transition-colors duration-200 text-sm font-medium"
+                        >
+                          Live Demo
+                        </a>
+                      {:else}
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="flex-1 px-4 py-2 bg-primary-600 text-white text-center rounded-lg hover:bg-primary-700 transition-colors duration-200 text-sm font-medium"
+                        >
+                          Live Demo
+                        </a>
+                      {/if}
+                    {/if}
+                    
                     {#if project.npmPackages && project.isPublished}
                       <button
                         on:click={() => openNpmModal(project)}
