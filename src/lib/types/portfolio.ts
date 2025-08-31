@@ -19,6 +19,12 @@ export interface WorkExperience {
   }[];
 }
 
+export interface NpmPackage {
+  name: string;
+  url: string;
+  description: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -30,11 +36,14 @@ export interface Project {
   technologies: string[];
   githubUrl?: string;
   liveUrl?: string;
+  npmUrl?: string;
+  npmPackages?: NpmPackage[];
   featured: boolean;
   type: 'professional' | 'personal';
   stars?: number;
   forks?: number;
   lastUpdated?: string;
+  isPublished?: boolean;
 }
 
 export interface Skill {

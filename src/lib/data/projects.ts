@@ -66,11 +66,29 @@ export const personalProjects: Project[] = [
     technologies: ['Vue.js', 'React', 'Svelte', 'TypeScript', 'Tailwind CSS', 'Storybook'],
     githubUrl: 'https://github.com/dev-1603/CelestialUI',
     liveUrl: 'https://celestialui.dev',
+    npmPackages: [
+      {
+        name: '@celestial-ui/vue',
+        url: 'https://www.npmjs.com/package/@celestial-ui/vue',
+        description: 'Vue 3 Component Library'
+      },
+      {
+        name: '@celestial-ui/react',
+        url: 'https://www.npmjs.com/package/@celestial-ui/react',
+        description: 'React Component Library'
+      },
+      {
+        name: '@celestial-ui/svelte',
+        url: 'https://www.npmjs.com/package/@celestial-ui/svelte',
+        description: 'Svelte Component Library'
+      }
+    ],
     featured: true,
     type: 'personal',
     stars: 150,
     forks: 25,
-    lastUpdated: '2024-12-01'
+    lastUpdated: '2024-12-01',
+    isPublished: true
   },
   {
     id: 'healthcare-ai',

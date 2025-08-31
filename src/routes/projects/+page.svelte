@@ -4,11 +4,14 @@
   import { personalInfo } from '$lib/data/personal';
   import { professionalProjects, personalProjects } from '$lib/data/projects';
   import type { Repository } from '$lib/types/github';
+  import NpmModal from '$lib/components/NpmModal.svelte';
 
   let githubRepos: Repository[] = [];
   let loading = true;
   let activeTab: 'professional' | 'personal' | 'github' = 'professional';
   let filteredProjects = professionalProjects;
+  let showNpmModal = false;
+  let selectedProject: any = null;
 
   onMount(async () => {
     if (browser) {
@@ -63,6 +66,16 @@
       month: 'short',
       day: 'numeric'
     });
+  }
+
+  function openNpmModal(project: any) {
+    selectedProject = project;
+    showNpmModal = true;
+  }
+
+  function closeNpmModal() {
+    showNpmModal = false;
+    selectedProject = null;
   }
 </script>
 
@@ -137,16 +150,16 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {#each filteredProjects as project, index}
             <div class="animate-scale-in" style="animation-delay: {index * 0.1}s;">
-              <div class="bg-white dark:bg-dark-900 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-dark-200 dark:border-dark-700">
+              <div class="bg-white dark:bg-dark-900 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-dark-200 dark:border-dark-700 h-full flex flex-col">
                 <!-- Project Image/Icon -->
                 <div class="h-48 bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/20 dark:to-accent-900/20 flex items-center justify-center">
                   <div class="text-4xl">🚀</div>
                 </div>
                 
                 <!-- Project Content -->
-                <div class="p-6">
+                <div class="p-6 flex flex-col flex-grow">
                   <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xl font-bold text-dark-900 dark:text-white">{project.title}</h3>
+                    <h3 class="text-xl font-bold text-dark-900 dark:text-white line-clamp-2">{project.title}</h3>
                     {#if project.type === 'professional'}
                       <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full">
                         Professional
@@ -158,7 +171,7 @@
                     {/if}
                   </div>
                   
-                  <p class="text-dark-600 dark:text-dark-300 mb-4 line-clamp-3">{project.description}</p>
+                  <p class="text-dark-600 dark:text-dark-300 mb-4 line-clamp-3 min-h-[4.5rem]">{project.description}</p>
                   
                   {#if project.role || project.company}
                     <div class="mb-4">
@@ -214,13 +227,13 @@
                   {/if}
                   
                   <!-- Action Buttons -->
-                  <div class="flex gap-3">
+                  <div class="flex gap-3 mt-auto">
                     {#if project.githubUrl}
                       <a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex-1 px-4 py-2 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-center rounded-lg hover:bg-dark-200 dark:hover:bg-dark-700 transition-colors duration-200 text-sm"
+                        class="flex-1 px-4 py-2 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-center rounded-lg hover:bg-dark-200 dark:hover:bg-dark-700 transition-colors duration-200 text-sm font-medium"
                       >
                         GitHub
                       </a>
@@ -230,9 +243,26 @@
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="flex-1 px-4 py-2 bg-primary-600 text-white text-center rounded-lg hover:bg-primary-700 transition-colors duration-200 text-sm"
+                        class="flex-1 px-4 py-2 bg-primary-600 text-white text-center rounded-lg hover:bg-primary-700 transition-colors duration-200 text-sm font-medium"
                       >
                         Live Demo
+                      </a>
+                    {/if}
+                    {#if project.npmPackages && project.isPublished}
+                      <button
+                        on:click={() => openNpmModal(project)}
+                        class="flex-1 px-4 py-2 bg-red-600 text-white text-center rounded-lg hover:bg-red-700 transition-colors duration-200 text-sm font-medium"
+                      >
+                        NPM
+                      </button>
+                    {:else if project.npmUrl && project.isPublished}
+                      <a
+                        href={project.npmUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="flex-1 px-4 py-2 bg-red-600 text-white text-center rounded-lg hover:bg-red-700 transition-colors duration-200 text-sm font-medium"
+                      >
+                        NPM
                       </a>
                     {/if}
                   </div>
@@ -332,4 +362,11 @@
       </div>
     </div>
   </section>
+
+    <!-- NPM Packages Modal -->
+  <NpmModal 
+    show={showNpmModal} 
+    project={selectedProject} 
+    onClose={closeNpmModal} 
+  />
 </div>

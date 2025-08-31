@@ -52,27 +52,6 @@
           
           <div class="flex flex-col gap-6">
             <div>
-              <h3 class="text-lg font-semibold mb-3">Key Highlights</h3>
-              <div class="flex flex-wrap gap-2 mb-4">
-                {#each currentJob.highlights as highlight}
-                  <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm rounded-full font-medium">
-                    {highlight}
-                  </span>
-                {/each}
-              </div>
-            </div>
-            <div>
-              <h3 class="text-lg font-semibold mb-3">Roles & Responsibilities</h3>
-              <ul class="space-y-2">
-                {#each currentJob.roles as role}
-                  <li class="flex items-start">
-                    <div class="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                    <span class="text-dark-700 dark:text-dark-300">{role}</span>
-                  </li>
-                {/each}
-              </ul>
-            </div>
-            <div>
               <h3 class="text-lg font-semibold mb-3">Key Achievements</h3>
               <ul class="space-y-2">
                 {#each currentJob.achievements as achievement}
@@ -101,113 +80,127 @@
 
   <!-- Work Timeline -->
   <section class="py-20">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="relative">
         <!-- Timeline line -->
-        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-dark-200 dark:bg-dark-700"></div>
+        <div class="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary-500 via-primary-400 to-primary-300"></div>
         
         <!-- Timeline items -->
         <div class="space-y-12">
           {#each workExperience as job, index}
-            <div class="relative animate-slide-up" style="animation-delay: {index * 0.1}s;">
+            <div class="relative animate-slide-up group" style="animation-delay: {index * 0.15}s;">
               <!-- Timeline dot -->
-              <div class="absolute left-6 w-4 h-4 bg-primary-500 rounded-full border-4 border-white dark:border-dark-900 transform -translate-x-1/2"></div>
+              <div class="absolute left-8 w-6 h-6 bg-primary-500 rounded-full border-4 border-white dark:border-dark-900 shadow-lg z-10 transform -translate-x-1/2 group-hover:scale-125 transition-transform duration-300 flex items-center justify-center">
+                {#if job.current}
+                  <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                {/if}
+              </div>
               
               <!-- Content -->
-              <div class="ml-16">
-                <div class="bg-white dark:bg-dark-900 rounded-xl shadow-lg p-6 border border-dark-200 dark:border-dark-700 hover:shadow-xl transition-shadow duration-300">
-                  <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+              <div class="ml-20">
+                <div class="bg-white dark:bg-dark-900 rounded-2xl shadow-xl p-8 border border-dark-200 dark:border-dark-700 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-[1.02] group-hover:border-primary-300 dark:group-hover:border-primary-600">
+                  <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
                     <div>
-                      <h3 class="text-xl font-bold text-dark-900 dark:text-white">{job.title}</h3>
-                      <p class="text-lg text-primary-600 dark:text-primary-400">{job.company}</p>
+                      <h3 class="text-2xl font-bold text-dark-900 dark:text-white mb-2">{job.title}</h3>
+                      <p class="text-lg text-primary-600 dark:text-primary-400 mb-1">{job.company}</p>
                       <p class="text-dark-600 dark:text-dark-400">{job.location}</p>
                     </div>
-                    <div class="mt-2 md:mt-0">
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300">
+                    <div class="mt-4 md:mt-0">
+                      <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300">
                         {job.duration}
                       </span>
                       {#if job.current}
-                        <span class="ml-2 inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200">
+                        <span class="ml-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 animate-pulse">
                           Current
                         </span>
                       {/if}
                     </div>
                   </div>
                   
-                  <p class="text-dark-600 dark:text-dark-300 mb-6">{job.description}</p>
+                  <p class="text-dark-600 dark:text-dark-300 mb-6 text-lg">{job.description}</p>
                   
-                  <div class="flex flex-col gap-6">
-                    <div>
-                      <h4 class="font-semibold text-dark-900 dark:text-white mb-3">Key Highlights</h4>
-                      <div class="flex flex-wrap gap-2 mb-3">
-                        {#each job.highlights as highlight}
-                          <span class="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs rounded-full font-medium">
-                            {highlight}
-                          </span>
-                        {/each}
-                      </div>
-                    </div>
-                    <div>
-                      <h4 class="font-semibold text-dark-900 dark:text-white mb-3">Roles & Responsibilities</h4>
-                      <ul class="space-y-2">
-                        {#each job.roles.slice(0, 4) as role}
-                          <li class="flex items-start">
-                            <div class="w-1.5 h-1.5 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span class="text-sm text-dark-700 dark:text-dark-300">{role}</span>
-                          </li>
-                        {/each}
-                        {#if job.roles.length > 4}
-                          <li class="text-sm text-primary-600 dark:text-primary-400 font-medium">
-                            +{job.roles.length - 4} more responsibilities
-                          </li>
-                        {/if}
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 class="font-semibold text-dark-900 dark:text-white mb-3">Key Achievements</h4>
-                      <ul class="space-y-2">
-                        {#each job.achievements.slice(0, 3) as achievement}
-                          <li class="flex items-start">
-                            <div class="w-1.5 h-1.5 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                            <span class="text-sm text-dark-700 dark:text-dark-300">{achievement}</span>
-                          </li>
-                        {/each}
-                        {#if job.achievements.length > 3}
-                          <li class="text-sm text-primary-600 dark:text-primary-400 font-medium">
-                            +{job.achievements.length - 3} more achievements
-                          </li>
-                        {/if}
-                      </ul>
-                    </div>
-                    <div>
-                      <h4 class="font-semibold text-dark-900 dark:text-white mb-3">Technologies</h4>
-                      <div class="flex flex-wrap gap-2">
-                        {#each job.technologies.slice(0, 6) as tech}
-                          <span class="px-2 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-xs rounded-md">
-                            {tech}
-                          </span>
-                        {/each}
-                        {#if job.technologies.length > 6}
-                          <span class="px-2 py-1 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-xs rounded-md">
-                            +{job.technologies.length - 6} more
-                          </span>
-                        {/if}
-                      </div>
-                    </div>
-                    {#if job.majorProjects}
+                  <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Left Column -->
+                    <div class="space-y-6">
                       <div>
-                        <h4 class="font-semibold text-dark-900 dark:text-white mb-3">Major Projects</h4>
-                        <div class="space-y-2">
-                          {#each job.majorProjects as project}
-                            <div class="p-3 bg-dark-50 dark:bg-dark-800 rounded-lg">
-                              <h5 class="font-medium text-dark-900 dark:text-white text-sm mb-1">{project.name}</h5>
-                              <p class="text-xs text-dark-600 dark:text-dark-400">{project.description}</p>
-                            </div>
+                        <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Key Highlights</h4>
+                        <div class="flex flex-wrap gap-2">
+                          {#each job.highlights as highlight}
+                            <span class="px-3 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm rounded-full font-medium hover:bg-primary-200 dark:hover:bg-primary-900/50 transition-colors duration-200">
+                              {highlight}
+                            </span>
                           {/each}
                         </div>
                       </div>
-                    {/if}
+                      
+                      <div>
+                        <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Roles & Responsibilities</h4>
+                        <ul class="space-y-3">
+                          {#each job.roles.slice(0, 5) as role}
+                            <li class="flex items-start group/item">
+                              <div class="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0 group-hover/item:scale-150 transition-transform duration-200"></div>
+                              <span class="text-sm text-dark-700 dark:text-dark-300 group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors duration-200">{role}</span>
+                            </li>
+                          {/each}
+                          {#if job.roles.length > 5}
+                            <li class="text-sm text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200 cursor-pointer">
+                              +{job.roles.length - 5} more responsibilities
+                            </li>
+                          {/if}
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="space-y-6">
+                      <div>
+                        <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Key Achievements</h4>
+                        <ul class="space-y-3">
+                          {#each job.achievements.slice(0, 4) as achievement}
+                            <li class="flex items-start group/item">
+                              <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0 group-hover/item:scale-150 transition-transform duration-200"></div>
+                              <span class="text-sm text-dark-700 dark:text-dark-300 group-hover/item:text-green-600 dark:group-hover/item:text-green-400 transition-colors duration-200">{achievement}</span>
+                            </li>
+                          {/each}
+                          {#if job.achievements.length > 4}
+                            <li class="text-sm text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors duration-200 cursor-pointer">
+                              +{job.achievements.length - 4} more achievements
+                            </li>
+                          {/if}
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Technologies</h4>
+                        <div class="flex flex-wrap gap-2">
+                          {#each job.technologies.slice(0, 8) as tech}
+                            <span class="px-3 py-2 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-sm rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/40 transition-colors duration-200 cursor-pointer">
+                              {tech}
+                            </span>
+                          {/each}
+                          {#if job.technologies.length > 8}
+                            <span class="px-3 py-2 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-sm rounded-lg hover:bg-dark-200 dark:hover:bg-dark-700 transition-colors duration-200 cursor-pointer">
+                              +{job.technologies.length - 8} more
+                            </span>
+                          {/if}
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                  
+                  {#if job.majorProjects}
+                    <div class="mt-8 pt-6 border-t border-dark-200 dark:border-dark-700">
+                      <h4 class="font-semibold text-dark-900 dark:text-white mb-4 text-lg">Major Projects</h4>
+                      <div class="grid md:grid-cols-2 gap-4">
+                        {#each job.majorProjects as project}
+                          <div class="p-4 bg-dark-50 dark:bg-dark-800 rounded-lg hover:bg-dark-100 dark:hover:bg-dark-700 transition-colors duration-200 cursor-pointer group">
+                            <h5 class="font-medium text-dark-900 dark:text-white text-sm mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">{project.name}</h5>
+                            <p class="text-xs text-dark-600 dark:text-dark-400 group-hover:text-dark-700 dark:group-hover:text-dark-300 transition-colors duration-200">{project.description}</p>
+                          </div>
+                        {/each}
+                      </div>
+                    </div>
+                  {/if}
                 </div>
               </div>
             </div>
