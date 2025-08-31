@@ -3,7 +3,8 @@ name: Build and Deploy Svelte App
 on:
   push:
     branches:
-      - main  # Change to your main branch if it's named differently
+      - main
+      # - master
 
 permissions:
   contents: write
@@ -18,22 +19,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
+      # - name: Setup pnpm
+      #   uses: pnpm/action-setup@v4
+      #   with:
+      #     version: 9
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm ci --legacy-peer-deps
 
       - name: Build
-        run: pnpm run build
+        run: npm run build
         env:
           GITHUB_PAGES: true
           DATABASE_URL: ./build.db 
@@ -42,4 +43,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./.svelte-kit/output
+          publish_dir: ./.svelte-kit/output/client
