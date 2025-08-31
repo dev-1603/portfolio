@@ -3,7 +3,8 @@ name: Build and Deploy Svelte App
 on:
   push:
     branches:
-      - main  # Change to your main branch if it's named differently
+      - main
+      # - master
 
 permissions:
   contents: write
@@ -39,7 +40,8 @@ jobs:
           DATABASE_URL: ./build.db
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: skywarth/vite-github-pages-deployer@v1.5.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./.svelte-kit/output
+          build_path: ./build
+          public_base_path: /portfolio
+          package_manager: pnpm
