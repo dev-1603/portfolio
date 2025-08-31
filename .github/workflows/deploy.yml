@@ -13,9 +13,12 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     env:
       GITHUB_PAGES: true
-      DATABASE_URL: ./build.db  # <-- Now available to all steps
+      DATABASE_URL: ./build.db
 
     steps:
       - name: Checkout code
@@ -33,9 +36,13 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Deploy to GitHub Pages
-        uses: skywarth/vite-github-pages-deployer@v1.5.0
+      # Upload build output to artifact
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          build_path: ./build
-          public_base_path: /portfolio
-          package_manager: yarn
+          path: ./build
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
