@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'  # Use 'npm' or 'yarn' if different
+          cache: 'npm'  # Use 'npm' or 'yarn' if different
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -35,10 +35,10 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: pnpm install  # Use npm/yarn if different
+        run: npm install  # Use npm/yarn if different
 
       - name: Build
-        run: pnpm run build  # Use npm/yarn if different
+        run: npm run build  # Use npm/yarn if different
         env:
           GITHUB_PAGES: true  # Critical for base path configuration
 
