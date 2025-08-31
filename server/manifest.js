@@ -10,7 +10,7 @@ return {
 	assets: new Set(["resumes/Debjyoti Resume 2025.pdf","resumes/Latest Detailed Resume Debjyoti 2024.pdf.pdf","resumes/README.md","resumes/debjyoti.JPG","robots.txt"]),
 	mimeTypes: {".pdf":"application/pdf",".md":"text/markdown",".JPG":"image/jpeg",".txt":"text/plain"},
 	_: {
-		client: {start:"_app/immutable/entry/start.DTDeffG0.js",app:"_app/immutable/entry/app.CXbp0svA.js",imports:["_app/immutable/entry/start.DTDeffG0.js","_app/immutable/chunks/Baugt1h5.js","_app/immutable/chunks/sIoAgI6b.js","_app/immutable/entry/app.CXbp0svA.js","_app/immutable/chunks/BoFT9pT0.js","_app/immutable/chunks/sIoAgI6b.js","_app/immutable/chunks/IHki7fMi.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.D3qsZ2sH.js",app:"_app/immutable/entry/app.BuqaJZxg.js",imports:["_app/immutable/entry/start.D3qsZ2sH.js","_app/immutable/chunks/CiN5_LdC.js","_app/immutable/chunks/sIoAgI6b.js","_app/immutable/entry/app.BuqaJZxg.js","_app/immutable/chunks/BoFT9pT0.js","_app/immutable/chunks/sIoAgI6b.js","_app/immutable/chunks/IHki7fMi.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
 			__memo(() => import('./nodes/0.js')),
 			__memo(() => import('./nodes/1.js')),
