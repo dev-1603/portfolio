@@ -18,27 +18,32 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'  # Use 'npm' or 'yarn' if different
+          cache: 'pnpm'  # Use pnpm for this project
 
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
           path: |
             node_modules
-            .npm
+            .pnpm-store
           key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install  # Use npm/yarn if different
+        run: pnpm install  # Use pnpm for this project
 
       - name: Build
-        run: npm run build  # Use npm/yarn if different
+        run: pnpm run build  # Use pnpm for this project
         env:
           GITHUB_PAGES: true  # Critical for base path configuration
 
