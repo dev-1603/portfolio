@@ -6,7 +6,7 @@ on:
       - main  # Change to your main branch if it's named differently
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -42,4 +42,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # Make sure this is your Vite output dir
+          publish_dir: ./.svelte-kit/output
