@@ -3,7 +3,7 @@ name: Build and Deploy Svelte App
 on:
   push:
     branches:
-      - main  # Change to your default branch if different
+      - main  # Change to your main branch if it's named differently
 
 permissions:
   contents: read
@@ -27,31 +27,18 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'pnpm'  # Use pnpm for this project
-
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: |
-            node_modules
-            .pnpm-store
-          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install  # Use pnpm for this project
+        run: pnpm install
 
       - name: Build
-        run: pnpm run build  # Use pnpm for this project
+        run: pnpm run build
         env:
-          GITHUB_PAGES: true  # Critical for base path configuration
-          DATABASE_URL: ./build.db  # Temporary database for build process
+          GITHUB_PAGES: true
 
       - name: Deploy to GitHub Pages
-        uses: skywarth/vite-github-pages-deployer@v1.5.0
-        id: deploy_to_pages
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy_to_pages.outputs.github_pages_url }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist  # Make sure this is your Vite output dir
