@@ -50,7 +50,7 @@
           <p class="text-lg text-primary-600 dark:text-primary-400 mb-4">{currentJob.company} • {currentJob.location}</p>
           <p class="text-dark-600 dark:text-dark-300 mb-6">{currentJob.description}</p>
           
-          <div class="grid md:grid-cols-2 gap-6">
+          <div class="flex flex-col gap-6">
             <div>
               <h3 class="text-lg font-semibold mb-3">Key Achievements</h3>
               <ul class="space-y-2">
@@ -115,7 +115,7 @@
                   
                   <p class="text-dark-600 dark:text-dark-300 mb-6">{job.description}</p>
                   
-                  <div class="grid md:grid-cols-2 gap-6">
+                  <div class="flex flex-col gap-6">
                     <div>
                       <h4 class="font-semibold text-dark-900 dark:text-white mb-3">Key Achievements</h4>
                       <ul class="space-y-2">
