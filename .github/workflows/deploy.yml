@@ -1,0 +1,51 @@
+name: Build and Deploy Svelte App
+
+on:
+  push:
+    branches:
+      - main  # Change to your default branch if different
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'  # Use 'npm' or 'yarn' if different
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: pnpm install  # Use npm/yarn if different
+
+      - name: Build
+        run: pnpm run build  # Use npm/yarn if different
+        env:
+          GITHUB_PAGES: true  # Critical for base path configuration
+
+      - name: Deploy to GitHub Pages
+        uses: skywarth/vite-github-pages-deployer@v1.5.0
+        id: deploy_to_pages
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy_to_pages.outputs.github_pages_url }}
