@@ -2,36 +2,58 @@ import type { Project } from '$lib/types/portfolio';
 
 export const professionalProjects: Project[] = [
   {
-    id: 'fintech-platform',
-    title: 'Fintech Payment Platform',
-    description: 'Enterprise-grade payment processing platform handling millions of transactions with real-time fraud detection and compliance features.',
-    role: 'Lead Developer',
-    company: 'TechCorp Solutions',
-    impact: 'Processed $10M+ monthly transactions, 99.99% uptime, 60% performance improvement',
-    technologies: ['Vue.js', 'Node.js', 'TypeScript', 'PostgreSQL', 'Redis', 'AWS', 'Docker'],
+    id: 'reach-mobile-ecommerce',
+    title: 'Reach Mobile E-commerce Platform',
+    description: 'Innovative e-commerce store for US telecom startup built with modern Vue/React stack. Integrated with CMS platforms for seamless content management and enhanced user experience.',
+    role: 'Software Development Engineer - 2',
+    company: 'Applore Technologies',
+    impact: 'Delivered scalable e-commerce solution for US telecom market with CMS integration',
+    technologies: ['Vue.js', 'React', 'TypeScript', 'Contentful', 'Strapi', 'Node.js', 'Tailwind CSS'],
     featured: true,
     type: 'professional'
   },
   {
-    id: 'ai-saas-platform',
-    title: 'AI-Powered SaaS Platform',
-    description: 'Comprehensive SaaS solution with AI-driven analytics, real-time collaboration, and automated workflow management.',
-    role: 'Full Stack Developer',
-    company: 'InnovateTech',
-    impact: 'Generated $2M+ annual revenue, 50K+ active users, 3-month MVP delivery',
-    technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'Socket.io', 'TensorFlow', 'Heroku'],
+    id: 'ai-multi-tenant-chat',
+    title: 'AI-Powered Multi-tenant Chat Application',
+    description: 'Sophisticated chat application with AI capabilities, robust data security, and LLM API integrations. Features dynamic component library and layout builder reducing development time by 30%.',
+    role: 'Senior Software Engineer',
+    company: 'Gate AI Pvt Ltd',
+    impact: '30% reduction in development time, secure multi-tenant architecture, AI integration',
+    technologies: ['Vue.js', 'Nuxt.js', 'TypeScript', 'JWT', 'OAuth', 'LLM APIs', 'Multi-tenant Architecture'],
     featured: true,
     type: 'professional'
   },
   {
-    id: 'ecommerce-platform',
-    title: 'E-commerce Platform',
-    description: 'High-performance e-commerce solution with advanced inventory management, payment processing, and analytics dashboard.',
+    id: 'portfolio-investment-platform',
+    title: 'Portfolio-centric Investment Platform',
+    description: 'Real-time investment tracking platform with advanced analytics, notifications, and data visualization dashboards. Built with modern fintech standards and user-centric design.',
+    role: 'Senior Software Engineer',
+    company: 'Geekyants',
+    impact: 'Real-time tracking, actionable insights, role-based workflows',
+    technologies: ['Nuxt.js', 'Vue.js', 'Firebase', 'Quasar Framework', 'Chart.js', 'TypeScript'],
+    featured: true,
+    type: 'professional'
+  },
+  {
+    id: 'no-code-platform',
+    title: 'No-Code Platform with Drag-and-Drop Builders',
+    description: 'Revolutionary no-code platform featuring drag-and-drop Schema and Layout Builders. Includes comprehensive component library with Storybook for consistent UI development.',
     role: 'Frontend Developer',
-    company: 'Digital Solutions Inc.',
-    impact: '99.9% uptime, 40% performance improvement, WCAG 2.1 AA compliance',
-    technologies: ['Vue.js', 'JavaScript', 'CSS3', 'Webpack', 'PWA', 'Stripe API'],
+    company: 'KISAI (Ideanz IT Solutions)',
+    impact: 'Reduced development cycles, enabled non-technical users, consistent UI standards',
+    technologies: ['Vue.js', 'Tailwind CSS', 'Storybook', 'Drag-and-Drop APIs', 'Component Libraries'],
     featured: true,
+    type: 'professional'
+  },
+  {
+    id: 'cms-role-based-workflow',
+    title: 'CMS with Role-based Workflows',
+    description: 'Advanced content management system with role-based workflows, dynamic content previews, and comprehensive data visualization capabilities.',
+    role: 'Senior Software Engineer',
+    company: 'Geekyants',
+    impact: 'Streamlined content management, enhanced collaboration, dynamic previews',
+    technologies: ['Vue.js', 'Quasar Framework', 'Node.js', 'Role-based Access', 'CMS Architecture'],
+    featured: false,
     type: 'professional'
   }
 ];
