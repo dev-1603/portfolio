@@ -42,5 +42,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: skywarth/vite-github-pages-deployer@v1.5.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
+          build_path: ./build
+          public_base_path: /portfolio
+          package_manager: pnpm
