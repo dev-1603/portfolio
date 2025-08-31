@@ -46,6 +46,7 @@ jobs:
         run: pnpm run build  # Use pnpm for this project
         env:
           GITHUB_PAGES: true  # Critical for base path configuration
+          DATABASE_URL: ./build.db  # Temporary database for build process
 
       - name: Deploy to GitHub Pages
         uses: skywarth/vite-github-pages-deployer@v1.5.0

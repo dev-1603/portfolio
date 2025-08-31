@@ -5,16 +5,27 @@
   export let project: any = null;
   export let onClose: () => void = () => {};
 
-  function handleBackdropClick(event: MouseEvent) {
-    if (event.target === event.currentTarget) {
+  function handleBackdropClick(event: MouseEvent | KeyboardEvent) {
+    if ('currentTarget' in event && event.target === event.currentTarget) {
       onClose();
     }
   }
 </script>
 
 {#if show && project}
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" on:click={handleBackdropClick}>
-    <div class="bg-white dark:bg-dark-900 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto" on:click|stopPropagation>
+  <div 
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+    on:click={handleBackdropClick}
+    role="button"
+    tabindex="0"
+    on:keydown={(e) => (e.key === 'Enter' || e.key === ' ') && handleBackdropClick(e)}
+    aria-label="Close modal"
+  >
+    <div 
+      class="bg-white dark:bg-dark-900 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+    >
       <div class="p-6">
         <div class="flex items-center justify-between mb-6">
           <h2 class="text-2xl font-bold text-dark-900 dark:text-white">
