@@ -77,6 +77,13 @@
     showNpmModal = false;
     selectedProject = null;
   }
+  function handleImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    if (img && img.nextElementSibling) {
+      img.style.display = 'none';
+      (img.nextElementSibling as HTMLElement).style.display = 'flex';
+    }
+  }
 </script>
 
 <svelte:head>
@@ -152,17 +159,29 @@
             <div class="animate-scale-in" style="animation-delay: {index * 0.1}s;">
               <div class="bg-white dark:bg-dark-900 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-dark-200 dark:border-dark-700 h-full flex flex-col">
                 <!-- Project Image/Icon -->
-                <div class="h-48 bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/20 dark:to-accent-900/20 flex items-center justify-center">
-                  <div class="text-4xl">🚀</div>
+                <div class="h-48 bg-gradient-to-br from-primary-100 to-accent-100 dark:from-primary-900/20 dark:to-accent-900/20 flex items-center justify-center overflow-hidden">
+                  {#if project.image}
+                    <img 
+                      src={project.image} 
+                      alt="{project.title}" 
+                      class="w-full h-full object-fit"
+                      on:error={handleImageError}
+                    />
+                    <div class="text-4xl absolute inset-0 flex items-center justify-center bg-primary-100/80 dark:bg-primary-900/40" style="display: none;">
+                      🚀
+                    </div>
+                  {:else}
+                    <div class="text-4xl">🚀</div>
+                  {/if}
                 </div>
                 
                 <!-- Project Content -->
                 <div class="p-6 flex flex-col flex-grow">
-                  <div class="flex items-center justify-between mb-3">
-                    <h3 class="text-xl font-bold text-dark-900 dark:text-white line-clamp-2">{project.title}</h3>
+                  <div class="mb-3">
+                    <h3 class="text-xl font-bold text-dark-900 dark:text-white line-clamp-2 mb-2">{project.title}</h3>
                     {#if project.type === 'professional'}
-                      <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full">
-                        Professional
+                      <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-xs rounded-full capitalize">
+                        {project.type}
                       </span>
                     {:else}
                       <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded-full">
@@ -170,7 +189,6 @@
                       </span>
                     {/if}
                   </div>
-                  
                   <p class="text-dark-600 dark:text-dark-300 mb-4 line-clamp-3 min-h-[4.5rem]">{project.description}</p>
                   
                   {#if project.role || project.company}

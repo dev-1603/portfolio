@@ -45,6 +45,7 @@ export interface Project {
   lastUpdated?: string;
   isPublished?: boolean;
   underDevelopment?: boolean;
+  order: number;
 }
 
 export interface Skill {
