@@ -6,6 +6,7 @@
 
   let showNotifyModal = false;
   let email = '';
+  let modalElement: HTMLDivElement;
 
   function handleNotifySubmit() {
     // Here you could integrate with a notification service
@@ -13,6 +14,11 @@
     alert('Thanks! We\'ll notify you when this project launches.');
     showNotifyModal = false;
     email = '';
+  }
+
+  // Focus management for modal
+  $: if (showNotifyModal && modalElement) {
+    setTimeout(() => modalElement.focus(), 100);
   }
 </script>
 
@@ -101,11 +107,30 @@
 
 <!-- Notification Modal -->
 {#if showNotifyModal}
-  <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" on:click={() => showNotifyModal = false}>
-    <div class="bg-white dark:bg-dark-900 rounded-2xl shadow-2xl max-w-md w-full p-6" on:click|stopPropagation>
+  <div 
+    bind:this={modalElement}
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" 
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+    tabindex="-1"
+  >
+    <!-- Backdrop click handler -->
+    <div 
+      class="absolute inset-0"
+      on:click={() => showNotifyModal = false}
+      on:keydown={(e) => e.key === 'Escape' && (showNotifyModal = false)}
+      role="button"
+      tabindex="-1"
+      aria-label="Close modal"
+    ></div>
+    <div 
+      class="bg-white dark:bg-dark-900 rounded-2xl shadow-2xl max-w-md w-full p-6" 
+      role="document"
+    >
       <div class="text-center">
         <div class="text-4xl mb-4">🚀</div>
-        <h3 class="text-xl font-bold text-dark-900 dark:text-white mb-2">
+        <h3 id="modal-title" class="text-xl font-bold text-dark-900 dark:text-white mb-2">
           Get Notified!
         </h3>
         <p class="text-dark-600 dark:text-dark-300 mb-6">
