@@ -9,6 +9,24 @@
     // Scroll to top when page loads
     window.scrollTo(0, 0);
   });
+
+  // Track expanded state for each job's sections
+  let expandedSections: Set<string> = new Set();
+
+  function toggleSection(jobId: string, section: string) {
+    const key = `${jobId}-${section}`;
+    if (expandedSections.has(key)) {
+      expandedSections.delete(key);
+    } else {
+      expandedSections.add(key);
+    }
+    // Trigger reactivity
+    expandedSections = expandedSections;
+  }
+
+  function isSectionExpanded(jobId: string, section: string): boolean {
+    return expandedSections.has(`${jobId}-${section}`);
+  }
 </script>
 
 <svelte:head>
@@ -136,15 +154,20 @@
                       <div>
                         <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Roles & Responsibilities</h4>
                         <ul class="space-y-3">
-                          {#each job.roles.slice(0, 5) as role}
+                          {#each job.roles.slice(0, isSectionExpanded(job.id || index.toString(), 'roles') ? job.roles.length : 5) as role}
                             <li class="flex items-start group/item">
                               <div class="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0 group-hover/item:scale-150 transition-transform duration-200"></div>
                               <span class="text-sm text-dark-700 dark:text-dark-300 group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors duration-200">{role}</span>
                             </li>
                           {/each}
                           {#if job.roles.length > 5}
-                            <li class="text-sm text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200 cursor-pointer">
-                              +{job.roles.length - 5} more responsibilities
+                            <li>
+                              <button
+                                class="w-full text-left text-sm text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200 cursor-pointer"
+                                on:click={() => toggleSection(job.id || index.toString(), 'roles')}
+                                on:keydown={(e) => e.key === 'Enter' && toggleSection(job.id || index.toString(), 'roles')}>
+                                {isSectionExpanded(job.id || index.toString(), 'roles') ? 'Show less' : `+${job.roles.length - 5} more responsibilities`}
+                              </button>
                             </li>
                           {/if}
                         </ul>
@@ -156,15 +179,20 @@
                       <div>
                         <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Key Achievements</h4>
                         <ul class="space-y-3">
-                          {#each job.achievements.slice(0, 4) as achievement}
+                          {#each job.achievements.slice(0, isSectionExpanded(job.id || index.toString(), 'achievements') ? job.achievements.length : 4) as achievement}
                             <li class="flex items-start group/item">
                               <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0 group-hover/item:scale-150 transition-transform duration-200"></div>
                               <span class="text-sm text-dark-700 dark:text-dark-300 group-hover/item:text-green-600 dark:group-hover/item:text-green-400 transition-colors duration-200">{achievement}</span>
                             </li>
                           {/each}
                           {#if job.achievements.length > 4}
-                            <li class="text-sm text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors duration-200 cursor-pointer">
-                              +{job.achievements.length - 4} more achievements
+                            <li>
+                              <button
+                                class="w-full text-left text-sm text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors duration-200 cursor-pointer"
+                                on:click={() => toggleSection(job.id || index.toString(), 'achievements')}
+                                on:keydown={(e) => e.key === 'Enter' && toggleSection(job.id || index.toString(), 'achievements')}>
+                                {isSectionExpanded(job.id || index.toString(), 'achievements') ? 'Show less' : `+${job.achievements.length - 4} more achievements`}
+                              </button>
                             </li>
                           {/if}
                         </ul>

@@ -52,7 +52,7 @@
   <meta name="description" content="Get in touch with {personalInfo.name} for collaboration opportunities" />
 </svelte:head>
 
-<div class="max-h-screen  bg-white dark:bg-dark-900">
+<div class="min-h-screen bg-white dark:bg-dark-900">
   <!-- Header -->
   <section class="pt-20 pb-12 bg-gradient-to-br from-primary-50 to-accent-50 dark:from-primary-900/20 dark:to-accent-900/20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
