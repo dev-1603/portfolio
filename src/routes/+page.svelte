@@ -304,6 +304,8 @@
 
   <!-- Scroll indicator -->
   <div class="absolute bottom-16 left-1/2 transform -translate-x-1/2 animate-bounce hidden lg:block">
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <div class="bg-white dark:bg-dark-900 rounded-full p-2 shadow-lg cursor-pointer  hover:bg-gray-100 dark:hover:bg-gray-600 hover:shadow-xl transition-shadow duration-300"
       on:click={scrollToAbout}
     >
