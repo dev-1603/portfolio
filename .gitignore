@@ -30,3 +30,10 @@ src/lib/paraglide
 
 *storybook.log
 storybook-static
+
+# Deployment and local files
+gh-pages-deploy-key*
+deploymentSteps.md
+workflows/
+drizzle/
+local.db
