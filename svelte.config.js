@@ -15,9 +15,6 @@ const config = {
 			precompress: false,
 			strict: false
 		}),
-		paths: {
-			base: process.env.GITHUB_PAGES ? '/portfolio' : '',
-		}
 	},
 	extensions: ['.svelte', '.svx']
 };
