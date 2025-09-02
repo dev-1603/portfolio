@@ -62,7 +62,7 @@ export interface ContactInfo {
   location: string;
   linkedin: string;
   github: string;
-  resume2025: string;
+  resume: string;
   resume2024: string;
 }
 

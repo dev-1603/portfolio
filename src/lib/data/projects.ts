@@ -178,6 +178,7 @@ export const personalProjects: Project[] = [
 		liveUrl: '',
 		underDevelopment: true,
 		image: '',
+    order: 1,
 		npmPackages: [
 			{
 				name: '@celestial-ui/vue',
@@ -216,6 +217,7 @@ export const personalProjects: Project[] = [
 		type: 'personal',
 		stars: 89,
 		forks: 12,
+		order: 2,
 		lastUpdated: '2024-11-15'
 	},
 	{
@@ -232,6 +234,7 @@ export const personalProjects: Project[] = [
 		type: 'personal',
 		stars: 67,
 		forks: 8,
+    order: 3,
 		lastUpdated: '2024-10-20'
 	}
 ];

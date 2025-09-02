@@ -44,6 +44,6 @@ export const contactInfo: ContactInfo = {
   location: 'Bhubaneswar, Odisha, India',
   linkedin: 'https://linkedin.com/in/debjyoti-mohapatra',
   github: 'https://github.com/dev-1603',
-  resume2025: '/resumes/Feb2025-Debjyoti-Mohapatra.pdf',
+  resume: '/resumes/Debjyoti_Resume_2025.pdf',
   resume2024: '/resumes/Latest-Detailed-Resume-2024.pdf'
 };
