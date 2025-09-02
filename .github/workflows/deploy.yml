@@ -12,8 +12,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: "file:./build.db"
+      DATABASE_URL: ./build.db
       GITHUB_PAGES: true
+      NODE_ENV: "production"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
