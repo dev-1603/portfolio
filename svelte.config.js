@@ -17,6 +17,9 @@ const config = {
 		}),
 		paths: {
 			base:  '',
+		},
+		prerender: {
+			handleHttpError: 'warn'
 		}
 	},
 	extensions: ['.svelte', '.svx']

@@ -60,6 +60,14 @@
       day: 'numeric'
     });
   }
+
+  function handleImageError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    if (img && img.nextElementSibling) {
+      img.style.display = 'none';
+      (img.nextElementSibling as HTMLElement).style.display = 'flex';
+    }
+  }
 </script>
 
 <svelte:head>
@@ -186,10 +194,10 @@
             <div class="w-full h-full bg-gradient-to-br from-primary-200 via-accent-200 to-primary-300 dark:from-primary-800 dark:via-accent-800 dark:to-primary-700 rounded-full flex items-center justify-center shadow-2xl hover:shadow-3xl transition-shadow duration-300 relative overflow-hidden">
               <!-- Replace this div with your actual image -->
               <img 
-                src="/path-to-your-avatar.jpg" 
+                src="/resumes/myAvatar.png" 
                 alt="{personalInfo.name}" 
                 class="w-full h-full object-cover rounded-full"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                on:error={handleImageError}
               />
               <div class="text-7xl text-primary-600 dark:text-primary-400" style="display: none;">
                 👨‍💻
