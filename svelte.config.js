@@ -15,6 +15,9 @@ const config = {
 			precompress: false,
 			strict: false
 		}),
+		paths: {
+			base:  '',
+		}
 	},
 	extensions: ['.svelte', '.svx']
 };

@@ -1,4 +1,4 @@
-name: Build and Deploy Svelte App
+name: Build and Deploy to dev-1603.github.io
 
 on:
   push:
@@ -7,19 +7,10 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    env:
-      GITHUB_PAGES: true
-      DATABASE_URL: ./build.db
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -36,13 +27,12 @@ jobs:
       - name: Build
         run: yarn build
 
-      # Upload build output to artifact
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./build
-
-      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v1
+        with:
+          deploy_key: ${{ secrets.DEPLOY_KEY }}
+          external_repository: dev-1603/dev-1603.github.io
+          publish_branch: main
+          publish_dir: ./build
+          force_orphan: true
+          commit_message: "Deploy from portfolio-website - ${{ github.sha }}"
