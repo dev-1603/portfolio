@@ -115,6 +115,7 @@ Source: Portfolio Website Contact Form
       `
     };
 
+    console.log('Mail paswordcheck:', (env.EMAIL_PASS?.length +24)/10);
     // Send email
     await transporter.sendMail(mailOptions);
 
