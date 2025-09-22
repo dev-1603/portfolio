@@ -14,6 +14,7 @@ jobs:
     env:
       DATABASE_URL: ./build.db
       GITHUB_PAGES: true
+      EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,6 +29,8 @@ jobs:
           rm -rf node_modules
           rm -rf .svelte-kit
           rm -rf build
+      
+      
 
       - name: Install dependencies
         run: yarn install
