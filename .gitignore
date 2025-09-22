@@ -36,3 +36,9 @@ gh-pages-deploy-key*
 deploymentSteps.md
 drizzle/
 local.db
+
+# Local files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+bun.lockb

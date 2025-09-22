@@ -26,11 +26,20 @@
     submitError = '';
 
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactForm),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message');
+      }
       
-      // In a real app, you'd send this to your backend
-      console.log('Contact form submitted:', contactForm);
       
       submitSuccess = true;
       contactForm = { name: '', email: '', subject: '', message: '' };
@@ -40,7 +49,8 @@
         submitSuccess = false;
       }, 5000);
     } catch (error) {
-      submitError = 'Failed to send message. Please try again.';
+      console.error('Contact form error:', error);
+      submitError = (error as Error).message || 'Failed to send message. Please try again.';
     } finally {
       submitting = false;
     }

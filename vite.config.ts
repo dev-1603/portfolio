@@ -1,17 +1,21 @@
 import { paraglideVitePlugin } from '@inlang/paraglide-js';
 import devtoolsJson from 'vite-plugin-devtools-json';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 
-export default defineConfig({
-	plugins: [
-		sveltekit(),
-		devtoolsJson(),
-		paraglideVitePlugin({
-			project: './project.inlang',
-			outdir: './src/lib/paraglide'
-		})
-	],
+export default defineConfig(({ mode }) => {
+	// Load env file based on `mode` in the current working directory.
+	const env = loadEnv(mode, process.cwd(), '');
+	
+	return {
+		plugins: [
+			sveltekit(),
+			devtoolsJson(),
+			paraglideVitePlugin({
+				project: './project.inlang',
+				outdir: './src/lib/paraglide'
+			})
+		],
 	test: {
 		expect: { requireAssertions: true },
 		projects: [
@@ -46,7 +50,8 @@ export default defineConfig({
 			overlay: false
 		}
 	},
-	build: {
-		outDir: 'dist' // Default for Vite
-	  }
+		build: {
+			outDir: 'dist' // Default for Vite
+		}
+	};
 });
