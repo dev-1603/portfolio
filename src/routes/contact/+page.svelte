@@ -26,6 +26,8 @@
     submitError = '';
 
     try {
+      console.log('Sending contact form data:', contactForm);
+      
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -34,7 +36,19 @@
         body: JSON.stringify(contactForm),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', response.headers);
+      
+      // Check if response is JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        console.error('Non-JSON response:', text);
+        throw new Error('Server returned non-JSON response');
+      }
+      
       const result = await response.json();
+      console.log('Response result:', result);
 
       if (!response.ok) {
         throw new Error(result.error || 'Failed to send message');
