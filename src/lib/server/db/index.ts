@@ -5,16 +5,16 @@ import { env } from '$env/dynamic/private';
 
 let db: ReturnType<typeof drizzle>;
 
-// Check if we're in a build environment
-const isBuildTime = process.env.NODE_ENV === 'production' && process.env.GITHUB_PAGES === 'true';
+// Check if we're in a build environment (Vercel, GitHub Pages, or CI)
+const isBuildTime = 
+  process.env.VERCEL === '1' || 
+  process.env.GITHUB_PAGES === 'true' || 
+  process.env.CI === 'true' ||
+  !env.DATABASE_URL;
 
 try {
-  if (!env.DATABASE_URL) {
-    throw new Error('DATABASE_URL is not set');
-  }
-  
   // Skip database initialization during build time
-  if (isBuildTime) {
+  if (isBuildTime || !env.DATABASE_URL) {
     console.log('Skipping database initialization during build time');
     db = {} as any;
   } else {
