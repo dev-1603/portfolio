@@ -180,7 +180,7 @@
             <div class="space-y-3">
               <a
                 href={contactInfo.resume}
-              download="Debjyoti_Resume_2025.pdf"
+              download="Debjyoti_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200 focus-ring"

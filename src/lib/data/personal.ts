@@ -45,5 +45,5 @@ export const contactInfo: ContactInfo = {
   linkedin: 'https://linkedin.com/in/debjyoti-mohapatra',
   github: 'https://github.com/dev-1603',
   resume: '/resumes/Debjyoti_Resume_2025.pdf',
-  resume2024: '/resumes/Latest-Detailed-Resume-2024.pdf'
+  resume2024: '/resumes/Debjyoti_Mohapatra-SeniorSoftwareDeveloper.pdf'
 };
