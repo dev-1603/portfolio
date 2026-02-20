@@ -5,6 +5,7 @@
   import { professionalProjects, personalProjects } from '$lib/data/projects';
   import type { Repository } from '$lib/types/github';
   import { NpmModal, ProjectCard } from '$lib/components';
+  import { fetchGitHubRepos } from '$lib/github';
 
   let githubRepos: Repository[] = [];
   let loading = true;
@@ -18,29 +19,14 @@
 
   onMount(async () => {
     if (browser) {
-      await fetchGitHubRepos();
+      await loadGithubRepos();
     }
   });
-
-  async function fetchGitHubRepos() {
+ 
+  async function loadGithubRepos() {
     try {
       loading = true;
-      const response = await fetch('https://api.github.com/users/dev-1603/repos?sort=updated&per_page=12');
-      if (!response.ok) throw new Error('Failed to fetch repositories');
-      
-      const repos = await response.json();
-      githubRepos = repos.map((repo: any) => ({
-        id: repo.id,
-        name: repo.name,
-        description: repo.description,
-        html_url: repo.html_url,
-        homepage: repo.homepage,
-        language: repo.language,
-        stargazers_count: repo.stargazers_count,
-        forks_count: repo.forks_count,
-        updated_at: repo.updated_at,
-        topics: repo.topics || []
-      }));
+      githubRepos = await fetchGitHubRepos('dev-1603', 50);
     } catch (err) {
       console.error('Error fetching repos:', err);
     } finally {

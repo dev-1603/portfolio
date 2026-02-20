@@ -28,6 +28,22 @@ transporter.verify((error, success) => {
     console.log('Email transporter is ready to send messages');
   }
 });
+// Common CORS headers for preflight and responses
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type'
+};
+
+// Simple GET for smoke-testing the endpoint in production
+export const GET: RequestHandler = async () => {
+  return json({ ok: true }, { status: 200, headers: CORS_HEADERS });
+};
+
+// Handle preflight requests
+export const OPTIONS: RequestHandler = async () => {
+  return new Response(null, { status: 204, headers: CORS_HEADERS });
+};
 
 export const POST: RequestHandler = async ({ request }: { request: Request }) => {
   try {
@@ -45,7 +61,7 @@ export const POST: RequestHandler = async ({ request }: { request: Request }) =>
     if (!name || !email || !message) {
       return json(
         { error: 'Missing required fields: name, email, and message are required' },
-        { status: 400 }
+        { status: 400, headers: CORS_HEADERS }
       );
     }
 
@@ -54,7 +70,7 @@ export const POST: RequestHandler = async ({ request }: { request: Request }) =>
     if (!emailRegex.test(email)) {
       return json(
         { error: 'Invalid email format' },
-        { status: 400 }
+        { status: 400, headers: CORS_HEADERS }
       );
     }
 
@@ -65,7 +81,7 @@ export const POST: RequestHandler = async ({ request }: { request: Request }) =>
           error: 'Email service not configured. Please set EMAIL_PASS environment variable.',
           details: 'Missing EMAIL_PASS in environment variables'
         },
-        { status: 500 }
+        { status: 500, headers: CORS_HEADERS }
       );
     }
 
@@ -117,14 +133,15 @@ Source: Portfolio Website Contact Form
 
     console.log('Mail paswordcheck:', (env.EMAIL_PASS?.length +24)/10);
     // Send email
-    await transporter.sendMail(mailOptions);
+    const result = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', result);
 
     return json(
       { 
         success: true, 
         message: 'Email sent successfully' 
       },
-      { status: 200 }
+      { status: 200, headers: CORS_HEADERS }
     );
 
   } catch (error) {
@@ -147,7 +164,7 @@ Source: Portfolio Website Contact Form
         error: userMessage,
         details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
       },
-      { status: 500 }
+      { status: 500, headers: CORS_HEADERS }
     );
   }
 };

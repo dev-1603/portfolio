@@ -55,7 +55,7 @@ export const workExperience: WorkExperience[] = [
       'Successfully integrated diverse LLMs for advanced AI-powered interactions',
       'Ensured regulatory compliance with data privacy protocols'
     ],
-    technologies: ['Vue.js 2&3', 'Nuxt.js 3', 'Node.js', 'Express.js', 'MySQL', 'Sequelize', 'LangChain', 'TypeScript', 'Tailwind CSS', 'Pinia', 'JWT/OAuth'],
+    technologies: ['Vue 2', 'Vue 3', 'Nuxt 2', 'Nuxt 3', 'Node.js', 'Express.js', 'MySQL', 'Sequelize', 'LangChain', 'TypeScript', 'Tailwind CSS', 'Pinia', 'JWT/OAuth'],
     description: 'Developed AI-powered applications with focus on security, scalability, and innovative solutions.',
     highlights: ['AI Integration', '30% Time Reduction', 'Multi-tenant Architecture', 'Security Implementation']
   },
@@ -87,7 +87,7 @@ export const workExperience: WorkExperience[] = [
       'Optimized performance and user experience with server-side rendering',
       'Streamlined operations through comprehensive admin console'
     ],
-    technologies: ['Vue.js 2&3', 'Nuxt.js 2&3', 'Quasar v2', 'TypeScript', 'Node.js', 'Firebase', 'PostgreSQL', 'Docker', 'Kubernetes', 'GCP', 'Chart.js', 'E-charts'],
+    technologies: ['Vue 2', 'Vue 3', 'Nuxt 2', 'Nuxt 3', 'Quasar v2', 'TypeScript', 'Node.js', 'Firebase', 'PostgreSQL', 'Docker', 'Kubernetes', 'GCP', 'Chart.js', 'E-charts'],
     description: 'Developed fintech and CMS solutions with focus on real-time data processing and user experience.',
     highlights: ['Fintech Platform', 'Real-time Tracking', 'Data Visualization', 'SSR Implementation'],
     majorProjects: [

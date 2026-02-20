@@ -7,12 +7,25 @@
   import { skills, skillCategories } from '$lib/data/skills';
   import type { Repository } from '$lib/types/github';
   import { ProjectCard } from '$lib/components';
+  import { fetchGitHubRepos } from '$lib/github';
 
   let githubRepos: Repository[] = [];
   let loading = true;
   let selectedCategory = 'all';
   let filteredSkills = skills;
   let expandedDescriptions: Set<number> = new Set();
+  // Track which work-experience cards have their technologies expanded
+  let expandedTech: Set<number> = new Set();
+
+  function toggleTech(i: number) {
+    if (expandedTech.has(i)) {
+      expandedTech.delete(i);
+    } else {
+      expandedTech.add(i);
+    }
+    // Reassign to trigger Svelte reactivity for Set mutations
+    expandedTech = new Set(expandedTech);
+  }
 
   // Computed properties for sorted projects
   $: sortedProfessionalProjects = professionalProjects
@@ -25,29 +38,14 @@
 
   onMount(async () => {
     if (browser) {
-      await fetchGitHubRepos();
+      await loadGithubRepos();
     }
   });
 
-  async function fetchGitHubRepos() {
+  async function loadGithubRepos() {
     try {
       loading = true;
-      const response = await fetch('https://api.github.com/users/dev-1603/repos?sort=updated&per_page=6');
-      if (!response.ok) throw new Error('Failed to fetch repositories');
-      
-      const repos = await response.json();
-      githubRepos = repos.map((repo: any) => ({
-        id: repo.id,
-        name: repo.name,
-        description: repo.description,
-        html_url: repo.html_url,
-        homepage: repo.homepage,
-        language: repo.language,
-        stargazers_count: repo.stargazers_count,
-        forks_count: repo.forks_count,
-        updated_at: repo.updated_at,
-        topics: repo.topics || []
-      }));
+      githubRepos = await fetchGitHubRepos('dev-1603', 6);
     } catch (err) {
       console.error('Error fetching repos:', err);
     } finally {
@@ -432,10 +430,31 @@
                   {tech}
                 </span>
               {/each}
+
               {#if job.technologies.length > 4}
-                <span class="px-2 py-1 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-xs rounded-md">
-                  +{job.technologies.length - 4} more
-                </span>
+                {#if expandedTech.has(index)}
+                  {#each job.technologies.slice(4) as tech}
+                    <span class="px-2 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-xs rounded-md">
+                      {tech}
+                    </span>
+                  {/each}
+
+                  <button
+                    on:click={() => toggleTech(index)}
+                    aria-expanded={expandedTech.has(index)}
+                    class="px-2 py-1 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-xs rounded-md focus-ring"
+                  >
+                    Show less
+                  </button>
+                {:else}
+                  <button
+                    on:click={() => toggleTech(index)}
+                    aria-expanded={expandedTech.has(index)}
+                    class="px-2 py-1 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-xs rounded-md focus-ring"
+                  >
+                    +{job.technologies.length - 4} more
+                  </button>
+                {/if}
               {/if}
             </div>
           </div>
