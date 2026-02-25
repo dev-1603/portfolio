@@ -1,5 +1,5 @@
 import { mdsvex } from 'mdsvex';
-import adapter from '@sveltejs/adapter-static';
+import adapterStatic from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -7,19 +7,18 @@ const config = {
 	// Consult https://svelte.dev/docs/kit/integrations
 	// for more information about preprocessors
 	preprocess: [vitePreprocess(), mdsvex()],
-	kit: { 
-		adapter: adapter({
-			pages: 'build',
-			assets: 'build',
-			fallback: 'index.html',
-			precompress: false,
+	kit: {
+		adapter: adapterStatic({
+			// GitHub Pages has no server; strict: false allows dynamic routes to be skipped
+			// so the rest of the site is still generated (main pages work, /api/contact will 404).
 			strict: false
 		}),
 		paths: {
-			base:  '',
+			base: ''
 		},
 		prerender: {
-			handleHttpError: 'warn'
+			handleHttpError: 'warn',
+			entries: ['*']
 		}
 	},
 	extensions: ['.svelte', '.svx']
