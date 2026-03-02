@@ -7,10 +7,10 @@ const formatExperienceText = () => {
   const diffTime = currentDate.getTime() - startDate.getTime();
   const diffDays = diffTime / (1000 * 60 * 60 * 24);
   const exactYears = diffDays / 365;
-  
+
   // Calculate months difference
   const monthsDifference = (exactYears - Math.floor(exactYears)) * 12;
-  
+
   if (monthsDifference < 6) {
     // Less than 6 months: show as "X+ years"
     return `${Math.floor(exactYears)}+ years`;
@@ -44,6 +44,6 @@ export const contactInfo: ContactInfo = {
   location: 'Bhubaneswar, Odisha, India',
   linkedin: 'https://linkedin.com/in/debjyoti-mohapatra',
   github: 'https://github.com/dev-1603',
-  resume: '/resumes/Debjyoti_Resume_2025.pdf',
+  resume: '/resumes/Debjyoti Mohapatra-Resume.pdf',
   resume2024: '/resumes/Debjyoti_Mohapatra-SeniorSoftwareDeveloper.pdf'
 };

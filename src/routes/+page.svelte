@@ -163,7 +163,7 @@
             </a>
             <a
               href={contactInfo.resume}
-              download="Debjyoti_Resume_2025.pdf"
+              download="Debjyoti Mohapatra-Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               class="px-8 py-4 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 hover:bg-dark-200 dark:hover:bg-dark-700 font-semibold rounded-lg transition-all duration-200 focus-ring transform hover:scale-105"
