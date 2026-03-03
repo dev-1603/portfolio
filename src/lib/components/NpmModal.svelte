@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { NpmPackage } from '$lib/types/portfolio';
+  import { Icon } from '$lib/components';
 
   export let show: boolean = false;
   export let project: any = null;
@@ -35,9 +36,7 @@
             on:click={onClose}
             class="text-dark-400 hover:text-dark-600 dark:text-dark-500 dark:hover:text-dark-300 transition-colors duration-200"
           >
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <Icon name="close" className="w-6 h-6" />
           </button>
         </div>
         
@@ -58,9 +57,7 @@
               <p class="text-dark-600 dark:text-dark-300 text-sm group-hover:text-dark-700 dark:group-hover:text-dark-200 transition-colors duration-200">{npmPackage.description}</p>
               <div class="mt-3 flex items-center text-red-600 dark:text-red-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 <span>View on NPM</span>
-                <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                <Icon name="arrow-right" className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-200" />
               </div>
             </a>
           {/each}

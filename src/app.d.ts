@@ -1,3 +1,11 @@
+/// <reference types="@sveltejs/kit" />
+
+// SVG raw import for Icon component
+declare module '*.svg?raw' {
+  const content: string;
+  export default content;
+}
+
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
