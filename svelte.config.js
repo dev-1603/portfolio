@@ -11,7 +11,9 @@ const config = {
 		adapter: adapterStatic({
 			// GitHub Pages has no server; strict: false allows dynamic routes to be skipped
 			// so the rest of the site is still generated (main pages work, /api/contact will 404).
-			strict: false
+			strict: false,
+			// Serve this page for unknown paths (e.g. refresh on /projects) so client-side routing works.
+			fallback: '200.html'
 		}),
 		paths: {
 			base: ''
