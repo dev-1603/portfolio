@@ -181,7 +181,7 @@ For higher rate limits when fetching GitHub repositories:
 ### Build Errors
 
 1. **Check Node.js version**: Ensure you're using Node.js 18+
-2. **Clear cache**: `rm -rf node_modules pnpm-lock.yaml && pnpm install`
+2. **Clear cache** (local only; keep `pnpm-lock.yaml` committed for CI): `rm -rf node_modules && pnpm install`
 3. **Check dependencies**: Ensure all required packages are installed
 
 ### GitHub API Issues
@@ -195,6 +195,23 @@ For higher rate limits when fetching GitHub repositories:
 1. **Build failures**: Check build logs for specific errors
 2. **Environment variables**: Ensure all required env vars are set
 3. **Domain issues**: Verify DNS configuration
+
+### GitHub Actions: "Dependencies lock file is not found" (pnpm-lock.yaml)
+
+1. **Commit the lock file**: `pnpm-lock.yaml` must be tracked so CI can use it. Ensure it is **not** in `.gitignore`. If it was ignored before, add and commit it:
+   ```bash
+   git add -f pnpm-lock.yaml
+   git commit -m "chore: track pnpm-lock.yaml for CI"
+   git push
+   ```
+2. **Monorepos**: If the repo root does not contain `package.json` / `pnpm-lock.yaml` (e.g. they live in a subfolder like `portfolio-website/`), set the job’s working directory so the workflow runs from the app folder:
+   ```yaml
+   jobs:
+     build-and-deploy:
+       defaults:
+         run:
+           working-directory: portfolio-website  # or your app subfolder
+   ```
 
 ## 📊 Performance Optimization
 
