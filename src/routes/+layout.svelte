@@ -3,6 +3,7 @@
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import { browser } from '$app/environment';
+  import { Analytics } from '@vercel/analytics/svelte';
 
   let darkMode = false;
   let mobileMenuOpen = false;
@@ -178,4 +179,5 @@
       </div>
     </div>
   </footer>
+  <Analytics />
 </div>

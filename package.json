@@ -58,6 +58,7 @@
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
     "@types/nodemailer": "^7.0.1",
+    "@vercel/analytics": "^1.6.1",
     "better-sqlite3": "^11.8.0",
     "dotenv": "^17.2.2",
     "drizzle-orm": "^0.40.0",
