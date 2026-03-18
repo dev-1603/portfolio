@@ -198,9 +198,9 @@ export const personalProjects: Project[] = [
 		],
 		featured: true,
 		type: 'personal',
-		stars: 150,
-		forks: 25,
-		lastUpdated: '2024-12-01',
+    stars: 0,
+    forks: 0,
+    lastUpdated: Date.now().toString(),
 		isPublished: true
 	},
 	{
@@ -209,16 +209,16 @@ export const personalProjects: Project[] = [
 		description:
 			'AI-powered healthcare application providing personalized health recommendations and symptom analysis using machine learning.',
 		technologies: ['Python', 'FastAPI', 'React', 'TensorFlow', 'PostgreSQL', 'Docker'],
-		githubUrl: 'https://github.com/dev-1603/healthcare-ai',
+    // githubUrl: 'https://github.com/dev-1603/healthcare-ai',
 		liveUrl: '',
 		underDevelopment: true,
 		image: '',
 		featured: true,
 		type: 'personal',
-		stars: 89,
-		forks: 12,
+    stars: 0,
+    forks: 0,
 		order: 2,
-		lastUpdated: '2024-11-15'
+    lastUpdated: Date.now().toString()
 	},
 	{
 		id: 'nexus-commerce',
@@ -232,9 +232,9 @@ export const personalProjects: Project[] = [
 		image: '',
 		featured: true,
 		type: 'personal',
-		stars: 67,
-		forks: 8,
+    stars: 0,
+    forks: 0,
     order: 3,
-		lastUpdated: '2024-10-20'
+    lastUpdated: Date.now().toString()
 	}
 ];
