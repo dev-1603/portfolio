@@ -1,11 +1,7 @@
 <script lang="ts">
   import { workExperience } from '$lib/data/work-experience';
-  import { personalInfo, siteMeta } from '$lib/data/personal';
+  import { personalInfo } from '$lib/data/personal';
   import { onMount } from 'svelte';
-
-  const pageTitle = `Work experience — ${personalInfo.name}`;
-  const pageDesc =
-    'Nine production applications across five ecosystems: GenAI, fintech, telecom MVNO, no-code SaaS, and industrial CRM—from blank repo to production.';
 
   let currentJob = workExperience.find(job => job.current);
 
@@ -34,15 +30,8 @@
 </script>
 
 <svelte:head>
-  <title>{pageTitle}</title>
-  <meta name="description" content={pageDesc} />
-  <meta property="og:url" content="{siteMeta.siteUrl}/work-experience" />
-  <meta property="og:title" content={pageTitle} />
-  <meta property="og:description" content={pageDesc} />
-  <meta property="og:image" content={siteMeta.ogImageUrl} />
-  <meta name="twitter:title" content={pageTitle} />
-  <meta name="twitter:description" content={pageDesc} />
-  <meta name="twitter:image" content={siteMeta.ogImageUrl} />
+  <title>Work Experience - {personalInfo.name}</title>
+  <meta name="description" content="Professional work experience and career timeline of {personalInfo.name}" />
 </svelte:head>
 
 <div class="min-h-screen bg-white dark:bg-dark-900">
@@ -54,7 +43,7 @@
           Work Experience
         </h1>
         <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-          {pageDesc}
+          {personalInfo.yearsOfExperience}+ years of experience building scalable applications across fintech, AI, and SaaS domains.
         </p>
       </div>
     </div>
@@ -252,9 +241,9 @@
   <!-- CTA Section -->
   <section class="py-20 bg-dark-50 dark:bg-dark-800">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold mb-4">Ready to work together?</h2>
+      <h2 class="text-3xl font-bold mb-4">Ready to Work Together?</h2>
       <p class="text-xl text-dark-600 dark:text-dark-300 mb-8">
-        Full-time, contract, or advisory: if you need someone who ships whole products—not just tickets—send a note with scope and timeline.
+        I'm always interested in new opportunities and exciting projects. Let's discuss how I can help bring your ideas to life.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a

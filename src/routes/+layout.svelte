@@ -6,9 +6,6 @@
   import { injectAnalytics } from '@vercel/analytics/sveltekit';
   import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
   import { Icon } from '$lib/components';
-  import { personalInfo, siteMeta } from '$lib/data/personal';
-
-  $: canonicalUrl = `${siteMeta.siteUrl}${$page.url.pathname}`;
 
   let darkMode = false;
   let mobileMenuOpen = false;
@@ -58,16 +55,10 @@
 </script>
 
 <svelte:head>
+  <title>Debjyoti Mohapatra - Full Stack Developer</title>
+  <meta name="description" content="Senior Full Stack Developer specializing in Vue.js, React, TypeScript, and Node.js. Building modern web applications with cutting-edge technologies." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="/favicon.svg" />
-  <link rel="canonical" href={canonicalUrl} />
-  <meta name="author" content={personalInfo.name} />
-  <meta property="og:site_name" content={personalInfo.name} />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content={siteMeta.ogImageUrl} />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content={siteMeta.ogImageUrl} />
 </svelte:head>
 
 <div class="min-h-screen bg-white dark:bg-dark-900 text-dark-900 dark:text-white transition-colors duration-300">
@@ -161,7 +152,7 @@
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
         <div class="text-sm text-dark-600 dark:text-dark-400">
-          © 2026 Debjyoti Mohapatra
+          © 2024 Debjyoti Mohapatra. All rights reserved.
         </div>
         <div class="flex space-x-6">
           <a

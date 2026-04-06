@@ -1,51 +1,49 @@
 import type { PersonalInfo, ContactInfo } from '$lib/types/portfolio';
 
-/** Shown in hero badge (static copy aligned to ~6.5y narrative). */
-export const heroExperienceLabel = '6.5+ Years';
+// Format experience display text based on months difference
+const formatExperienceText = () => {
+  const startDate = new Date('2019-10-01');
+  const currentDate = new Date();
+  const diffTime = currentDate.getTime() - startDate.getTime();
+  const diffDays = diffTime / (1000 * 60 * 60 * 24);
+  const exactYears = diffDays / 365;
 
-export const siteMeta = {
-	siteUrl: 'https://debjyoti.in',
-	/** Use absolute URL for OG/Twitter when prerendering */
-	ogImagePath: '/resumes/myAvatar.png',
-	get ogImageUrl() {
-		return `${this.siteUrl}${this.ogImagePath}`;
-	}
+  // Calculate months difference
+  const monthsDifference = (exactYears - Math.floor(exactYears)) * 12;
+
+  if (monthsDifference < 6) {
+    // Less than 6 months: show as "X+ years"
+    return `${Math.floor(exactYears)}+ years`;
+  } else {
+    // 6 months or more: show as "about X+1 years"
+    return `about ${Math.ceil(exactYears)} years`;
+  }
 };
 
+const yearsOfExperience = Math.floor((new Date().getTime() - new Date('2019-10-01').getTime()) / (1000 * 60 * 60 * 24 * 365));
+export const experienceText = formatExperienceText();
+
 export const personalInfo: PersonalInfo = {
-	name: 'Debjyoti Mohapatra',
-	title: 'Full Stack Engineer',
-	yearsOfExperience: 6,
-	domains: ['GenAI / AI', 'Fintech', 'Telecom (MVNO)', 'SaaS / Low-code'],
-	summary:
-		'9 applications built from scratch and shipped to production. Fintech, GenAI, telecom, SaaS — every time starting from an empty repo.',
-	aboutIntro:
-		'Nine production apps across five product ecosystems. I start from blank repos and own the stack through to stable releases.',
-	about: `I've spent 6.5 years building products from zero. Not adding features to someone else's codebase — starting from blank repos and owning everything through to production.
+  name: 'Debjyoti Mohapatra',
+  title: 'Senior Software/Full Stack Developer',
+  yearsOfExperience: yearsOfExperience,
+  domains: ['Fintech', 'Generative AI', 'E-commerce', 'SaaS', 'Low-code Platforms', 'CRM', 'CMS'],
+  summary: `Senior Full Stack Developer with ${experienceText} of experience in end-to-end solutioning, specializing in scalable, high-performance applications. Proven expertise in fintech, generative AI, e-commerce, SaaS, low-code platforms, CRM, and CMS.`,
+  about: `I'm a passionate Senior Full Stack Developer with ${experienceText} of experience in end-to-end solutioning, specializing in scalable, high-performance applications. My expertise spans across fintech, generative AI, e-commerce, SaaS, low-code platforms, CRM, and CMS development.
 
-Across my last five roles I've shipped 9 applications as part of 5 product ecosystems. At a GenAI startup I built three from scratch: a customer-facing AI chat app, a centralized auth portal, and a super admin console for tenant management and MIS — all sharing Node.js backends with PostgreSQL and multi-tenant data isolation. At a fintech company, another three: an investor-facing portfolio app, a CMS with a two-step approval workflow, and a three-tier advisory console with RBAC and feature flags. Before that, a no-code platform engine, and a Sales CRM with a GraphQL API syncing industrial data across global clients. Right now I own a multi-tenant MVNO/MSP platform serving 5 US telecom brands on AWS.
+I excel in system architecture optimization, best practices implementation, and driving innovation for enhanced product quality and user experience. My technical journey includes building AI-powered multi-tenant applications, dynamic component libraries, real-time collaboration platforms, and no-code solutions.
 
-The pattern is the same every time: walk into ambiguity, figure out the architecture, ship it, keep it stable. Vue.js, TypeScript, Node.js, and PostgreSQL are my daily tools. I've led three Vue 2 to Vue 3 migrations at three different companies and set up testing pipelines at each one.
-
-I'm available for permanent roles, freelance projects, and consulting. If you need someone who can own a product end-to-end — architecture through production — let's talk.`,
-	location: 'Bhubaneswar, Odisha, India',
-	availableForWork: true
+When I'm not developing cutting-edge solutions, I contribute to open-source projects and stay at the forefront of emerging technologies. I believe in continuous learning and sharing knowledge with the developer community.`,
+  location: 'Bhubaneswar, Odisha, India',
+  availableForWork: true
 };
 
 export const contactInfo: ContactInfo = {
-	email: 'mohapatra.dev02@gmail.com',
-	phone: '+91-7568802836',
-	location: 'Bhubaneswar, Odisha, India',
-	linkedin: 'https://linkedin.com/in/debjyoti-mohapatra',
-	github: 'https://github.com/dev-1603',
-	resume: '/resumes/Debjyoti Mohapatra-Resume.pdf',
-	resume2024: '/resumes/Debjyoti_Mohapatra-SeniorSoftwareDeveloper.pdf'
+  email: 'mohapatra.dev02@gmail.com',
+  phone: '+91-7568802836',
+  location: 'Bhubaneswar, Odisha, India',
+  linkedin: 'https://linkedin.com/in/debjyoti-mohapatra',
+  github: 'https://github.com/dev-1603',
+  resume: '/resumes/Debjyoti Mohapatra-Resume.pdf',
+  resume2024: '/resumes/Debjyoti_Mohapatra-SeniorSoftwareDeveloper.pdf'
 };
-
-/** Hero stat grid: value + short label under each cell */
-export const heroStats = [
-	{ value: '9', label: 'Production Apps' },
-	{ value: '5', label: 'Product Ecosystems' },
-	{ value: '4', label: 'Domains' },
-	{ value: 'All', label: 'Built from scratch' }
-] as const;

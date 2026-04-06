@@ -1,11 +1,7 @@
 <script lang="ts">
-  import { contactInfo, personalInfo, siteMeta } from '$lib/data/personal';
+  import { contactInfo, personalInfo } from '$lib/data/personal';
   import { onMount } from 'svelte';
   import { Icon } from '$lib/components';
-
-  const pageTitle = `Contact — ${personalInfo.name}`;
-  const pageDesc =
-    'Reach out for full-time roles, freelance builds, or consulting on Vue/Nuxt, multi-tenant systems, or GenAI platforms.';
 
   let contactForm = {
     name: '',
@@ -77,15 +73,8 @@
 </script>
 
 <svelte:head>
-  <title>{pageTitle}</title>
-  <meta name="description" content={pageDesc} />
-  <meta property="og:url" content="{siteMeta.siteUrl}/contact" />
-  <meta property="og:title" content={pageTitle} />
-  <meta property="og:description" content={pageDesc} />
-  <meta property="og:image" content={siteMeta.ogImageUrl} />
-  <meta name="twitter:title" content={pageTitle} />
-  <meta name="twitter:description" content={pageDesc} />
-  <meta name="twitter:image" content={siteMeta.ogImageUrl} />
+  <title>Contact - {personalInfo.name}</title>
+  <meta name="description" content="Get in touch with {personalInfo.name} for collaboration opportunities" />
 </svelte:head>
 
 <div class="min-h-screen bg-white dark:bg-dark-900">
@@ -94,10 +83,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-6 gradient-text">
-          Get in touch
+          Get In Touch
         </h1>
         <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-          Open to permanent roles, freelance projects, and consulting engagements. If you need someone who can own a product from architecture to production, use the form or email me directly.
+          I'm always interested in new opportunities and exciting projects. Let's discuss how we can work together to bring your ideas to life.
         </p>
       </div>
     </div>
@@ -292,7 +281,7 @@
             <span class="text-green-700 dark:text-green-300 font-medium">Available for new opportunities</span>
           </div>
           <p class="text-dark-600 dark:text-dark-300">
-            I am reviewing full-time, contract, and advisory conversations. Share stack, timeline, and whether you need an owner or a scoped engagement.
+            I'm currently accepting new projects and full-time opportunities. Let's discuss how I can contribute to your team or project.
           </p>
         {:else}
           <div class="flex items-center justify-center mb-4">
