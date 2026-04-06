@@ -1,18 +1,16 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { browser } from '$app/environment';
-  import { personalInfo, contactInfo, experienceText } from '$lib/data/personal';
+  import { personalInfo, contactInfo, heroExperienceLabel, heroStats, siteMeta } from '$lib/data/personal';
   import { workExperience } from '$lib/data/work-experience';
   import { professionalProjects, personalProjects } from '$lib/data/projects';
-  import { skills, skillCategories } from '$lib/data/skills';
+  import { skillGroups } from '$lib/data/skills';
   import type { Repository } from '$lib/types/github';
   import { Icon, ProjectCard } from '$lib/components';
   import { fetchGitHubRepos } from '$lib/github';
 
   let githubRepos: Repository[] = [];
   let loading = true;
-  let selectedCategory = 'all';
-  let filteredSkills = skills;
   let expandedDescriptions: Set<number> = new Set();
   // Track which work-experience cards have their technologies expanded
   let expandedTech: Set<number> = new Set();
@@ -53,15 +51,6 @@
     }
   }
 
-  function filterSkills(category: string) {
-    selectedCategory = category;
-    if (category === 'all') {
-      filteredSkills = skills;
-    } else {
-      filteredSkills = skills.filter(skill => skill.category === category);
-    }
-  }
-
   function formatDate(dateString: string) {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -83,8 +72,17 @@
 </script>
 
 <svelte:head>
-  <title>{personalInfo.name} - {personalInfo.title}</title>
-  <meta name="description" content="{personalInfo.summary}" />
+  <title>{personalInfo.name} — {personalInfo.title}</title>
+  <meta name="description" content={personalInfo.summary} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{siteMeta.siteUrl}/" />
+  <meta property="og:title" content="{personalInfo.name} — {personalInfo.title}" />
+  <meta property="og:description" content={personalInfo.summary} />
+  <meta property="og:image" content={siteMeta.ogImageUrl} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{personalInfo.name} — {personalInfo.title}" />
+  <meta name="twitter:description" content={personalInfo.summary} />
+  <meta name="twitter:image" content={siteMeta.ogImageUrl} />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -108,7 +106,7 @@
           <div class="mb-6">
             <span class="inline-flex items-center px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
               <Icon name="briefcase" className="w-4 h-4 mr-2" />
-              {experienceText} Years Experience
+              {heroExperienceLabel} experience
             </span>
           </div>
 
@@ -171,22 +169,12 @@
 
           <!-- Quick Stats -->
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-md mx-auto lg:mx-0">
-            <div class="bg-white dark:bg-dark-900 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-              <div class="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-1">{personalInfo.yearsOfExperience}+</div>
-              <div class="text-xs text-dark-600 dark:text-dark-400">Years</div>
-            </div>
-            <div class="bg-white dark:bg-dark-900 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-              <div class="text-2xl font-bold text-accent-600 dark:text-accent-400 mb-1">{personalInfo.domains.length}</div>
-              <div class="text-xs text-dark-600 dark:text-dark-400">Domains</div>
-            </div>
-            <div class="bg-white dark:bg-dark-900 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-              <div class="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">{skills.length}+</div>
-              <div class="text-xs text-dark-600 dark:text-dark-400">Skills</div>
-            </div>
-            <div class="bg-white dark:bg-dark-900 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-              <div class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-1">{professionalProjects.length + personalProjects.length}</div>
-              <div class="text-xs text-dark-600 dark:text-dark-400">Projects</div>
-            </div>
+            {#each heroStats as stat}
+              <div class="bg-white dark:bg-dark-900 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+                <div class="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-1">{stat.value}</div>
+                <div class="text-xs text-dark-600 dark:text-dark-400">{stat.label}</div>
+              </div>
+            {/each}
           </div>
         </div>
       </div>
@@ -298,16 +286,16 @@
     <div class="text-center mb-16">
       <h2 class="text-4xl font-bold mb-4">About Me</h2>
       <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        {personalInfo.yearsOfExperience}+ years of experience building scalable applications with a focus on user experience and technical excellence.
+        {personalInfo.aboutIntro}
       </p>
     </div>
 
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div class="animate-slide-up">
         <div class="prose prose-lg dark:prose-invert max-w-none">
-          <p class="text-lg leading-relaxed mb-6">
-            {personalInfo.about}
-          </p>
+          {#each personalInfo.about.split('\n\n').filter(Boolean) as para}
+            <p class="text-lg leading-relaxed mb-6">{para}</p>
+          {/each}
           <div class="flex flex-wrap gap-4">
             <a
               href={contactInfo.github}
@@ -340,7 +328,7 @@
                 {personalInfo.title}
               </p>
               <p class="text-sm text-dark-500 dark:text-dark-400 mt-2">
-                {experienceText}  years experience
+                {heroExperienceLabel} in production work
               </p>
             </div>
           </div>
@@ -356,7 +344,7 @@
     <div class="text-center mb-16">
       <h2 class="text-4xl font-bold mb-4">Work Experience</h2>
       <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        A timeline of my professional journey and key achievements.
+        Roles where I took products from zero to production: multi-app ecosystems, not one-off features.
       </p>
     </div>
 
@@ -452,7 +440,7 @@
     <div class="text-center mb-16">
       <h2 class="text-4xl font-bold mb-4">Featured Projects</h2>
       <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        A showcase of my professional work and personal projects, demonstrating expertise across various technologies and domains.
+        A sample of shipped professional work and active side experiments. Each entry names what it does and what I owned.
       </p>
     </div>
 
@@ -508,64 +496,23 @@
 <section id="skills" class="py-20 bg-dark-50 dark:bg-dark-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4">Skills & Technologies</h2>
+      <h2 class="text-4xl font-bold mb-4">Skills & technologies</h2>
       <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        I work with a wide range of technologies to build modern, scalable applications.
+        Grouped by how often they show up in my day job. No percentages—just what I ship with.
       </p>
     </div>
 
-    <!-- Skill Categories Filter -->
-    <div class="flex flex-wrap justify-center gap-4 mb-12">
-      <button
-        on:click={() => filterSkills('all')}
-        class="px-4 py-2 rounded-lg font-medium transition-colors duration-200 focus-ring"
-        class:bg-primary-600={selectedCategory === 'all'}
-        class:text-white={selectedCategory === 'all'}
-        class:bg-dark-100={selectedCategory !== 'all'}
-        class:dark:bg-dark-800={selectedCategory !== 'all'}
-        class:text-dark-700={selectedCategory !== 'all'}
-        class:dark:text-dark-300={selectedCategory !== 'all'}
-      >
-        All Skills
-      </button>
-      {#each skillCategories as category}
-        <button
-          on:click={() => filterSkills(category.key)}
-          class="px-4 py-2 rounded-lg font-medium transition-colors duration-200 focus-ring"
-          class:bg-primary-600={selectedCategory === category.key}
-          class:text-white={selectedCategory === category.key}
-          class:bg-dark-100={selectedCategory !== category.key}
-          class:dark:bg-dark-800={selectedCategory !== category.key}
-          class:text-dark-700={selectedCategory !== category.key}
-          class:dark:text-dark-300={selectedCategory !== category.key}
-        >
-          {category.icon} {category.label}
-        </button>
-      {/each}
-    </div>
-
-    <!-- Skills Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {#each filteredSkills as skill, index}
-        <div class="animate-scale-in" style="animation-delay: {index * 0.05}s;">
-          <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="font-semibold text-dark-900 dark:text-white">{skill.name}</h3>
-              <span class="text-sm text-dark-500 dark:text-dark-400">{skill.proficiency}%</span>
-            </div>
-            <div class="w-full bg-dark-200 dark:bg-dark-700 rounded-full h-2 mb-3">
-              <div 
-                class="bg-gradient-to-r from-primary-500 to-accent-500 h-2 rounded-full transition-all duration-1000"
-                style="width: {skill.proficiency}%"
-              ></div>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs text-dark-500 dark:text-dark-400 capitalize">
-                {skill.category.replace('-', ' ')}
-              </span>
-              {#if skill.color}
-                <div class="w-3 h-3 rounded-full" style="background-color: {skill.color}"></div>
-              {/if}
+    <div class="grid md:grid-cols-2 gap-8">
+      {#each skillGroups as group, gi}
+        <div class="animate-scale-in" style="animation-delay: {gi * 0.08}s;">
+          <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg border border-dark-200 dark:border-dark-700">
+            <h3 class="text-lg font-semibold text-dark-900 dark:text-white mb-4">{group.label}</h3>
+            <div class="flex flex-wrap gap-2">
+              {#each group.items as item}
+                <span class="px-3 py-1.5 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-sm rounded-md">
+                  {item}
+                </span>
+              {/each}
             </div>
           </div>
         </div>
@@ -578,9 +525,9 @@
 <section class="py-20 bg-white dark:bg-dark-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4">Latest GitHub Repositories</h2>
+      <h2 class="text-4xl font-bold mb-4">Latest GitHub repositories</h2>
       <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        Check out my latest work on GitHub. All repositories are automatically updated from my GitHub profile.
+        Pulled live from my GitHub account—same names and activity you would see on my profile.
       </p>
     </div>
 
@@ -647,9 +594,9 @@
 <section id="contact" class="py-20 bg-dark-50 dark:bg-dark-800">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
+      <h2 class="text-4xl font-bold mb-4">Get in touch</h2>
       <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        I'm always interested in new opportunities and exciting projects. Let's work together!
+        Open to permanent roles, freelance projects, and consulting engagements. If you need someone who can own a product from architecture to production, reach out.
       </p>
     </div>
 
@@ -697,7 +644,7 @@
         <div class="bg-white dark:bg-dark-900 rounded-2xl p-6 shadow-lg">
           <h3 class="text-xl font-bold mb-6">Send a Message</h3>
           <p class="text-dark-600 dark:text-dark-300 mb-6">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.
+            Tell me about the product, timeline, and stack. I reply to serious inquiries about full ownership or scoped consulting.
           </p>
           <a
             href="/contact"

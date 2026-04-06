@@ -1,8 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { browser } from '$app/environment';
-  import { personalInfo } from '$lib/data/personal';
+  import { personalInfo, siteMeta } from '$lib/data/personal';
   import { professionalProjects, personalProjects } from '$lib/data/projects';
+
+  const pageTitle = `Projects — ${personalInfo.name}`;
+  const pageDesc =
+    'Professional shipped work: GenAI platform, fintech, MVNO commerce, CRM, and CMS. Personal experiments include component libraries and commerce prototypes.';
   import type { Repository } from '$lib/types/github';
   import { Icon, NpmModal, ProjectCard } from '$lib/components';
   import { fetchGitHubRepos } from '$lib/github';
@@ -73,8 +77,15 @@
 </script>
 
 <svelte:head>
-  <title>Projects - {personalInfo.name}</title>
-  <meta name="description" content="Professional and personal projects by {personalInfo.name}" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDesc} />
+  <meta property="og:url" content="{siteMeta.siteUrl}/projects" />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDesc} />
+  <meta property="og:image" content={siteMeta.ogImageUrl} />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDesc} />
+  <meta name="twitter:image" content={siteMeta.ogImageUrl} />
 </svelte:head>
 
 <div class="min-h-screen bg-white dark:bg-dark-900">
@@ -86,7 +97,7 @@
           My Projects
         </h1>
         <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-          A showcase of my professional work and personal projects, demonstrating expertise across various technologies and domains.
+          {pageDesc}
         </p>
       </div>
     </div>
@@ -215,9 +226,9 @@
   <!-- CTA Section -->
   <section class="py-20 bg-dark-50 dark:bg-dark-800">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold mb-4">Interested in Working Together?</h2>
+      <h2 class="text-3xl font-bold mb-4">Want something similar?</h2>
       <p class="text-xl text-dark-600 dark:text-dark-300 mb-8">
-        I'm always open to discussing new projects and opportunities. Let's create something amazing together.
+        Describe the product and constraints. I take on select builds and consulting where I can own architecture through release.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a

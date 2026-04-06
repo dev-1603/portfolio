@@ -181,7 +181,9 @@
               href="/development-in-progress?title={encodeURIComponent(project.title)}&id={project.id}"
               class="flex-1 px-4 py-2 bg-yellow-500 text-white text-center rounded-lg hover:bg-yellow-600 transition-colors duration-200 text-sm font-medium"
             >
-              🚧 In Development
+              {project.developmentStatus
+                ? `In progress — ${project.developmentStatus}`
+                : 'In progress'}
             </a>
           {:else if project.liveUrl}
             <a
