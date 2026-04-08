@@ -3,31 +3,20 @@ import nodemailer from 'nodemailer';
 import type { RequestHandler } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 
-// Email configuration
-const EMAIL_CONFIG = {
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false, // true for 465, false for other ports
-  auth: {
-    user: env.EMAIL_USER || 'debjyotimohapatra.work@gmail.com',
-    pass: env.EMAIL_PASS || 'suumphznagybyfmt' // You'll need to set this in your environment variables
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-};
-
-// Create transporter
-const transporter = nodemailer.createTransport(EMAIL_CONFIG);
-
-// Verify connection configuration
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('Email transporter verification failed:', error);
-  } else {
-    console.log('Email transporter is ready to send messages');
-  }
-});
+function createTransporter() {
+  return nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: env.EMAIL_USER,
+      pass: env.EMAIL_PASS
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+}
 // Common CORS headers for preflight and responses
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -45,19 +34,10 @@ export const OPTIONS: RequestHandler = async () => {
   return new Response(null, { status: 204, headers: CORS_HEADERS });
 };
 
-export const POST: RequestHandler = async ({ request }: { request: Request }) => {
+export const POST: RequestHandler = async ({ request }) => {
   try {
     const { name, email, subject, message } = await request.json();
 
-    // Debug: Check if environment variables are loaded
-    console.log('Environment check:', {
-      hasEmailUser: !!env.EMAIL_USER,
-      hasEmailPass: !!env.EMAIL_PASS,
-      emailUser: env.EMAIL_USER,
-      emailPassLength: env.EMAIL_PASS?.length || 0
-    });
-
-    // Validate required fields
     if (!name || !email || !message) {
       return json(
         { error: 'Missing required fields: name, email, and message are required' },
@@ -65,7 +45,6 @@ export const POST: RequestHandler = async ({ request }: { request: Request }) =>
       );
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return json(
@@ -74,23 +53,20 @@ export const POST: RequestHandler = async ({ request }: { request: Request }) =>
       );
     }
 
-    // Check if email credentials are available
-    if (!env.EMAIL_PASS) {
+    if (!env.EMAIL_USER || !env.EMAIL_PASS) {
       return json(
-        { 
-          error: 'Email service not configured. Please set EMAIL_PASS environment variable.',
-          details: 'Missing EMAIL_PASS in environment variables'
-        },
+        { error: 'Email service not configured. Please set EMAIL_USER and EMAIL_PASS environment variables.' },
         { status: 500, headers: CORS_HEADERS }
       );
     }
 
-    // Email content
+    const transporter = createTransporter();
+
     const mailOptions = {
-      from: `"${name}" <${EMAIL_CONFIG.auth.user}>`,
+      from: `"${name}" <${env.EMAIL_USER}>`,
       to: 'debjyotimohapatra.work@gmail.com',
       replyTo: email,
-      subject: subject ? `Contact Form: ${subject}` : 'Contact enqury from portfolio website',
+      subject: subject ? `Contact Form: ${subject}` : 'Contact enquiry from portfolio website',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333; border-bottom: 2px solid #007bff; padding-bottom: 10px;">
@@ -131,16 +107,10 @@ Source: Portfolio Website Contact Form
       `
     };
 
-    console.log('Mail paswordcheck:', (env.EMAIL_PASS?.length +24)/10);
-    // Send email
-    const result = await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully:', result);
+    await transporter.sendMail(mailOptions);
 
     return json(
-      { 
-        success: true, 
-        message: 'Email sent successfully' 
-      },
+      { success: true, message: 'Email sent successfully' },
       { status: 200, headers: CORS_HEADERS }
     );
 
@@ -150,20 +120,16 @@ Source: Portfolio Website Contact Form
     const errorMessage = (error as Error).message;
     let userMessage = 'Failed to send email. Please try again later.';
     
-    // Provide more specific error messages
     if (errorMessage.includes('Missing credentials')) {
-      userMessage = 'Email service not configured properly. Please check your email settings.';
+      userMessage = 'Email service not configured properly.';
     } else if (errorMessage.includes('Invalid login')) {
-      userMessage = 'Email authentication failed. Please check your email credentials.';
+      userMessage = 'Email authentication failed.';
     } else if (errorMessage.includes('ECONNREFUSED')) {
       userMessage = 'Unable to connect to email server. Please try again later.';
     }
     
     return json(
-      { 
-        error: userMessage,
-        details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
-      },
+      { error: userMessage },
       { status: 500, headers: CORS_HEADERS }
     );
   }

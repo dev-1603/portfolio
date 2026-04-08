@@ -73,8 +73,12 @@
 </script>
 
 <svelte:head>
-  <title>Contact - {personalInfo.name}</title>
-  <meta name="description" content="Get in touch with {personalInfo.name} for collaboration opportunities" />
+  <title>Contact – {personalInfo.name} | Hire a Senior Full Stack Developer</title>
+  <meta name="description" content="Get in touch with {personalInfo.name} for freelance projects, full-time roles, or technical consulting. Senior Full Stack Developer available for Vue.js, React, and Node.js work." />
+  <meta property="og:title" content="Contact – {personalInfo.name}" />
+  <meta property="og:description" content="Reach out to {personalInfo.name} for collaboration, consulting, or hiring opportunities." />
+  <meta property="og:url" content="https://www.debjyoti.in/contact" />
+  <link rel="canonical" href="https://www.debjyoti.in/contact" />
 </svelte:head>
 
 <div class="min-h-screen bg-white dark:bg-dark-900">

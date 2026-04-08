@@ -50,10 +50,25 @@ export interface Project {
 
 export interface Skill {
   name: string;
-  category: 'frontend' | 'backend' | 'database' | 'testing' | 'tools' | 'cloud' | 'devops' | 'ai-ml';
-  proficiency: number; // 1-100
+  category: 'frontend' | 'backend-architecture' | 'data-infrastructure' | 'testing-tooling' | 'ai-ml';
+  proficiency: number; // 1–100, used for sort order only — never displayed
   icon?: string;
   color?: string;
+  subcategory?: string;
+}
+
+export interface SkillSubcategory {
+  key: string;
+  label: string;
+}
+
+export interface SkillCategory {
+  key: Skill['category'];
+  label: string;
+  description: string;
+  icon: string;
+  color: string;
+  subcategories?: SkillSubcategory[];
 }
 
 export interface ContactInfo {

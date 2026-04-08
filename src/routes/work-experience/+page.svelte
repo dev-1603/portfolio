@@ -30,8 +30,12 @@
 </script>
 
 <svelte:head>
-  <title>Work Experience - {personalInfo.name}</title>
-  <meta name="description" content="Professional work experience and career timeline of {personalInfo.name}" />
+  <title>Work Experience – {personalInfo.name} | Career Timeline & Achievements</title>
+  <meta name="description" content="Professional career timeline of {personalInfo.name} – senior roles in fintech, SaaS, and AI-powered products. Vue.js, TypeScript, Node.js expertise." />
+  <meta property="og:title" content="Work Experience – {personalInfo.name}" />
+  <meta property="og:description" content="Career timeline and achievements of {personalInfo.name} across fintech, SaaS, and enterprise platforms." />
+  <meta property="og:url" content="https://www.debjyoti.in/work-experience" />
+  <link rel="canonical" href="https://www.debjyoti.in/work-experience" />
 </svelte:head>
 
 <div class="min-h-screen bg-white dark:bg-dark-900">

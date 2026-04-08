@@ -73,8 +73,12 @@
 </script>
 
 <svelte:head>
-  <title>Projects - {personalInfo.name}</title>
-  <meta name="description" content="Professional and personal projects by {personalInfo.name}" />
+  <title>Projects – {personalInfo.name} | Full Stack Web Applications & Open Source</title>
+  <meta name="description" content="Professional and open-source projects by {personalInfo.name} – fintech platforms, SaaS dashboards, component libraries, and AI-powered applications built with Vue.js, React, and Node.js." />
+  <meta property="og:title" content="Projects – {personalInfo.name}" />
+  <meta property="og:description" content="Full stack web applications, component libraries, and open-source work by {personalInfo.name}." />
+  <meta property="og:url" content="https://www.debjyoti.in/projects" />
+  <link rel="canonical" href="https://www.debjyoti.in/projects" />
 </svelte:head>
 
 <div class="min-h-screen bg-white dark:bg-dark-900">

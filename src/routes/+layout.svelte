@@ -55,13 +55,11 @@
 </script>
 
 <svelte:head>
-  <title>Debjyoti Mohapatra - Full Stack Developer</title>
-  <meta name="description" content="Senior Full Stack Developer specializing in Vue.js, React, TypeScript, and Node.js. Building modern web applications with cutting-edge technologies." />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" href="/favicon.svg" />
+  <title>Debjyoti Mohapatra – Senior Full Stack Developer | Vue.js, TypeScript, Node.js</title>
+  <meta name="description" content="Senior Full Stack Developer with 6+ years of experience building scalable fintech, SaaS, and AI-powered web applications using Vue.js, TypeScript, Node.js, and React." />
 </svelte:head>
 
-<div class="min-h-screen bg-white dark:bg-dark-900 text-dark-900 dark:text-white transition-colors duration-300">
+<div class="min-h-screen flex flex-col bg-white dark:bg-dark-900 text-dark-900 dark:text-white transition-colors duration-300">
   <!-- Navigation -->
   <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 dark:border-dark-600/30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -143,7 +141,7 @@
   </nav>
 
   <!-- Main content -->
-  <main class="pt-16">
+  <main class="pt-16 flex-1">
     <slot />
   </main>
 
@@ -152,7 +150,7 @@
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
         <div class="text-sm text-dark-600 dark:text-dark-400">
-          © 2024 Debjyoti Mohapatra. All rights reserved.
+          © 2024–{new Date().getFullYear()} Debjyoti Mohapatra. All rights reserved.
         </div>
         <div class="flex space-x-6">
           <a

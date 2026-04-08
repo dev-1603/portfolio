@@ -1,21 +1,66 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import { browser } from '$app/environment';
   import { personalInfo, contactInfo, experienceText } from '$lib/data/personal';
   import { workExperience } from '$lib/data/work-experience';
   import { professionalProjects, personalProjects } from '$lib/data/projects';
   import { skills, skillCategories } from '$lib/data/skills';
+  import type { Skill, SkillCategory } from '$lib/types/portfolio';
   import type { Repository } from '$lib/types/github';
   import { Icon, ProjectCard } from '$lib/components';
   import { fetchGitHubRepos } from '$lib/github';
 
+  type SkillWithStagger = Skill & { staggerIndex: number };
+  type GroupedSkillSet = { key: string; label: string; items: SkillWithStagger[] };
+  type SkillCategoryViewModel = SkillCategory & { groups: GroupedSkillSet[] };
+  type DomainExpertise = { title: string; description: string; focusAreas: string[] };
+
   let githubRepos: Repository[] = [];
   let loading = true;
-  let selectedCategory = 'all';
-  let filteredSkills = skills;
   let expandedDescriptions: Set<number> = new Set();
+  let skillsRegion: HTMLElement | null = null;
+  let visibleSkillCards = new Set<SkillCategory['key']>(skillCategories.map(category => category.key));
+  let prefersReducedMotion = false;
+  let skillsViewModel: SkillCategoryViewModel[] = [];
   // Track which work-experience cards have their technologies expanded
   let expandedTech: Set<number> = new Set();
+  const domainExpertiseMap: Record<string, DomainExpertise> = {
+    Fintech: {
+      title: 'Fintech Platforms',
+      description: 'Secure product development for payments, transaction workflows, and financial operations.',
+      focusAreas: ['Secure API integrations', 'Role-based access', 'Performance and reliability']
+    },
+    'Generative AI': {
+      title: 'Generative AI Products',
+      description: 'Practical AI features and LLM integrations with production-friendly user experiences.',
+      focusAreas: ['LLM APIs', 'Prompt and workflow design', 'AI-assisted product features']
+    },
+    'E-commerce': {
+      title: 'E-commerce Systems',
+      description: 'Scalable storefront and commerce experiences with conversion-focused product flows.',
+      focusAreas: ['Catalog and checkout UX', 'Order workflows', 'Performance optimization']
+    },
+    SaaS: {
+      title: 'SaaS Applications',
+      description: 'Multi-tenant business products with maintainable architecture and clean developer workflows.',
+      focusAreas: ['Tenant-aware architecture', 'Feature delivery velocity', 'Quality and testing']
+    },
+    'Low-code Platforms': {
+      title: 'Low-code Platforms',
+      description: 'Builder-style systems that enable faster delivery for non-technical and technical users.',
+      focusAreas: ['Config-driven UI', 'Reusable component systems', 'Workflow automation']
+    },
+    CRM: {
+      title: 'CRM Solutions',
+      description: 'Customer lifecycle and operations tooling for teams managing sales and relationships.',
+      focusAreas: ['Data management UX', 'Role-based workflows', 'Productivity tooling']
+    },
+    CMS: {
+      title: 'CMS Implementations',
+      description: 'Content operations platforms with structured authoring and reliable publishing flows.',
+      focusAreas: ['Content modeling', 'Admin dashboards', 'Publishing pipelines']
+    }
+  };
 
   function toggleTech(i: number) {
     if (expandedTech.has(i)) {
@@ -36,10 +81,64 @@
     .sort((a, b) => (a.order || 0) - (b.order || 0))
     .slice(0, 3);
 
-  onMount(async () => {
-    if (browser) {
-      await loadGithubRepos();
-    }
+  onMount(() => {
+    if (!browser) return;
+
+    void loadGithubRepos();
+
+    let observer: IntersectionObserver | null = null;
+    let revealFallbackTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const setupSkillsObserver = async () => {
+      await tick();
+
+      prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReducedMotion || !skillsRegion || typeof IntersectionObserver === 'undefined') {
+        revealAllSkillCards();
+        return;
+      }
+
+      const cards = skillsRegion.querySelectorAll<HTMLElement>('[data-skill-card-key]');
+      if (cards.length === 0) {
+        revealAllSkillCards();
+        return;
+      }
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            const cardKey = entry.target.getAttribute('data-skill-card-key') as SkillCategory['key'] | null;
+            if (!cardKey) continue;
+            visibleSkillCards.add(cardKey);
+            visibleSkillCards = new Set(visibleSkillCards);
+            observer?.unobserve(entry.target);
+          }
+
+          if (visibleSkillCards.size > 0 && revealFallbackTimer) {
+            clearTimeout(revealFallbackTimer);
+            revealFallbackTimer = null;
+          }
+        },
+        { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
+      );
+
+      for (const card of cards) observer.observe(card);
+
+      // Fallback: never leave cards hidden if observer does not emit.
+      revealFallbackTimer = setTimeout(() => {
+        if (visibleSkillCards.size === 0) {
+          revealAllSkillCards();
+        }
+      }, 1200);
+    };
+
+    void setupSkillsObserver();
+
+    return () => {
+      observer?.disconnect();
+      if (revealFallbackTimer) clearTimeout(revealFallbackTimer);
+    };
   });
 
   async function loadGithubRepos() {
@@ -53,14 +152,77 @@
     }
   }
 
-  function filterSkills(category: string) {
-    selectedCategory = category;
-    if (category === 'all') {
-      filteredSkills = skills;
-    } else {
-      filteredSkills = skills.filter(skill => skill.category === category);
-    }
+  function revealAllSkillCards() {
+    visibleSkillCards = new Set(skillCategories.map(category => category.key));
   }
+
+  function isSkillCardVisible(categoryKey: SkillCategory['key']) {
+    return prefersReducedMotion || visibleSkillCards.has(categoryKey);
+  }
+
+  function buildGroupsForCategory(category: SkillCategory): GroupedSkillSet[] {
+    const categorySkills = skills
+      .filter(skill => skill.category === category.key)
+      .sort((a, b) => b.proficiency - a.proficiency);
+
+    if (!category.subcategories?.length) {
+      return [
+        {
+          key: 'all',
+          label: category.label,
+          items: categorySkills.map((skill, index) => ({ ...skill, staggerIndex: index }))
+        }
+      ];
+    }
+
+    const [firstGroup, ...otherGroups] = category.subcategories;
+    const baseGroups: GroupedSkillSet[] = [
+      {
+        key: firstGroup.key,
+        label: firstGroup.label,
+        items: categorySkills.filter(
+          skill => !skill.subcategory || skill.subcategory === firstGroup.key
+        ).map(skill => ({ ...skill, staggerIndex: 0 }))
+      },
+      ...otherGroups.map(subcategory => ({
+        key: subcategory.key,
+        label: subcategory.label,
+        items: categorySkills
+          .filter(skill => skill.subcategory === subcategory.key)
+          .map(skill => ({ ...skill, staggerIndex: 0 }))
+      }))
+    ];
+
+    const knownSubcategories = new Set(category.subcategories.map(subcategory => subcategory.key));
+    const unknownSubcategorySkills = categorySkills
+      .filter(skill => skill.subcategory && !knownSubcategories.has(skill.subcategory))
+      .map(skill => ({ ...skill, staggerIndex: 0 }));
+
+    if (unknownSubcategorySkills.length > 0) {
+      baseGroups.push({ key: 'other', label: 'Other', items: unknownSubcategorySkills });
+    }
+
+    let staggerIndex = 0;
+    return baseGroups
+      .map(group => ({
+        ...group,
+        items: group.items.map(skill => ({ ...skill, staggerIndex: staggerIndex++ }))
+      }))
+      .filter(group => group.items.length > 0);
+  }
+
+  $: skillsViewModel = skillCategories.slice(0, 5).map(category => ({
+    ...category,
+    groups: buildGroupsForCategory(category)
+  }));
+  $: domainExpertiseViewModel = personalInfo.domains.map(domain => ({
+    domain,
+    ...(domainExpertiseMap[domain] ?? {
+      title: domain,
+      description: `Hands-on product engineering experience in ${domain}.`,
+      focusAreas: ['Architecture', 'Implementation', 'Optimization']
+    })
+  }));
 
   function formatDate(dateString: string) {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -83,8 +245,13 @@
 </script>
 
 <svelte:head>
-  <title>{personalInfo.name} - {personalInfo.title}</title>
-  <meta name="description" content="{personalInfo.summary}" />
+  <title>{personalInfo.name} – {personalInfo.title} | Vue.js, TypeScript, Node.js</title>
+  <meta name="description" content="{personalInfo.name} – {personalInfo.title} with {experienceText} of experience in fintech, SaaS, generative AI, and e-commerce. Specializing in Vue.js, TypeScript, Node.js, React, and scalable architecture." />
+  <meta name="keywords" content="Debjyoti Mohapatra, senior full stack developer, Vue.js, TypeScript, Node.js, React, Nuxt.js, fintech, SaaS, generative AI, component library, design systems, portfolio, hire developer, India" />
+  <meta property="og:title" content="{personalInfo.name} – {personalInfo.title}" />
+  <meta property="og:description" content="{personalInfo.title} with {experienceText} of experience building scalable fintech, SaaS, and AI-powered applications." />
+  <meta property="og:url" content="https://www.debjyoti.in/" />
+  <link rel="canonical" href="https://www.debjyoti.in/" />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -292,6 +459,82 @@
   </div>
 </section>
 
+<style>
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .skills-card--full {
+    width: 100%;
+  }
+
+  .skills-card--ai {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  .skills-pill {
+    transition: transform 200ms ease, background-color 200ms ease, border-color 200ms ease;
+  }
+
+  .skills-pill:hover {
+    transform: scale(1.03);
+    filter: brightness(1.03);
+  }
+
+  :global(.dark) .skills-pill:hover {
+    filter: brightness(1.12);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .skills-card:not(.skills-card--visible):not(.skills-card--reduced) {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    .skills-card.skills-card--visible:not(.skills-card--reduced) {
+      animation: skills-card-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: var(--card-delay, 0ms);
+    }
+
+    .skills-pill:not(.skills-pill--visible) {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    .skills-pill.skills-pill--visible {
+      animation: skills-pill-enter 360ms ease forwards;
+      animation-delay: calc(var(--card-delay, 0ms) + 120ms + var(--pill-delay, 0ms));
+    }
+  }
+
+  @keyframes skills-card-enter {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes skills-pill-enter {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
 <!-- About Section -->
 <section id="about" class="py-20 bg-white dark:bg-dark-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -346,6 +589,42 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Domain Expertise Section -->
+<section class="py-20 bg-white dark:bg-dark-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <p class="text-sm uppercase tracking-[0.35em] text-primary-500 dark:text-primary-400 mb-3">Where I Deliver</p>
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="gradient-text">Domain Expertise</span>
+      </h2>
+      <p class="text-lg text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
+        Product domains where I have delivered scalable, high-quality solutions from architecture to release.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {#each domainExpertiseViewModel as item, index}
+        <article class="bg-dark-50 dark:bg-dark-800 rounded-2xl p-6 border border-dark-200 dark:border-dark-700 animate-slide-up" style="animation-delay: {index * 0.05}s;">
+          <div class="mb-4">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300">
+              {item.domain}
+            </span>
+          </div>
+          <h3 class="text-xl font-bold text-dark-900 dark:text-white mb-2">{item.title}</h3>
+          <p class="text-sm text-dark-600 dark:text-dark-300 mb-4">{item.description}</p>
+          <div class="flex flex-wrap gap-2">
+            {#each item.focusAreas as focusArea}
+              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-white dark:bg-dark-900 text-dark-700 dark:text-dark-200 border border-dark-200 dark:border-dark-600">
+                {focusArea}
+              </span>
+            {/each}
+          </div>
+        </article>
+      {/each}
     </div>
   </div>
 </section>
@@ -508,67 +787,73 @@
 <section id="skills" class="py-20 bg-dark-50 dark:bg-dark-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4">Skills & Technologies</h2>
-      <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        I work with a wide range of technologies to build modern, scalable applications.
+      <p class="text-sm uppercase tracking-[0.35em] text-primary-500 dark:text-primary-400 mb-3">What I Know</p>
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="gradient-text">Technical Skills</span>
+      </h2>
+      <p class="text-lg text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
+        My toolkit for building scalable products, robust systems, and high quality user experiences.
       </p>
     </div>
 
-    <!-- Skill Categories Filter -->
-    <div class="flex flex-wrap justify-center gap-4 mb-12">
-      <button
-        on:click={() => filterSkills('all')}
-        class="px-4 py-2 rounded-lg font-medium transition-colors duration-200 focus-ring"
-        class:bg-primary-600={selectedCategory === 'all'}
-        class:text-white={selectedCategory === 'all'}
-        class:bg-dark-100={selectedCategory !== 'all'}
-        class:dark:bg-dark-800={selectedCategory !== 'all'}
-        class:text-dark-700={selectedCategory !== 'all'}
-        class:dark:text-dark-300={selectedCategory !== 'all'}
-      >
-        All Skills
-      </button>
-      {#each skillCategories as category}
-        <button
-          on:click={() => filterSkills(category.key)}
-          class="px-4 py-2 rounded-lg font-medium transition-colors duration-200 focus-ring"
-          class:bg-primary-600={selectedCategory === category.key}
-          class:text-white={selectedCategory === category.key}
-          class:bg-dark-100={selectedCategory !== category.key}
-          class:dark:bg-dark-800={selectedCategory !== category.key}
-          class:text-dark-700={selectedCategory !== category.key}
-          class:dark:text-dark-300={selectedCategory !== category.key}
+    <div class="skills-grid" role="region" aria-label="Skills" bind:this={skillsRegion}>
+      {#each skillsViewModel as category, cardIndex}
+        <section
+          aria-label={category.label}
+          data-skill-card-key={category.key}
+          class="skills-card bg-white dark:bg-dark-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-dark-200 dark:border-dark-700"
+          class:skills-card--full={category.key === 'backend-architecture'}
+          class:skills-card--ai={category.key === 'ai-ml'}
+          class:skills-card--visible={isSkillCardVisible(category.key)}
+          class:skills-card--reduced={prefersReducedMotion}
+          style="--card-delay: {cardIndex * 80}ms;"
         >
-          {category.icon} {category.label}
-        </button>
-      {/each}
-    </div>
-
-    <!-- Skills Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {#each filteredSkills as skill, index}
-        <div class="animate-scale-in" style="animation-delay: {index * 0.05}s;">
-          <div class="bg-white dark:bg-dark-900 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <div class="flex items-center justify-between mb-3">
-              <h3 class="font-semibold text-dark-900 dark:text-white">{skill.name}</h3>
-              <span class="text-sm text-dark-500 dark:text-dark-400">{skill.proficiency}%</span>
+          <div class="flex items-start gap-4 mb-5">
+            <div class="w-11 h-11 rounded-xl bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300 flex items-center justify-center text-lg">
+              {category.icon}
             </div>
-            <div class="w-full bg-dark-200 dark:bg-dark-700 rounded-full h-2 mb-3">
-              <div 
-                class="bg-gradient-to-r from-primary-500 to-accent-500 h-2 rounded-full transition-all duration-1000"
-                style="width: {skill.proficiency}%"
-              ></div>
-            </div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs text-dark-500 dark:text-dark-400 capitalize">
-                {skill.category.replace('-', ' ')}
-              </span>
-              {#if skill.color}
-                <div class="w-3 h-3 rounded-full" style="background-color: {skill.color}"></div>
-              {/if}
+            <div>
+              <h3 class="text-xl md:text-2xl font-bold text-dark-900 dark:text-white">{category.label}</h3>
+              <p class="text-sm text-dark-600 dark:text-dark-400 mt-1">{category.description}</p>
             </div>
           </div>
-        </div>
+
+          {#if category.subcategories?.length}
+            <div class="space-y-4">
+              {#each category.groups as group, groupIndex}
+                {#if groupIndex > 0}
+                  <div class="border-t border-dark-200 dark:border-dark-700 pt-4"></div>
+                {/if}
+                <p class="text-[10px] font-bold tracking-[0.06em] uppercase text-dark-500 dark:text-dark-400 mb-2.5">{group.label}</p>
+                <div class="flex flex-wrap gap-2.5">
+                  {#each group.items as skill}
+                    <span
+                      class="skills-pill inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-200 border border-dark-200 dark:border-dark-700 {category.key === 'backend-architecture' && skill.subcategory === 'patterns'
+                        ? 'bg-primary-100 dark:bg-primary-900/30 border-primary-300 dark:border-primary-700 text-primary-700 dark:text-primary-300'
+                        : ''}"
+                      class:skills-pill--visible={isSkillCardVisible(category.key)}
+                      style="--pill-delay: {skill.staggerIndex * 20}ms;"
+                    >
+                      {skill.name}
+                    </span>
+                  {/each}
+                </div>
+              {/each}
+            </div>
+          {:else}
+            <div class="flex flex-wrap gap-2.5">
+              {#each category.groups[0]?.items ?? [] as skill}
+                <span
+                  class="skills-pill inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-200 border border-dark-200 dark:border-dark-700"
+                  class:skills-pill--visible={isSkillCardVisible(category.key)}
+                  style="--pill-delay: {skill.staggerIndex * 20}ms;"
+                >
+                  {skill.name}
+                </span>
+              {/each}
+            </div>
+          {/if}
+        </section>
       {/each}
     </div>
   </div>
