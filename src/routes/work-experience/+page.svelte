@@ -158,13 +158,13 @@
                       <div>
                         <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Roles & Responsibilities</h4>
                         <ul class="space-y-3">
-                          {#each job.roles.slice(0, isSectionExpanded(job.id || index.toString(), 'roles') ? job.roles.length : 5) as role}
+                          {#each job.roles.slice(0, isSectionExpanded(job.id || index.toString(), 'roles') ? job.roles.length : 15) as role}
                             <li class="flex items-start group/item">
                               <div class="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0 group-hover/item:scale-150 transition-transform duration-200"></div>
                               <span class="text-sm text-dark-700 dark:text-dark-300 group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors duration-200">{role}</span>
                             </li>
                           {/each}
-                          {#if job.roles.length > 5}
+                          {#if job.roles.length > 15}
                             <li>
                               <button
                                 class="w-full text-left text-sm text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200 cursor-pointer"
@@ -183,13 +183,13 @@
                       <div>
                         <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Key Achievements</h4>
                         <ul class="space-y-3">
-                          {#each job.achievements.slice(0, isSectionExpanded(job.id || index.toString(), 'achievements') ? job.achievements.length : 4) as achievement}
+                          {#each job.achievements.slice(0, isSectionExpanded(job.id || index.toString(), 'achievements') ? job.achievements.length : 15) as achievement}
                             <li class="flex items-start group/item">
                               <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0 group-hover/item:scale-150 transition-transform duration-200"></div>
                               <span class="text-sm text-dark-700 dark:text-dark-300 group-hover/item:text-green-600 dark:group-hover/item:text-green-400 transition-colors duration-200">{achievement}</span>
                             </li>
                           {/each}
-                          {#if job.achievements.length > 4}
+                          {#if job.achievements.length > 15}
                             <li>
                               <button
                                 class="w-full text-left text-sm text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors duration-200 cursor-pointer"
@@ -205,14 +205,14 @@
                       <div>
                         <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Technologies</h4>
                         <div class="flex flex-wrap gap-2">
-                          {#each job.technologies.slice(0, 8) as tech}
+                          {#each job.technologies.slice(0, 25) as tech}
                             <span class="px-3 py-2 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-sm rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/40 transition-colors duration-200 cursor-pointer">
                               {tech}
                             </span>
                           {/each}
-                          {#if job.technologies.length > 8}
+                          {#if job.technologies.length > 25}
                             <span class="px-3 py-2 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-sm rounded-lg hover:bg-dark-200 dark:hover:bg-dark-700 transition-colors duration-200 cursor-pointer">
-                              +{job.technologies.length - 8} more
+                              +{job.technologies.length - 25} more
                             </span>
                           {/if}
                         </div>
