@@ -42,24 +42,34 @@
         
         <div class="space-y-4">
           {#each project.npmPackages as npmPackage}
-            <a
-              href={npmPackage.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="block border border-dark-200 dark:border-dark-700 rounded-lg p-4 hover:bg-dark-50 dark:hover:bg-dark-800 hover:border-red-300 dark:hover:border-red-600 transition-all duration-200 cursor-pointer group"
-            >
+            <div class="border border-dark-200 dark:border-dark-700 rounded-lg p-4">
               <div class="flex items-center justify-between mb-2">
-                <h3 class="text-lg font-semibold text-dark-900 dark:text-white group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors duration-200">{npmPackage.name}</h3>
-                <span class="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs rounded-full font-medium">
-                  NPM
-                </span>
+                <h3 class="text-lg font-semibold text-dark-900 dark:text-white">{npmPackage.name}</h3>
+                <div class="flex items-center gap-2">
+                  {#if npmPackage.githubUrl}
+                    <a
+                      href={npmPackage.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="px-2 py-1 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-xs rounded-full font-medium hover:bg-dark-200 dark:hover:bg-dark-700 transition-colors duration-200"
+                      on:click|stopPropagation
+                    >
+                      GitHub
+                    </a>
+                  {/if}
+                  <a
+                    href={npmPackage.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-xs rounded-full font-medium hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors duration-200"
+                    on:click|stopPropagation
+                  >
+                    NPM
+                  </a>
+                </div>
               </div>
-              <p class="text-dark-600 dark:text-dark-300 text-sm group-hover:text-dark-700 dark:group-hover:text-dark-200 transition-colors duration-200">{npmPackage.description}</p>
-              <div class="mt-3 flex items-center text-red-600 dark:text-red-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                <span>View on NPM</span>
-                <Icon name="arrow-right" className="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition-transform duration-200" />
-              </div>
-            </a>
+              <p class="text-dark-600 dark:text-dark-300 text-sm">{npmPackage.description}</p>
+            </div>
           {/each}
         </div>
         

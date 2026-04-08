@@ -162,8 +162,7 @@
 
   function buildGroupsForCategory(category: SkillCategory): GroupedSkillSet[] {
     const categorySkills = skills
-      .filter(skill => skill.category === category.key)
-      .sort((a, b) => b.proficiency - a.proficiency);
+      .filter(skill => skill.category === category.key);
 
     if (!category.subcategories?.length) {
       return [
@@ -245,11 +244,11 @@
 </script>
 
 <svelte:head>
-  <title>{personalInfo.name} – {personalInfo.title} | Vue.js, TypeScript, Node.js</title>
-  <meta name="description" content="{personalInfo.name} – {personalInfo.title} with {experienceText} of experience in fintech, SaaS, generative AI, and e-commerce. Specializing in Vue.js, TypeScript, Node.js, React, and scalable architecture." />
-  <meta name="keywords" content="Debjyoti Mohapatra, senior full stack developer, Vue.js, TypeScript, Node.js, React, Nuxt.js, fintech, SaaS, generative AI, component library, design systems, portfolio, hire developer, India" />
+  <title>{personalInfo.name} – {personalInfo.title} | Vue.js, React, Node.js, TypeScript</title>
+  <meta name="description" content="{personalInfo.name} – {personalInfo.title} with {experienceText} of experience in Vue.js, React, Node.js, TypeScript, and NestJS. Building multi-tenant SaaS, fintech, GenAI, telecom, and e-commerce products with event-driven backends and RBAC systems." />
+  <meta name="keywords" content="Debjyoti Mohapatra, full stack engineer, Vue.js, Vue 3, Nuxt.js, Nuxt 3, React, Next.js, Node.js, Express.js, NestJS, TypeScript, SvelteKit, Tailwind CSS, fintech developer, SaaS developer, generative AI, multi-tenant architecture, RBAC, JWT, OAuth2, authentication, e-commerce, telecom, event-driven, component library, full stack developer India, hire developer" />
   <meta property="og:title" content="{personalInfo.name} – {personalInfo.title}" />
-  <meta property="og:description" content="{personalInfo.title} with {experienceText} of experience building scalable fintech, SaaS, and AI-powered applications." />
+  <meta property="og:description" content="{personalInfo.title} with {experienceText} of experience building fintech, SaaS, GenAI, and telecom products. Vue.js, React, Node.js, TypeScript, NestJS, multi-tenant architecture, and RBAC." />
   <meta property="og:url" content="https://www.debjyoti.in/" />
   <link rel="canonical" href="https://www.debjyoti.in/" />
 </svelte:head>
@@ -339,20 +338,20 @@
           <!-- Quick Stats -->
           <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-md mx-auto lg:mx-0">
             <div class="bg-white dark:bg-dark-900 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-              <div class="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-1">{personalInfo.yearsOfExperience}+</div>
-              <div class="text-xs text-dark-600 dark:text-dark-400">Years</div>
+              <div class="text-2xl font-bold text-primary-600 dark:text-primary-400 mb-1">{professionalProjects.length + personalProjects.length}</div>
+              <div class="text-xs text-dark-600 dark:text-dark-400">Production Apps</div>
             </div>
             <div class="bg-white dark:bg-dark-900 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
               <div class="text-2xl font-bold text-accent-600 dark:text-accent-400 mb-1">{personalInfo.domains.length}</div>
-              <div class="text-xs text-dark-600 dark:text-dark-400">Domains</div>
+              <div class="text-xs text-dark-600 dark:text-dark-400">Ecosystems</div>
             </div>
             <div class="bg-white dark:bg-dark-900 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-              <div class="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">{skills.length}+</div>
+              <div class="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">{personalInfo.yearsOfExperience}+</div>
+              <div class="text-xs text-dark-600 dark:text-dark-400">Years</div>
+            </div>
+            <div class="bg-white dark:bg-dark-900 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
+              <div class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-1">{skills.length}+</div>
               <div class="text-xs text-dark-600 dark:text-dark-400">Skills</div>
-            </div>
-            <div class="bg-white dark:bg-dark-900 rounded-xl p-4 shadow-lg hover:shadow-xl transition-shadow duration-300 text-center">
-              <div class="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-1">{professionalProjects.length + personalProjects.length}</div>
-              <div class="text-xs text-dark-600 dark:text-dark-400">Projects</div>
             </div>
           </div>
         </div>
@@ -541,14 +540,14 @@
     <div class="text-center mb-16">
       <h2 class="text-4xl font-bold mb-4">About Me</h2>
       <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        {personalInfo.yearsOfExperience}+ years of experience building scalable applications with a focus on user experience and technical excellence.
+        {personalInfo.yearsOfExperience}+ years building full-stack products across fintech, GenAI, telecom, SaaS, and CMS.
       </p>
     </div>
 
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div class="animate-slide-up">
         <div class="prose prose-lg dark:prose-invert max-w-none">
-          <p class="text-lg leading-relaxed mb-6">
+          <p class="text-lg leading-relaxed mb-6" style="white-space: pre-line;">
             {personalInfo.about}
           </p>
           <div class="flex flex-wrap gap-4">
@@ -583,7 +582,7 @@
                 {personalInfo.title}
               </p>
               <p class="text-sm text-dark-500 dark:text-dark-400 mt-2">
-                {experienceText}  years experience
+                {experienceText} experience
               </p>
             </div>
           </div>

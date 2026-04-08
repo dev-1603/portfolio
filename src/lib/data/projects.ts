@@ -6,19 +6,24 @@ export const professionalProjects: Project[] = [
     id: 'ai-multi-tenant-chat',
     title: 'AI-Powered Multi-tenant Chat Application',
     description:
-      'Architected an end-to-end chat application enabling multiple organizations to securely interact using advanced AI and LLM integrations. The system features modular chatroom configurations, real-time data protection, and customizable AI services for content understanding, automating workflows, and enhancing user communication.',
+      'Built the core platform for a multi-tenant B2B GenAI SaaS from scratch. Designed the JWT authorizer middleware and RBAC layer that controls per-tenant access across all API routes. Built a dynamic component library and layout builder in Vue 3 that cut feature delivery time by 30%. Led Vue 2 to Vue 3 and Nuxt 2 to Nuxt 3 migrations across the product.',
     role: 'Senior Software Engineer',
     company: 'Gate AI Pvt Ltd',
     impact:
       'Accelerated product delivery by 30% while providing highly secure, custom AI chat environments for diverse enterprise clients.',
     technologies: [
-      'Vue.js',
-      'Nuxt.js',
+      'Vue 2',
+      'Vue 3',
+      'Nuxt 2',
+      'Nuxt 3',
+      'Node.js',
       'TypeScript',
       'JWT',
-      'OAuth',
-      'LLM APIs',
-      'Multi-tenant Architecture'
+      'RBAC',
+      'Multi-tenant Architecture',
+      'Event-driven',
+      'Feature Flags',
+      'LLM APIs'
     ],
     featured: true,
     image: '/project-images/ai-multi-tenant-chat.png',
@@ -29,11 +34,11 @@ export const professionalProjects: Project[] = [
     id: 'no-code-platform',
     title: 'Next-Gen No-Code Development Platform',
     description:
-      'Pioneered a no-code platform allowing business users to design and launch web and mobile apps with a drag-and-drop experience. Integrated dynamic schema and layout builders, a universal component library, and robust UI prototyping tools, dramatically reducing go-to-market time and dependency on dedicated development teams.',
+      'Built a no-code platform letting business users design and launch web and mobile apps with drag-and-drop. Includes a schema builder, layout builder, and component library - cutting go-to-market time and reducing dependency on dev teams.',
     role: 'Frontend Developer',
     company: 'KISAI (Ideanz IT Solutions)',
     impact:
-      'Reduced app delivery time by 50%, empowering teams without coding expertise to launch complex solutions.',
+      'Reduced app delivery time by 50% - non-technical teams could launch complex apps without writing code.',
     technologies: [
       'Vue.js',
       'Tailwind CSS',
@@ -50,11 +55,11 @@ export const professionalProjects: Project[] = [
     id: 'portfolio-investment-platform',
     title: 'Portfolio-centric Investment Platform',
     description:
-      'Engineered an all-in-one investment tracking platform empowering users with real-time portfolio valuation, analytics dashboards, and proactive notifications for payments and rebalancing. The product is optimized for performance, featuring role-based workflows and seamless integration with finance APIs—enabling instant, data-driven decision making.',
+      'Built an investment tracking platform with real-time portfolio valuation, analytics dashboards, and notifications for upcoming payments and portfolio rebalancing. SSR for performance, role-based workflows, and direct finance API integration.',
     role: 'Senior Software Engineer',
     company: 'Geekyants',
     impact:
-      'Enabled 10,000+ investors to manage assets efficiently, leading to smarter financial decisions and improved platform retention.',
+      'Owned the web implementation end-to-end - SSR Nuxt frontend, GCP Pub/Sub integration for real-time portfolio valuations, and RBAC-based advisory console for 10,000+ investors. Recognised by Ametra\'s Co-Founder/CTO for commitment to shipping.',
     technologies: ['Nuxt.js', 'Vue.js', 'Firebase', 'Quasar Framework', 'Chart.js', 'TypeScript'],
     featured: true,
     image: '/project-images/investment-app.png',
@@ -65,7 +70,7 @@ export const professionalProjects: Project[] = [
     id: 'reach-mobile-ecommerce',
     title: 'Mobile E-commerce Platform',
     description:
-      'Developed a modern, scalable e-commerce platform tailored for a major US telecom operator, integrating a Vue/React stack with robust CMS support. The solution delivers seamless shopping experiences, centralized content management, and rapid deployment of new product offerings, supporting high transaction volumes and real-time updates across devices.',
+      'Built a Vue/React e-commerce platform for a major US telecom operator with Contentful and Strapi for content management. Supports high transaction volumes, real-time product updates, and rapid content deployment across devices.',
     role: 'Software Development Engineer - 2',
     company: 'Applore Technologies',
     impact:
@@ -169,26 +174,45 @@ export const professionalProjects: Project[] = [
 
 export const personalProjects: Project[] = [
 	{
+		id: 'celestial-auth',
+		title: 'Celestial Auth',
+		description:
+			'Authentication-as-a-Service gateway built with Node.js and TypeScript. Supports multiple identity providers, SSO, JWT issuance, and role-based access control. Frontends in both React and Vue talk to the same auth layer. Designed to be dropped into any multi-tenant SaaS without rewriting auth from scratch.',
+		technologies: ['Nuxt 3', 'Node.js', 'Supabase ', 'Express', 'TypeScript', 'Prisma',   'Tailwind CSS', 'shadcn-vue', 'JWT', 'OAuth2', 'SSO', 'RBAC'],
+		githubUrl: 'https://github.com/dev-1603/celestial-auth-portal',
+		liveUrl: '',
+		underDevelopment: false,
+		image: '/project-images/celestial-auth.png',
+		featured: true,
+		type: 'personal',
+		stars: 0,
+		forks: 0,
+		order: 2,
+		lastUpdated: Date.now().toString()
+	},
+	{
 		id: 'celestial-ui',
 		title: 'CelestialUI Component Library',
 		description:
-			'Modern, accessible component library built with Vue 3, React, and Svelte. Features 50+ components with TypeScript support.',
+			'Accessible component library with packages for Vue 3, React, and Svelte - all published on npm. Built incrementally with TypeScript support and a shared design system across frameworks. Active development with continuous feature additions.',
 		technologies: ['Vue.js', 'React', 'Svelte', 'TypeScript', 'Tailwind CSS', 'Storybook'],
-		githubUrl: 'https://github.com/dev-1603/CelestialUI',
+		githubUrl: '',
 		liveUrl: '',
-		underDevelopment: true,
-		image: '',
+		underDevelopment: false,
+		image: '/project-images/celestial-ui.png',
     order: 1,
 		npmPackages: [
 			{
 				name: '@celestial-ui/vue',
 				url: 'https://www.npmjs.com/package/@celestial-ui/vue',
-				description: 'Vue 3 Component Library'
+				description: 'Vue 3 Component Library',
+				githubUrl: 'https://github.com/dev-1603/CelestialUI-Vue'
 			},
 			{
 				name: '@celestial-ui/react',
 				url: 'https://www.npmjs.com/package/@celestial-ui/react',
-				description: 'React Component Library'
+				description: 'React Component Library',
+				githubUrl: 'https://github.com/dev-1603/celestialui-react'
 			},
 			{
 				name: '@celestial-ui/svelte',
@@ -207,12 +231,12 @@ export const personalProjects: Project[] = [
 		id: 'healthcare-ai',
 		title: 'Care Caddy',
 		description:
-			'AI-powered healthcare application providing personalized health recommendations and symptom analysis using machine learning.',
-		technologies: ['Python', 'FastAPI', 'React', 'TensorFlow', 'PostgreSQL', 'Docker'],
+			'An AI-powered healthcare companion that helps users take control of their medical life. Upload a prescription and it reads it — extracting every medication, dosage, and instruction using OCR and LLM processing. Log symptoms and get an AI risk assessment. Track medications, set reminders, and monitor vitals over time. Find doctors by specialty and availability and book appointments directly.Built as a full-stack product with a NestJS microservice handling all AI processing separately from the main API, keeping response times fast and the architecture clean.',
+		technologies: ['Next.js', 'Nuxt 4', 'NestJS', 'TypeScript', 'PostgreSQL', 'Supabase', 'Prisma', 'OpenAI GPT-4o', 'AWS Textract', 'Tailwind CSS', 'shadcn/ui', 'Docker', 'HIPAA-aware', 'RBAC'],
     // githubUrl: 'https://github.com/dev-1603/healthcare-ai',
 		liveUrl: '',
 		underDevelopment: true,
-		image: '',
+		image: '/project-images/care-caddy.png',
 		featured: true,
 		type: 'personal',
     stars: 0,
@@ -220,21 +244,4 @@ export const personalProjects: Project[] = [
 		order: 2,
     lastUpdated: Date.now().toString()
 	},
-	{
-		id: 'nexus-commerce',
-		title: 'Nexus Commerce Platform',
-		description:
-			'Full-stack e-commerce platform with real-time inventory management, payment processing, and admin dashboard.',
-		technologies: ['Node.js', 'React', 'PostgreSQL', 'Stripe', 'Redis', 'AWS'],
-		githubUrl: 'https://github.com/dev-1603/nexus-commerce',
-		liveUrl: '',
-		underDevelopment: true,
-		image: '',
-		featured: true,
-		type: 'personal',
-    stars: 0,
-    forks: 0,
-    order: 3,
-    lastUpdated: Date.now().toString()
-	}
 ];

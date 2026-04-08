@@ -2,7 +2,7 @@ import type { PersonalInfo, ContactInfo } from '$lib/types/portfolio';
 
 // Format experience display text based on months difference
 const formatExperienceText = () => {
-  const startDate = new Date('2019-10-01');
+  const startDate = new Date('2019-06-01');
   const currentDate = new Date();
   const diffTime = currentDate.getTime() - startDate.getTime();
   const diffDays = diffTime / (1000 * 60 * 60 * 24);
@@ -20,20 +20,20 @@ const formatExperienceText = () => {
   }
 };
 
-const yearsOfExperience = Math.floor((new Date().getTime() - new Date('2019-10-01').getTime()) / (1000 * 60 * 60 * 24 * 365));
+const yearsOfExperience = Math.floor((new Date().getTime() - new Date('2019-06-01').getTime()) / (1000 * 60 * 60 * 24 * 365));
 export const experienceText = formatExperienceText();
 
 export const personalInfo: PersonalInfo = {
   name: 'Debjyoti Mohapatra',
-  title: 'Senior Software/Full Stack Developer',
+  title: 'Full Stack Engineer',
   yearsOfExperience: yearsOfExperience,
   domains: ['Fintech', 'Generative AI', 'E-commerce', 'SaaS', 'Low-code Platforms', 'CRM', 'CMS'],
-  summary: `Senior Full Stack Developer with ${experienceText} of experience in end-to-end solutioning, specializing in scalable, high-performance applications. Proven expertise in fintech, generative AI, e-commerce, SaaS, low-code platforms, CRM, and CMS.`,
-  about: `I'm a passionate Senior Full Stack Developer with ${experienceText} of experience in end-to-end solutioning, specializing in scalable, high-performance applications. My expertise spans across fintech, generative AI, e-commerce, SaaS, low-code platforms, CRM, and CMS development.
+  summary: `Full-stack products built from scratch across fintech, GenAI, telecom, SaaS, and CMS. ${experienceText} of shipping code - every time starting from an empty repo.`,
+  about: `I've spent ${experienceText} building full-stack products across five completely different domains - starting from nothing each time. A fintech investment platform. A GenAI multi-tenant SaaS. A telecom e-commerce stack. A no-code builder. An authentication gateway.
 
-I excel in system architecture optimization, best practices implementation, and driving innovation for enhanced product quality and user experience. My technical journey includes building AI-powered multi-tenant applications, dynamic component libraries, real-time collaboration platforms, and no-code solutions.
+The common thread isn't the domain. It's the depth: multi-tenant architecture, event-driven backends, RBAC systems, Vue/Node/TS from frontend to infra.
 
-When I'm not developing cutting-edge solutions, I contribute to open-source projects and stay at the forefront of emerging technologies. I believe in continuous learning and sharing knowledge with the developer community.`,
+I'm frontend-heavy by background but backend-capable by necessity. Most of the interesting problems live at the seam between the two.`,
   location: 'Bhubaneswar, Odisha, India',
   availableForWork: true
 };

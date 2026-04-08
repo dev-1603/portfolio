@@ -23,6 +23,7 @@ export interface NpmPackage {
   name: string;
   url: string;
   description: string;
+  githubUrl?: string;
 }
 
 export interface Project {
@@ -51,7 +52,6 @@ export interface Project {
 export interface Skill {
   name: string;
   category: 'frontend' | 'backend-architecture' | 'data-infrastructure' | 'testing-tooling' | 'ai-ml';
-  proficiency: number; // 1–100, used for sort order only — never displayed
   icon?: string;
   color?: string;
   subcategory?: string;

@@ -14,17 +14,17 @@ export const workExperience: WorkExperience[] = [
       'Architected and implemented scalable UI/UX using Vue/React ecosystem',
       'Integrated CMS platforms (Contentful, Strapi) for streamlined content management',
       'Coordinated with designers and cross-disciplinary teams for high-quality solutions',
-      'Spearheaded development of innovative e-commerce store with high-performance architecture',
+      'Led development of e-commerce storefront with high-performance architecture for US telecom brand',
       'Collaborated closely with designers to ensure cohesive user experience'
     ],
     achievements: [
       'Successfully delivered high-performance e-commerce store for US telecom startup',
-      'Enabled seamless user experience through robust CMS integration',
-      'Elevated product quality, scalability, and maintainability using modern best practices',
-      'Built scalable solutions that support rapid business scaling'
+      'Delivered consistent user experience across the storefront through CMS integration with Contentful and Strapi',
+      'Micro-frontend architecture across 15+ AWS Lambda endpoints with DynamoDB for a US telecom brand',
+      'Built architecture that supports rapid product expansion without rework'
     ],
     technologies: ['Vue.js', 'React.js', 'Contentful', 'Strapi', 'TypeScript', 'JavaScript'],
-    description: 'Leading frontend development for innovative e-commerce solutions in the US telecom industry.',
+    description: 'Frontend lead for Reach Mobile - a US telecom e-commerce product. Vue/React stack, Contentful and Strapi for CMS, micro-frontend architecture across 15+ AWS Lambda endpoints with DynamoDB.',
     highlights: ['E-commerce Platform', 'CMS Integration', 'Team Leadership', 'Performance Optimization']
   },
   {
@@ -37,17 +37,20 @@ export const workExperience: WorkExperience[] = [
     endDate: '2024-09',
     current: false,
     roles: [
-      'Spearheaded full-stack development of multi-tenant AI-driven chat application',
+      'Led full-stack development of multi-tenant AI-driven chat platform',
       'Engineered Node.js backend services with LLM API integrations (LangChain)',
       'Developed centralized JWT/OAuth authentication for unified access',
       'Built internal administrative portal for customer support and tenant management',
-      'Implemented robust data security and data loss prevention mechanisms',
+      'Implemented data security controls and data loss prevention for multi-tenant environments',
       'Designed database schemas using MySQL with Sequelize ORM',
       'Conducted performance monitoring and optimization for scalability',
       'Maintained comprehensive documentation for system architecture and APIs',
       'Led training sessions for platform adoption and user empowerment'
     ],
     achievements: [
+      'Designed JWT authorizer middleware and RBAC system for per-tenant API access control',
+      'Implemented event-driven architecture for async AI workflow processing',
+      'Built dynamic component library used across all tenant frontends',
       'Reduced development time by 30% through dynamic component library and layout builder',
       'Delivered feature-rich, highly secure chat environment with public/private models',
       'Implemented sensitive data monitoring for real-time risk identification',
@@ -56,7 +59,7 @@ export const workExperience: WorkExperience[] = [
       'Ensured regulatory compliance with data privacy protocols'
     ],
     technologies: ['Vue 2', 'Vue 3', 'Nuxt 2', 'Nuxt 3', 'Node.js', 'Express.js', 'MySQL', 'Sequelize', 'LangChain', 'TypeScript', 'Tailwind CSS', 'Pinia', 'JWT/OAuth'],
-    description: 'Developed AI-powered applications with focus on security, scalability, and innovative solutions.',
+    description: 'Built a multi-tenant GenAI SaaS platform - full stack, from auth middleware and RBAC to Vue 3 frontend and Node.js/LangChain backend.',
     highlights: ['AI Integration', '30% Time Reduction', 'Multi-tenant Architecture', 'Security Implementation']
   },
   {
@@ -80,15 +83,15 @@ export const workExperience: WorkExperience[] = [
       'Collaborated with design teams for engaging and responsive UI/UX'
     ],
     achievements: [
-      'Built portfolio-centric investment platform supporting real-time deposits/withdrawals',
-      'Implemented two-step approval process for content accuracy',
-      'Enhanced operational efficiency through integrated MIS reporting',
-      'Delivered actionable insights via advanced data visualization',
-      'Optimized performance and user experience with server-side rendering',
-      'Streamlined operations through comprehensive admin console'
+      'Built SSR investment platform in Nuxt 3 - real-time portfolio valuations, deposit/withdrawal flows, and rebalancing notifications for 10,000+ investors',
+      'Developed SPA advisory console in Vue 3/Quasar with SSO, RBAC, client portfolio management, and MIS report generation',
+      'Built CMS with two-step role-based approval workflow, live content preview, and annotated revision flow',
+      'Designed and deployed Node.js/Express content API - email templates via Sendgrid, PDF generation with pdfmake, and scheduled data jobs',
+      'Implemented universal state management using Pinia across all frontend products',
+      'Worked with GCP, Docker, Kubernetes, and Gitlab CI for deployment across all four products'
     ],
-    technologies: ['Vue 2', 'Vue 3', 'Nuxt 2', 'Nuxt 3', 'Quasar v2', 'TypeScript', 'Node.js', 'Firebase', 'PostgreSQL', 'Docker', 'Kubernetes', 'GCP', 'Chart.js', 'E-charts'],
-    description: 'Developed fintech and CMS solutions with focus on real-time data processing and user experience.',
+    technologies: ['Vue 2', 'Vue 3', 'Nuxt 2', 'Nuxt 3', 'Quasar v2', 'TypeScript', 'Node.js', 'Express.js', 'Firebase', 'PostgreSQL', 'Docker', 'Kubernetes', 'GCP', 'Pinia', 'Chart.js', 'E-charts', 'Sendgrid', 'pdfmake'],
+    description: 'Worked across a four-product fintech ecosystem - an SSR investment platform, an SPA advisory console with SSO, a CMS with approval workflows, and a Node.js content API. Each product shipped independently; all shared the same infrastructure.',
     highlights: ['Fintech Platform', 'Real-time Tracking', 'Data Visualization', 'SSR Implementation'],
     majorProjects: [
       {
@@ -119,24 +122,24 @@ export const workExperience: WorkExperience[] = [
     endDate: '2021-09',
     current: false,
     roles: [
-      'Engineered UI and core modules for innovative no-code platform',
+      'Built UI and core modules for a no-code drag-and-drop platform',
       'Developed reusable component library using Vue.js, Tailwind CSS, and Storybook',
       'Designed intuitive Layout Builder with drag-and-drop functionality',
       'Implemented Schema Builder for complex stateful application logic',
       'Created flow chart constructor for enhanced flexibility and customization',
       'Ensured UI consistency and optimized development workflows',
-      'Collaborated in revolutionary platform development for web/mobile apps'
+      'Worked on platform development for web and mobile app creation'
     ],
     achievements: [
-      'Pioneered dynamic UI toolkit that dramatically reduced time-to-market',
-      'Spearheaded revolutionary no-code platform development',
+      'Built a dynamic UI toolkit that reduced time-to-market for non-technical teams',
+      'Core contributor to no-code platform development from initial build to delivery',
       'Significantly optimized development processes through component library',
       'Enabled effortless web page creation through intuitive builder tools',
       'Facilitated complex application design without coding expertise',
       'Reduced development cycles and ensured consistent UI patterns'
     ],
     technologies: ['JavaScript', 'Vue.js 2&3', 'Tailwind CSS', 'Storybook', 'Git', 'GitLab'],
-    description: 'Developed innovative no-code platforms and reusable component libraries.',
+    description: 'Built the frontend for a no-code platform - drag-and-drop layout builder, schema builder for stateful logic, and a reusable component library in Vue.js and Storybook.',
     highlights: ['No-Code Platform', 'Component Library', 'Drag-and-Drop Builder', 'UI Toolkit']
   },
   {
@@ -151,21 +154,21 @@ export const workExperience: WorkExperience[] = [
     roles: [
       'Developed and maintained scalable web applications using Vue.js and Node.js',
       'Collaborated with design team for intuitive and responsive user interfaces',
-      'Orchestrated end-to-end development of CRM modules',
+      'Developed CRM modules covering account management, project tracking, and deliverable monitoring',
       'Designed UI components and client-side functionality',
       'Implemented multi-tenant architecture for enterprise solutions',
       'Developed spreadsheet interfaces for bulk operations',
       'Created product comparison and analysis modules'
     ],
     achievements: [
-      'Delivered multi-tenant CRM solution for Valve and Service Industries',
-      'Enhanced team efficiency through comprehensive UI architecture improvements',
-      'Built real-time digital workshop platform with multi-language support',
-      'Implemented innovative Charge Code system for adaptable workshops',
-      'Streamlined bulk custom orders through intuitive interfaces'
+      'Built multi-tenant CRM supporting account management, project tracking, deliverable monitoring, and bulk order entry via Jspreadsheet with Apollo GraphQL backend',
+      'Developed product comparison and market analysis platform - real-time workshops, Charge Code system for configurable sessions, and multi-language support',
+      'Implemented product, comparison, implementation, and advisor modules for the DTV market analysis tool',
+      'Worked with NestJS/PostgreSQL on CRM backend and Feathers/MongoDB on the DTV platform',
+      'Delivered spreadsheet-based bulk order interface using Jspreadsheet, Excel.js, and SheetJS'
     ],
-    technologies: ['Vue.js', 'Vuex', 'Quasar', 'Node.js', 'NestJS', 'FeathersJS', 'PostgreSQL', 'MongoDB', 'Apollo GraphQL', 'AWS', 'Redis'],
-    description: 'Developed web applications with focus on responsive design and performance optimization.',
+    technologies: ['Vue.js', 'Vuex', 'Quasar', 'Node.js', 'NestJS', 'FeathersJS', 'PostgreSQL', 'MongoDB', 'Apollo GraphQL', 'E-charts', 'Plotly.js', 'Jspreadsheet', 'Excel.js', 'SheetJS', 'Git', 'Bitbucket'],
+    description: 'Built frontend across two products - a multi-tenant sales CRM for Valve and Service Industries, and a real-time market analysis tool with product comparison and design-to-value workflows.',
     highlights: ['Multi-tenant CRM', 'Real-time Platform', 'Bulk Operations', 'Enterprise Solutions'],
     majorProjects: [
       {
