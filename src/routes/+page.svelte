@@ -640,19 +640,17 @@
 
     <div class="grid md:grid-cols-3 gap-8">
       {#each workExperience.slice(0, 3) as job, index}
-        <div class="animate-slide-up" style="animation-delay: {index * 0.1}s;">
-          <div class="bg-white dark:bg-dark-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+        <div class="animate-slide-up h-full" style="animation-delay: {index * 0.1}s;">
+          <div class="bg-white dark:bg-dark-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full flex flex-col">
             <div class="flex items-center justify-between mb-4">
               <h3 class="text-lg font-bold text-dark-900 dark:text-white">{job.title}</h3>
-              {#if job.current}
-                <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded-full">
-                  Current
-                </span>
-              {/if}
+             
             </div>
             <p class="text-primary-600 dark:text-primary-400 mb-2">{job.company}</p>
             <p class="text-dark-600 dark:text-dark-400 text-sm mb-4">{job.duration}</p>
-            <p class="text-dark-700 dark:text-dark-300 text-sm mb-4">{job.description}</p>
+            <div class="min-h-32 max-h-36 overflow-auto mb-4">
+              <p class="text-dark-700 dark:text-dark-300 text-sm">{job.description}</p>
+            </div>
             
             <!-- Key Highlights -->
             <div class="mb-4">
@@ -674,7 +672,7 @@
             {/if}
             
             <!-- Technologies -->
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-2 mt-auto">
               {#each job.technologies.slice(0, 4) as tech}
                 <span class="px-2 py-1 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-xs rounded-md">
                   {tech}
@@ -735,7 +733,7 @@
     </div>
 
     <!-- Professional Projects -->
-    <div class="mb-16">
+    <div class="mb-8">
       <h3 class="text-2xl font-bold mb-8 text-center">Professional Projects</h3>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {#each sortedProfessionalProjects as project, index}
@@ -751,9 +749,18 @@
         {/each}
       </div>
     </div>
+    <div class="text-center">
+      <a
+        href="/projects?tab=professional"
+        class="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors duration-200 focus-ring"
+      >
+        View All Projects
+        <Icon name="arrow-right" className="w-5 h-5 ml-2" />
+      </a>
+    </div>
 
     <!-- Personal Projects -->
-    <div class="mb-16">
+    <div class="my-8">
       <h3 class="text-2xl font-bold mb-8 text-center">Personal Projects</h3>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {#each sortedPersonalProjects as project, index}
@@ -772,7 +779,7 @@
 
     <div class="text-center">
       <a
-        href="/projects"
+        href="/projects?tab=personal"
         class="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors duration-200 focus-ring"
       >
         View All Projects

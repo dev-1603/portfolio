@@ -18,9 +18,23 @@
   let expandedDescriptions: Set<number> = new Set();
 
   onMount(async () => {
-    if (browser) {
-      await loadGithubRepos();
+    if (!browser) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const tabParam = params.get('tab');
+    if (tabParam) {
+      const t = tabParam.toLowerCase();
+      if (t === 'professional' || t === 'personal' || t === 'github') {
+        switchTab(t as 'professional' | 'personal' | 'github');
+        if (t === 'github') {
+          await loadGithubRepos();
+        }
+        return;
+      }
     }
+
+    // default: load GitHub repos so the github tab is ready if opened
+    await loadGithubRepos();
   });
  
   async function loadGithubRepos() {
