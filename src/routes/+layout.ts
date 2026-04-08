@@ -1,3 +1,2 @@
-// Prerender all pages so adapter-static can generate the site for GitHub Pages.
-// Build-time env (e.g. GITHUB_TOKEN) is used in +page.server.ts where needed.
-export const prerender = true;
+// Vercel adapter handles SSR/server routes. Do not force global prerender.
+export const prerender = false;
