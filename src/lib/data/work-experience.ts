@@ -5,179 +5,188 @@ export const workExperience: WorkExperience[] = [
     id: 'sde-2-applore',
     title: 'Software Development Engineer - 2',
     company: 'Applore Technologies',
-    location: 'Remote',
+    location: 'Bhubaneswar, India (Remote)',
     duration: 'Oct 2024 - Present',
     startDate: '2024-10',
     current: true,
+    description: 'Architected a "Zero-Redeploy" multi-tenant e-commerce ecosystem for 5 major US telecom brands. Engineered a headless micro-frontend architecture driven by AWS Lambda and runtime feature flags to enable instant, independent brand scaling.',
     roles: [
-      'Led frontend development team as Vue Consultant for Reach Mobile (US telecom startup)',
-      'Architected and implemented scalable UI/UX using Vue/React ecosystem',
-      'Integrated CMS platforms (Contentful, Strapi) for streamlined content management',
-      'Coordinated with designers and cross-disciplinary teams for high-quality solutions',
-      'Led development of e-commerce storefront with high-performance architecture for US telecom brand',
-      'Collaborated closely with designers to ensure cohesive user experience'
+      'Orchestrated the architectural vision for a white-label MVNO and e-commerce platform, enabling isolated scaling for multiple US telecom brands on a unified core.',
+      'Partnered closely with Project Managers and Design Heads to translate complex PRDs into actionable technical roadmaps, defining precise feature delivery estimates and finalizing user stories.',
+      'Designed a "Zero-Redeploy" vendor system leveraging runtime configuration and feature flags, allowing tenants to instantly customize storefront templates, UI configurations, and feature sets.',
+      'Architected a headless synchronization engine between Shopware and Strapi CMS, utilizing AWS Lambda workflows and DynamoDB indexing to decouple frontend delivery from complex catalog logic.',
+      'Mentored peer and junior engineers through rigorous technical grooming and code reviews, streamlining development cycles to maintain maximum team efficiency.',
+      'Defined the technical strategy for Vue 2 to Vue 3 Composition API migrations across the entire product line, resulting in cleaner Pinia state management and ~40% performance optimization.'
     ],
     achievements: [
-      'Successfully delivered high-performance e-commerce store for US telecom startup',
-      'Delivered consistent user experience across the storefront through CMS integration with Contentful and Strapi',
-      'Micro-frontend architecture across 15+ AWS Lambda endpoints with DynamoDB for a US telecom brand',
-      'Built architecture that supports rapid product expansion without rework'
+      'Successfully delivered a high-performance, multi-tenant e-commerce core from zero to production for 5 major US telecom brands.',
+      'Eliminated cross-brand redeployments by engineering a highly dynamic, configuration-driven micro-frontend architecture combining Vue.js and React.',
+      'Established a versioned REST API layer with strict tenant-scoped authorization, supporting rapid product expansion across 15+ micro-services.',
+      'Automated catalog propagation across all brands without frontend code changes via an API-first headless integration layer.'
     ],
-    technologies: ['Vue.js', 'React.js', 'Contentful', 'Strapi', 'TypeScript', 'JavaScript'],
-    description: 'Frontend lead for Reach Mobile - a US telecom e-commerce product. Vue/React stack, Contentful and Strapi for CMS, micro-frontend architecture across 15+ AWS Lambda endpoints with DynamoDB.',
-    highlights: ['E-commerce Platform', 'CMS Integration', 'Team Leadership', 'Performance Optimization']
+    technologies: ['Vue.js', 'React.js', 'AWS Lambda', 'DynamoDB', 'Shopware', 'Strapi', 'Pinia', 'TypeScript'],
+    highlights: ['Multi-tenant Architecture', 'Template-based applications', 'Zero-Redeploy Systems', 'Headless CMS', 'Vue/React Integration'],
+    majorProjects: [
+      {
+        name: 'Bespoke MVNO Storefront Platform',
+        description: 'Custom-built storefronts for US telecom carriers like AT&T, Verizon, and Lyca Mobile, where each client owned the feature set, policies, and UX flows. Built on a shared MSP and device store foundation using a micro-frontend architecture with Vue.js and React.'
+      },
+      {
+        name: 'Self-Serve Multi-Tenant MVNE Platform',
+        description: 'An in-house white-label platform where tenants onboard by selecting from a predefined set of templates, page layouts, and features. All supported themes and variants are defined by the platform — tenants configure their storefront through a structured onboarding flow with no custom development needed.'
+      }
+    ]
   },
   {
     id: 'senior-swe-gate-ai',
     title: 'Senior Software Engineer',
     company: 'Gate AI Pvt Ltd',
-    location: 'Remote',
+    location: 'Chennai, India (Remote)',
     duration: 'Dec 2023 - Sept 2024',
     startDate: '2023-12',
     endDate: '2024-09',
     current: false,
+    description: 'Spearheaded the 0-to-1 design of an enterprise GenAI orchestration platform. Architected a provider-agnostic LLM gateway and centralized IAM portal with strict multi-tenant data isolation and fine-grained RBAC.',
     roles: [
-      'Led full-stack development of multi-tenant AI-driven chat platform',
-      'Engineered Node.js backend services with LLM API integrations (LangChain)',
-      'Developed centralized JWT/OAuth authentication for unified access',
-      'Built internal administrative portal for customer support and tenant management',
-      'Implemented data security controls and data loss prevention for multi-tenant environments',
-      'Designed database schemas using MySQL with Sequelize ORM',
-      'Conducted performance monitoring and optimization for scalability',
-      'Maintained comprehensive documentation for system architecture and APIs',
-      'Led training sessions for platform adoption and user empowerment'
+      'Drove the architectural solutioning of PRD requirements, conducting technical grooming sessions to break down high-level business goals into scalable production features.',
+      'Engineered the "Celestial Auth Portal," a centralized authentication layer utilizing JWT and OAuth2 to manage secure, enterprise-grade access across the entire platform ecosystem.',
+      'Designed a provider-agnostic LLM gateway that abstracted model complexity, allowing seamless swapping of AI models (Anthropic, OpenAI, Gemini) without impacting client-side integrations.',
+      'Developed a high-scale Control Plane in Node.js (Express/Sequelize) to orchestrate asynchronous AI workflows, document analysis, and high-speed streaming interactions.',
+      'Implemented strict Data Loss Prevention (DLP) protocols and fine-grained RBAC to guarantee absolute data isolation within shared and closed multi-tenant chat environments.'
     ],
     achievements: [
-      'Designed JWT authorizer middleware and RBAC system for per-tenant API access control',
-      'Implemented event-driven architecture for async AI workflow processing',
-      'Built dynamic component library used across all tenant frontends',
-      'Reduced development time by 30% through dynamic component library and layout builder',
-      'Delivered feature-rich, highly secure chat environment with public/private models',
-      'Implemented sensitive data monitoring for real-time risk identification',
-      'Established shared and closed chatroom environments with data integrity',
-      'Successfully integrated diverse LLMs for advanced AI-powered interactions',
-      'Ensured regulatory compliance with data privacy protocols'
+      'Spearheaded the conceptualization and 0-to-1 delivery of an enterprise GenAI orchestration platform, scaling it from a rough MVP to a production-ready V1.',
+      'Reduced feature time-to-market by 30% by developing a dynamic Component Library and modular Layout Builder utilized across all tenant frontends.',
+      'Successfully integrated complex AI interaction capabilities, including public/private model segmentation and real-time sensitive data monitoring.',
+      'Built a comprehensive Super Admin infrastructure for tenant onboarding, MIS reporting, and platform oversight.'
     ],
-    technologies: ['Vue 2', 'Vue 3', 'Nuxt 2', 'Nuxt 3', 'Node.js', 'Express.js', 'MySQL', 'Sequelize', 'LangChain', 'TypeScript', 'Tailwind CSS', 'Pinia', 'JWT/OAuth'],
-    description: 'Built a multi-tenant GenAI SaaS platform - full stack, from auth middleware and RBAC to Vue 3 frontend and Node.js/LangChain backend.',
-    highlights: ['AI Integration', '30% Time Reduction', 'Multi-tenant Architecture', 'Security Implementation']
+    technologies: ['Nuxt 3', 'Vue 3', 'TypeScript', 'Node.js', 'Express.js', 'MySQL', 'Sequelize', 'LangChain', 'Tailwind CSS', 'JWT/OAuth'],
+    highlights: ['LLM Orchestration', 'Identity Management', 'SaaS Data Isolation', 'Provider-Agnostic Gateway'],
+    majorProjects: [
+      {
+        name: 'Multi-Tenant Auth & Identity Gateway',
+        description: 'Centralised authentication service across the Gate AI ecosystem. Every request passed through a custom authoriser that verified tokens, resolved tenant and user identity, and injected context headers so downstream services could trust the caller without re-validating.'
+      },
+      {
+        name: 'Provider-Agnostic AI Chat Platform',
+        description: 'Multi-tenant chat application with support for multiple LLM providers, document analysis, and per-tenant isolation. Included DLP and PII guards to prevent sensitive data from leaving the platform. RBAC and feature flags were configurable per tenant, controlled entirely from the super admin layer.'
+      },
+      {
+        name: 'Super Admin & Tenant Management Console',
+        description: 'Internal dashboard for platform-wide operations — tenant onboarding, feature flag management, RBAC configuration,customer-support, and MIS reporting. Maintained a strict separation between host-level data and per-tenant data.'
+      }
+    ]
   },
   {
     id: 'senior-swe-geekyants',
     title: 'Senior Software Engineer',
-    company: 'Geekyants Private Limited',
-    location: 'Remote',
+    company: 'Geekyants',
+    location: 'Bengaluru, India (Remote)',
     duration: 'Sept 2021 - Nov 2023',
     startDate: '2021-09',
     endDate: '2023-11',
     current: false,
+    description: 'Worked across a 4-product fintech ecosystem serving 10,000+ active investors — covering an investment platform, advisory console, CMS, and the event-driven backend tying them together on shared GCP infrastructure.',
     roles: [
-      'Developed transactional SSR-based investment platform with real-time portfolio tracking',
-      'Engineered versatile CMS with role-based workflows and dynamic content preview',
-      'Built backend API applications for content management, PDF generation, email systems',
-      'Developed SPA admin/advisory console with SSO and role-based access control',
-      'Implemented universal state management using Pinia library',
-      'Integrated analytics and SEO for enhanced functionality',
-      'Created data visualization dashboards using Chart.js and E-charts',
-      'Designed database schemas and optimized queries for performance',
-      'Collaborated with design teams for engaging and responsive UI/UX'
+      'Collaborated directly with the CTO, Lead Designers, and DevOps to finalise product decisions and ship features end-to-end.',
+      'Architected a high-concurrency investment platform built for real-time portfolio valuations and instant deposit/withdrawal flows.',
+      'Built an event-driven content architecture using GCP Pub/Sub to handle heavy data jobs and automated email workflows.',
+      'Designed an RBAC framework across the advisory console to deliver dynamic, role-specific capabilities without separate builds per role.',
+      'Led adoption of a centralised state management pattern and set up deployment pipelines using Docker, Kubernetes, and GitLab CI.'
     ],
     achievements: [
-      'Built SSR investment platform in Nuxt 3 - real-time portfolio valuations, deposit/withdrawal flows, and rebalancing notifications for 10,000+ investors',
-      'Developed SPA advisory console in Vue 3/Quasar with SSO, RBAC, client portfolio management, and MIS report generation',
-      'Built CMS with two-step role-based approval workflow, live content preview, and annotated revision flow',
-      'Designed and deployed Node.js/Express content API - email templates via Sendgrid, PDF generation with pdfmake, and scheduled data jobs',
-      'Implemented universal state management using Pinia across all frontend products',
-      'Worked with GCP, Docker, Kubernetes, and Gitlab CI for deployment across all four products'
+      'Built a CMS with a two-step approval workflow, live content preview, and custom syntax generation.',
+      'Kept independent shipping cycles for four products while sharing the same underlying GCP infrastructure.',
+      'Delivered MIS reporting and client portfolio management tools for financial advisors — covering portfolio breakdown, transaction history, and fund rebalancing views.'
     ],
-    technologies: ['Vue 2', 'Vue 3', 'Nuxt 2', 'Nuxt 3', 'Quasar v2', 'TypeScript', 'Node.js', 'Express.js', 'Firebase', 'PostgreSQL', 'Docker', 'Kubernetes', 'GCP', 'Pinia', 'Chart.js', 'E-charts', 'Sendgrid', 'pdfmake'],
-    description: 'Worked across a four-product fintech ecosystem - an SSR investment platform, an SPA advisory console with SSO, a CMS with approval workflows, and a Node.js content API. Each product shipped independently; all shared the same infrastructure.',
-    highlights: ['Fintech Platform', 'Real-time Tracking', 'Data Visualization', 'SSR Implementation'],
+    technologies: ['Nuxt 3', 'Vue 3', 'TypeScript', 'Node.js', 'Firebase', 'GCP', 'PostgreSQL', 'Docker', 'Kubernetes', 'Pinia', 'Quasar v2'],
+    highlights: ['10k+ Investor Scale', 'Real-time Portfolio', 'Ecosystem Architecture', 'Event-Driven GCP'],
     majorProjects: [
       {
-        name: 'Transactional Portfolio Investment Website',
-        description: 'SSR platform for portfolio investments with real-time tracking, notifications, and rebalancing'
+        name: 'Transactional Portfolio Engine',
+        description: 'An investment platform with real-time portfolio tracking, instant deposit/withdrawal flows, and automated fund rebalancing.'
       },
       {
-        name: 'Advisory & Admin Console',
-        description: 'SPA with SSO, MIS reporting, role-based access, portfolio/client management'
+        name: 'Advisory & Reporting Console',
+        description: 'A secure console for financial advisors with role-based access, deep MIS reporting, client portfolio management, and data visualisation.'
       },
       {
         name: 'Content Management System',
-        description: 'Multi-platform CMS with preview, two-step approval, customizable syntax'
+        description: 'A CMS with live content previews, custom syntax support, and a two-step role-based approval workflow.'
       },
       {
-        name: 'Content Backend Server',
-        description: 'Node.js API for content management, email templates, scheduled jobs'
+        name: 'Event-Driven Content & Notification Service',
+        description: 'A backend service handling content APIs, scheduled big-data jobs, and automated email operations.'
       }
     ]
   },
   {
     id: 'frontend-dev-kisai',
     title: 'Frontend Developer',
-    company: 'Ideanz IT Solutions (now KISAI)',
-    location: 'Remote',
-    duration: 'May 2021 - Sept 2021',
+    company: 'KISAI (Ideanz IT Solutions)',
+    location: 'Hyderabad, India',
+    duration: 'May 2021 - Sep 2021',
     startDate: '2021-05',
     endDate: '2021-09',
     current: false,
+    description: 'Built the core rendering engine for a No-Code platform and independently designed a headless component library — both grounded in atomic design principles and token-based theming.',
     roles: [
-      'Built UI and core modules for a no-code drag-and-drop platform',
-      'Developed reusable component library using Vue.js, Tailwind CSS, and Storybook',
-      'Designed intuitive Layout Builder with drag-and-drop functionality',
-      'Implemented Schema Builder for complex stateful application logic',
-      'Created flow chart constructor for enhanced flexibility and customization',
-      'Ensured UI consistency and optimized development workflows',
-      'Worked on platform development for web and mobile app creation'
+      'Built the core rendering logic for a No-Code platform using Vue 3 Composition API and XState for deterministic state management.',
+      'Developed a Schema Builder that parsed JSON/YAML metadata and produced fully functional, stateful UI components at runtime.',
+      'Built a Layout Builder with drag-and-drop mechanics allowing non-technical users to assemble application views without writing code.',
+      'Independently designed and built a headless component library following atomic design principles and token-based theming — consumed both as a standard library and as drag-and-drop building blocks in the No-Code platform via props.',
+      'Documented and previewed the component library via Storybook, covering core primitives, form elements, and layout components.'
     ],
     achievements: [
-      'Built a dynamic UI toolkit that reduced time-to-market for non-technical teams',
-      'Core contributor to no-code platform development from initial build to delivery',
-      'Significantly optimized development processes through component library',
-      'Enabled effortless web page creation through intuitive builder tools',
-      'Facilitated complex application design without coding expertise',
-      'Reduced development cycles and ensured consistent UI patterns'
+      'Built the frontend engine that let users define application schemas, states, and events entirely through configuration.',
+      'Integrated XState into the core platform to guarantee predictable UI state transitions across complex component trees.',
+      'Delivered a fully headless component library solo — reused across both traditional consumption and the No-Code drag-and-drop interface without any structural changes.',
+      'Reduced time-to-market for enterprise clients using the No-Code toolset for web and mobile application delivery.'
     ],
-    technologies: ['JavaScript', 'Vue.js 2&3', 'Tailwind CSS', 'Storybook', 'Git', 'GitLab'],
-    description: 'Built the frontend for a no-code platform - drag-and-drop layout builder, schema builder for stateful logic, and a reusable component library in Vue.js and Storybook.',
-    highlights: ['No-Code Platform', 'Component Library', 'Drag-and-Drop Builder', 'UI Toolkit']
+    technologies: ['Vue 3 (Composition API)', 'JavaScript', 'XState', 'Tailwind CSS', 'Storybook', 'Gitlab'],
+    highlights: ['No-Code Engine', 'State Machines (XState)', 'Dynamic Schema Parsing', 'Headless Component Library'],
+    majorProjects: [
+      {
+        name: 'No-Code Application Builder',
+        description: 'A platform where users define application schemas, layouts, and state flows through configuration — no code required. Supported drag-and-drop assembly, dynamic component rendering, and complex state transitions.'
+      },
+      {
+        name: 'Headless Component Library & Design System',
+        description: 'A component library following atomic design principles and token-based theming. Served dual purpose — used as a standard library and as headless drag-and-drop building blocks inside the No-Code platform, configured entirely through props.'
+      }
+    ]
   },
   {
     id: 'software-eng-kalsoft',
     title: 'Software Engineer',
-    company: 'Kalsoft Solutions Pvt Ltd',
-    location: 'Bhubaneswar, Odisha',
+    company: 'Kalsoft Solutions',
+    location: 'Bengaluru, India',
     duration: 'Nov 2019 - May 2021',
     startDate: '2019-11',
     endDate: '2021-05',
     current: false,
+    description: 'Worked on two 0-to-1 enterprise products — a multi-tenant Sales CRM and a real-time market analysis platform — handling everything from GraphQL architecture to in-browser data processing and live analytics.',
     roles: [
-      'Developed and maintained scalable web applications using Vue.js and Node.js',
-      'Collaborated with design team for intuitive and responsive user interfaces',
-      'Developed CRM modules covering account management, project tracking, and deliverable monitoring',
-      'Designed UI components and client-side functionality',
-      'Implemented multi-tenant architecture for enterprise solutions',
-      'Developed spreadsheet interfaces for bulk operations',
-      'Created product comparison and analysis modules'
+      'Built a multi-tenant Sales CRM from scratch with a schema-first Apollo GraphQL layer on top of Vue.js and NestJS.',
+      'Built an in-browser data processing engine using Jspreadsheet and SheetJS to handle bulk custom order datasets without DOM performance issues.',
+      'Built real-time comparison and analytics modules for digital workshops using FeathersJS and WebSocket connections.',
+      'Implemented data visualisation layers using Plotly and E-charts, with Redis caching to maintain responsiveness under heavy load.'
     ],
     achievements: [
-      'Built multi-tenant CRM supporting account management, project tracking, deliverable monitoring, and bulk order entry via Jspreadsheet with Apollo GraphQL backend',
-      'Developed product comparison and market analysis platform - real-time workshops, Charge Code system for configurable sessions, and multi-language support',
-      'Implemented product, comparison, implementation, and advisor modules for the DTV market analysis tool',
-      'Worked with NestJS/PostgreSQL on CRM backend and Feathers/MongoDB on the DTV platform',
-      'Delivered spreadsheet-based bulk order interface using Jspreadsheet, Excel.js, and SheetJS'
+      'Designed a GraphQL data synchronisation layer that kept complex industrial datasets in sync across global clients.',
+      'Delivered a multi-tenant CRM tailored for the global Valve industry, tracking accounts and deep implementation deliverables.',
+      'Built a configurable "Charge Code" system in the market analysis platform for adaptable real-time client workshops.'
     ],
-    technologies: ['Vue.js', 'Vuex', 'Quasar', 'Node.js', 'NestJS', 'FeathersJS', 'PostgreSQL', 'MongoDB', 'Apollo GraphQL', 'E-charts', 'Plotly.js', 'Jspreadsheet', 'Excel.js', 'SheetJS', 'Git', 'Bitbucket'],
-    description: 'Built frontend across two products - a multi-tenant sales CRM for Valve and Service Industries, and a real-time market analysis tool with product comparison and design-to-value workflows.',
-    highlights: ['Multi-tenant CRM', 'Real-time Platform', 'Bulk Operations', 'Enterprise Solutions'],
+    technologies: ['Vue.js', 'NestJS', 'Apollo GraphQL', 'PostgreSQL', 'Redis', 'FeathersJS', 'MongoDB', 'Jspreadsheet', 'E-charts'],
+    highlights: ['0-to-1 Delivery', 'GraphQL Record Syncing', 'In-Browser Big Data', 'Real-time Analytics'],
     majorProjects: [
       {
-        name: 'Salesdesk CRM',
-        description: 'Multi-tenant CRM for account management, project tracking, deliverable monitoring'
+        name: 'Salesdesk - Sales CRM',
+        description: 'A multi-tenant CRM for the global Valve and service industries, tracking accounts and bulk-order datasets through a GraphQL-backed data layer.'
       },
       {
         name: 'Digital DTV - Market Analysis Tool',
-        description: 'Real-time digital workshop platform with product comparison and reporting'
+        description: 'A real-time digital workshop platform with live product comparison, automated reporting, and multi-language architectural support.'
       }
     ]
   }

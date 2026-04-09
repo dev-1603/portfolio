@@ -27,38 +27,43 @@
   const domainExpertiseMap: Record<string, DomainExpertise> = {
     Fintech: {
       title: 'Fintech Platforms',
-      description: 'Secure product development for payments, transaction workflows, and financial operations.',
-      focusAreas: ['Secure API integrations', 'Role-based access', 'Performance and reliability']
+      description: 'Full-stack product development for investment platforms, portfolio management, and financial advisory tools - built for real-time data, strict access control, and high transaction reliability.',
+      focusAreas: ['Real-time portfolio and transaction flows', 'Role-based access and audit trails', 'MIS reporting and advisor tooling']
     },
     'Generative AI': {
       title: 'Generative AI Products',
-      description: 'Practical AI features and LLM integrations with production-friendly user experiences.',
-      focusAreas: ['LLM APIs', 'Prompt and workflow design', 'AI-assisted product features']
+      description: 'Multi-tenant AI platforms with provider-agnostic LLM orchestration, agentic workflows, and production-grade safety controls including DLP and PII guards.',
+      focusAreas: ['Multi-provider LLM routing and orchestration', 'Agentic workflows and document analysis', 'DLP, PII protection, and tenant isolation']
     },
     'E-commerce': {
-      title: 'E-commerce Systems',
-      description: 'Scalable storefront and commerce experiences with conversion-focused product flows.',
-      focusAreas: ['Catalog and checkout UX', 'Order workflows', 'Performance optimization']
+      title: 'Telecom E-commerce & Storefronts',
+      description: 'Bespoke and white-label storefront platforms for MVNO clients - from fully custom carrier-specific builds to self-serve multi-tenant systems with runtime configuration.',
+      focusAreas: ['Carrier-specific storefront delivery', 'Multi-tenant template and feature configuration', 'Device catalog and checkout flows']
     },
     SaaS: {
       title: 'SaaS Applications',
-      description: 'Multi-tenant business products with maintainable architecture and clean developer workflows.',
-      focusAreas: ['Tenant-aware architecture', 'Feature delivery velocity', 'Quality and testing']
+      description: 'Multi-tenant SaaS products with centralised auth, per-tenant isolation, and platform-wide feature governance - covering both customer-facing and internal tooling.',
+      focusAreas: ['Multi-tenant architecture and DB isolation', 'JWT/RBAC and feature flag systems', 'Tenant onboarding and admin consoles']
     },
     'Low-code Platforms': {
-      title: 'Low-code Platforms',
-      description: 'Builder-style systems that enable faster delivery for non-technical and technical users.',
-      focusAreas: ['Config-driven UI', 'Reusable component systems', 'Workflow automation']
+      title: 'Low-code & No-code Platforms',
+      description: 'Schema-driven builder platforms where application structure, state, and layout are defined through configuration - backed by a headless atomic component system.',
+      focusAreas: ['Schema and metadata-driven UI rendering', 'Headless component library with atomic design', 'Drag-and-drop layout assembly']
     },
     CRM: {
       title: 'CRM Solutions',
-      description: 'Customer lifecycle and operations tooling for teams managing sales and relationships.',
-      focusAreas: ['Data management UX', 'Role-based workflows', 'Productivity tooling']
+      description: 'Enterprise CRM products for global industrial clients - built from scratch with GraphQL data layers, bulk data processing, and real-time analytics for complex sales operations.',
+      focusAreas: ['Schema-first GraphQL architecture', 'In-browser bulk data processing', 'Real-time analytics and workshop tooling']
     },
     CMS: {
-      title: 'CMS Implementations',
-      description: 'Content operations platforms with structured authoring and reliable publishing flows.',
-      focusAreas: ['Content modeling', 'Admin dashboards', 'Publishing pipelines']
+      title: 'CMS & Content Operations',
+      description: 'Content management platforms with structured authoring, role-based approval workflows, and live preview - built to support editorial teams across multiple content types.',
+      focusAreas: ['Multi-step role-based approval workflows', 'Live content preview and custom syntax', 'Scheduled publishing and automated distribution']
+    },
+    Healthcare: {
+      title: 'Healthcare Platforms',
+      description: 'A domain I am actively building in out of personal interest - focused on making care coordination, patient data, and clinical workflows more accessible through thoughtful software.',
+      focusAreas: ['AI-assisted care workflows', 'Role-based clinical access', 'Patient data privacy and compliance' , 'HIPAA & GDPR compliance']
     }
   };
 
@@ -540,7 +545,7 @@
     <div class="text-center mb-16">
       <h2 class="text-4xl font-bold mb-4">About Me</h2>
       <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        {personalInfo.yearsOfExperience}+ years building full-stack products across fintech, GenAI, telecom, SaaS, and CMS.
+        {experienceText} years building full-stack products from scratch across fintech, GenAI, SaaS, telecom, and more.
       </p>
     </div>
 

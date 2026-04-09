@@ -27,13 +27,11 @@ export const personalInfo: PersonalInfo = {
   name: 'Debjyoti Mohapatra',
   title: 'Full Stack Engineer',
   yearsOfExperience: yearsOfExperience,
-  domains: ['Fintech', 'Generative AI', 'E-commerce', 'SaaS', 'Low-code Platforms', 'CRM', 'CMS'],
+  domains: ['Fintech', 'Generative AI', 'E-commerce', 'SaaS', 'Low-code Platforms', 'CRM', 'CMS', 'Healthcare'],
   summary: `Full-stack products built from scratch across fintech, GenAI, telecom, SaaS, and CMS. ${experienceText} of shipping code - every time starting from an empty repo.`,
-  about: `I've spent ${experienceText} building full-stack products across five completely different domains - starting from nothing each time. A fintech investment platform. A GenAI multi-tenant SaaS. A telecom e-commerce stack. A no-code builder. An authentication gateway.
-
-The common thread isn't the domain. It's the depth: multi-tenant architecture, event-driven backends, RBAC systems, Vue/Node/TS from frontend to infra.
-
-I'm frontend-heavy by background but backend-capable by necessity. Most of the interesting problems live at the seam between the two.`,
+  about: `Senior Full Stack Engineer with nearly ${experienceText} years owning product architecture end to end — from greenfield design to production systems serving real users across fintech, GenAI, telecom, SaaS, and low-code platforms.
+Across five companies and five domains, the work has consistently started at the same place: an empty repo and an ambiguous problem. That's produced multi-tenant SaaS platforms, provider-agnostic AI orchestration layers, MVNO e-commerce ecosystems, no-code builders, and centralised auth gateways — each designed to scale beyond the initial delivery.
+Strong across the full stack — Vue/React on the frontend, Node.js and cloud infrastructure on the backend — but the real focus is on the decisions that sit above the code: system boundaries, tenant isolation strategies, performance under real load, and the architecture that lets teams move fast without breaking things.`,
   location: 'Bhubaneswar, Odisha, India',
   availableForWork: true
 };
