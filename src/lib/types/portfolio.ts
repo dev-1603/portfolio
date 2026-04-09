@@ -1,3 +1,10 @@
+export interface Testimonial {
+  quote: string;
+  author: string;
+  title: string;
+  link?: string;
+}
+
 export interface WorkExperience {
   id: string;
   title: string;
@@ -17,6 +24,7 @@ export interface WorkExperience {
     name: string;
     description: string;
   }[];
+  testimonial?: Testimonial;
 }
 
 export interface NpmPackage {

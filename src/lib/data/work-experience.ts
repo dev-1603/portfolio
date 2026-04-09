@@ -118,7 +118,14 @@ export const workExperience: WorkExperience[] = [
         name: 'Event-Driven Content & Notification Service',
         description: 'A backend service handling content APIs, scheduled big-data jobs, and automated email operations.'
       }
-    ]
+    ],
+
+    testimonial: {
+      quote: "Debjyoti created our transaction website for investment robot-advisory. He comes with a strong technical expertise in web development with an ever growing interest to learn new technologies. He is very committed professional putting in dedicated efforts to make the system go-live. He being in the team makes a huge difference and I am sure he will continue to build beautiful software systems in the future as well. All the very best to Debjyoti !!",
+      author: "Ramakrishnan Subramaniam",
+      title: "Co-Founder & CTO at Ametra",
+      link: "https://www.linkedin.com/in/debjyoti-mohapatra/details/recommendations/"
+    },
   },
   {
     id: 'frontend-dev-kisai',
@@ -188,6 +195,12 @@ export const workExperience: WorkExperience[] = [
         name: 'Digital DTV - Market Analysis Tool',
         description: 'A real-time digital workshop platform with live product comparison, automated reporting, and multi-language architectural support.'
       }
-    ]
+    ],
+    testimonial: {
+      quote: "Debjyoti Mohapatara was a fantastic person to work with, and is not only a multi-skilled and insightful colleague, but also an inspiring strategist. Very good person. Great employee with a very strong problem solving skills. It was an great experience to working with him.",
+      author: "Antony Agustine Raj",
+      title: "Technical Lead @ Pickles Auctions",
+      link: "https://www.linkedin.com/in/debjyoti-mohapatra/details/recommendations/"
+    }
   }
 ];

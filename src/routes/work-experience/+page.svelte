@@ -1,9 +1,17 @@
 <script lang="ts">
   import { workExperience } from '$lib/data/work-experience';
   import { personalInfo } from '$lib/data/personal';
+  import { RecommendationCard, Icon } from '$lib/components';
   import { onMount } from 'svelte';
+  import { slide } from 'svelte/transition';
 
   let currentJob = workExperience.find(job => job.current);
+
+  let openId: string | null = null;
+
+  function toggleAccordion(id: string) {
+    openId = openId === id ? null : id;
+  }
 
   onMount(() => {
     // Scroll to top when page loads
@@ -120,116 +128,155 @@
               
               <!-- Content -->
               <div class="ml-20">
-                <div class="bg-white dark:bg-dark-900 rounded-2xl shadow-xl p-8 border border-dark-200 dark:border-dark-700 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-[1.02] group-hover:border-primary-300 dark:group-hover:border-primary-600">
-                  <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
-                    <div>
-                      <h3 class="text-2xl font-bold text-dark-900 dark:text-white mb-2">{job.title}</h3>
-                      <p class="text-lg text-primary-600 dark:text-primary-400 mb-1">{job.company}</p>
-                      <p class="text-dark-600 dark:text-dark-400">{job.location}</p>
+                <div class="bg-white dark:bg-dark-900 rounded-2xl shadow-xl border border-dark-200 dark:border-dark-700 hover:shadow-2xl transition-all duration-300 group-hover:border-primary-300 dark:group-hover:border-primary-600 overflow-hidden relative">
+                  <!-- Accordion Header (always visible) -->
+                  <!-- svelte-ignore a11y-click-events-have-key-events -->
+                  <!-- svelte-ignore a11y-no-static-element-interactions -->
+                  <div class="p-8 cursor-pointer" on:click={() => toggleAccordion(job.id)}>
+                    <div class="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                      <div>
+                        <h3 class="text-2xl font-bold text-dark-900 dark:text-white mb-2">{job.title}</h3>
+                        <p class="text-lg text-primary-600 dark:text-primary-400 mb-1">{job.company} </p>
+                        <p class="text-dark-600 dark:text-dark-400">{job.location}</p>
+                      </div>
+                      <div class="mt-4 md:mt-0 flex flex-col items-end gap-2">
+                        <div>
+                          <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300">
+                            {job.duration}
+                          </span>
+                          {#if job.current}
+                            <span class="ml-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 animate-pulse">
+                              Current
+                            </span>
+                          {/if}
+                        </div>
+                        <button class="expand-btn expand-btn--desktop" class:open={openId === job.id}
+                          on:click|stopPropagation={() => openId = openId === job.id ? null : job.id}>
+                          <span>{openId === job.id ? 'Hide' : 'Details'}</span>
+                          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 6l4 4 4-4"/>
+                          </svg>
+                        </button>
+                      </div>
+
+                      <!-- Mobile circle button -->
+                      <!-- svelte-ignore a11y-click-events-have-key-events -->
+                      <!-- svelte-ignore a11y-no-static-element-interactions -->
+                      <div class="expand-btn--mobile" class:open={openId === job.id}
+                        on:click|stopPropagation={() => openId = openId === job.id ? null : job.id}>
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M4 6l4 4 4-4"/>
+                        </svg>
+                      </div>
                     </div>
-                    <div class="mt-4 md:mt-0">
-                      <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300">
-                        {job.duration}
-                      </span>
-                      {#if job.current}
-                        <span class="ml-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 animate-pulse">
-                          Current
+
+                    <div class="flex flex-wrap gap-2">
+                      {#each job.highlights as highlight}
+                        <span class="px-3 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm rounded-full font-medium">
+                          {highlight}
                         </span>
-                      {/if}
+                      {/each}
                     </div>
                   </div>
+
+                  <!-- Accordion Body (expandable) -->
+                  {#if openId === job.id}
+                    <div transition:slide={{ duration: 300 }}>
+                      <div class="px-8 pb-8">
+                        <p class="text-dark-600 dark:text-dark-300 mb-6 text-lg">{job.description}</p>
                   
-                  <p class="text-dark-600 dark:text-dark-300 mb-6 text-lg">{job.description}</p>
-                  
-                  <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Left Column -->
-                    <div class="space-y-6">
-                      <div>
-                        <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Key Highlights</h4>
-                        <div class="flex flex-wrap gap-2">
-                          {#each job.highlights as highlight}
-                            <span class="px-3 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm rounded-full font-medium hover:bg-primary-200 dark:hover:bg-primary-900/50 transition-colors duration-200">
-                              {highlight}
-                            </span>
-                          {/each}
-                        </div>
-                      </div>
-                      
-                      <div>
-                        <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Roles & Responsibilities</h4>
-                        <ul class="space-y-3">
-                          {#each job.roles.slice(0, isSectionExpanded(job.id || index.toString(), 'roles') ? job.roles.length : 15) as role}
-                            <li class="flex items-start group/item">
-                              <div class="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0 group-hover/item:scale-150 transition-transform duration-200"></div>
-                              <span class="text-sm text-dark-700 dark:text-dark-300 group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors duration-200">{role}</span>
-                            </li>
-                          {/each}
-                          {#if job.roles.length > 15}
-                            <li>
-                              <button
-                                class="w-full text-left text-sm text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200 cursor-pointer"
-                                on:click={() => toggleSection(job.id || index.toString(), 'roles')}
-                                on:keydown={(e) => e.key === 'Enter' && toggleSection(job.id || index.toString(), 'roles')}>
-                                {isSectionExpanded(job.id || index.toString(), 'roles') ? 'Show less' : `+${job.roles.length - 5} more responsibilities`}
-                              </button>
-                            </li>
-                          {/if}
-                        </ul>
-                      </div>
-                    </div>
-                    
-                    <!-- Right Column -->
-                    <div class="space-y-6">
-                      <div>
-                        <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Key Achievements</h4>
-                        <ul class="space-y-3">
-                          {#each job.achievements.slice(0, isSectionExpanded(job.id || index.toString(), 'achievements') ? job.achievements.length : 15) as achievement}
-                            <li class="flex items-start group/item">
-                              <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0 group-hover/item:scale-150 transition-transform duration-200"></div>
-                              <span class="text-sm text-dark-700 dark:text-dark-300 group-hover/item:text-green-600 dark:group-hover/item:text-green-400 transition-colors duration-200">{achievement}</span>
-                            </li>
-                          {/each}
-                          {#if job.achievements.length > 15}
-                            <li>
-                              <button
-                                class="w-full text-left text-sm text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors duration-200 cursor-pointer"
-                                on:click={() => toggleSection(job.id || index.toString(), 'achievements')}
-                                on:keydown={(e) => e.key === 'Enter' && toggleSection(job.id || index.toString(), 'achievements')}>
-                                {isSectionExpanded(job.id || index.toString(), 'achievements') ? 'Show less' : `+${job.achievements.length - 4} more achievements`}
-                              </button>
-                            </li>
-                          {/if}
-                        </ul>
-                      </div>
-                      
-                      <div>
-                        <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Technologies</h4>
-                        <div class="flex flex-wrap gap-2">
-                          {#each job.technologies.slice(0, 25) as tech}
-                            <span class="px-3 py-2 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-sm rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/40 transition-colors duration-200 cursor-pointer">
-                              {tech}
-                            </span>
-                          {/each}
-                          {#if job.technologies.length > 25}
-                            <span class="px-3 py-2 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-sm rounded-lg hover:bg-dark-200 dark:hover:bg-dark-700 transition-colors duration-200 cursor-pointer">
-                              +{job.technologies.length - 25} more
-                            </span>
-                          {/if}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {#if job.majorProjects}
-                    <div class="mt-8 pt-6 border-t border-dark-200 dark:border-dark-700">
-                      <h4 class="font-semibold text-dark-900 dark:text-white mb-4 text-lg">Major Projects</h4>
-                      <div class="grid md:grid-cols-2 gap-4">
-                        {#each job.majorProjects as project}
-                          <div class="p-4 bg-dark-50 dark:bg-dark-800 rounded-lg hover:bg-dark-100 dark:hover:bg-dark-700 transition-colors duration-200 cursor-pointer group">
-                            <h5 class="font-medium text-dark-900 dark:text-white text-sm mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">{project.name}</h5>
-                            <p class="text-xs text-dark-600 dark:text-dark-400 group-hover:text-dark-700 dark:group-hover:text-dark-300 transition-colors duration-200">{project.description}</p>
+                        <div class="grid md:grid-cols-2 gap-8">
+                          <!-- Left Column -->
+                          <div class="space-y-6">
+                            <div>
+                              <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Roles & Responsibilities</h4>
+                              <ul class="space-y-3">
+                                {#each job.roles.slice(0, isSectionExpanded(job.id || index.toString(), 'roles') ? job.roles.length : 15) as role}
+                                  <li class="flex items-start group/item">
+                                    <div class="w-2 h-2 bg-primary-500 rounded-full mt-2 mr-3 flex-shrink-0 group-hover/item:scale-150 transition-transform duration-200"></div>
+                                    <span class="text-sm text-dark-700 dark:text-dark-300 group-hover/item:text-primary-600 dark:group-hover/item:text-primary-400 transition-colors duration-200">{role}</span>
+                                  </li>
+                                {/each}
+                                {#if job.roles.length > 15}
+                                  <li>
+                                    <button
+                                      class="w-full text-left text-sm text-primary-600 dark:text-primary-400 font-medium hover:text-primary-700 dark:hover:text-primary-300 transition-colors duration-200 cursor-pointer"
+                                      on:click|stopPropagation={() => toggleSection(job.id || index.toString(), 'roles')}
+                                      on:keydown={(e) => e.key === 'Enter' && toggleSection(job.id || index.toString(), 'roles')}>
+                                      {isSectionExpanded(job.id || index.toString(), 'roles') ? 'Show less' : `+${job.roles.length - 5} more responsibilities`}
+                                    </button>
+                                  </li>
+                                {/if}
+                              </ul>
+                            </div>
                           </div>
-                        {/each}
+                    
+                          <!-- Right Column -->
+                          <div class="space-y-6">
+                            <div>
+                              <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Key Achievements</h4>
+                              <ul class="space-y-3">
+                                {#each job.achievements.slice(0, isSectionExpanded(job.id || index.toString(), 'achievements') ? job.achievements.length : 15) as achievement}
+                                  <li class="flex items-start group/item">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0 group-hover/item:scale-150 transition-transform duration-200"></div>
+                                    <span class="text-sm text-dark-700 dark:text-dark-300 group-hover/item:text-green-600 dark:group-hover/item:text-green-400 transition-colors duration-200">{achievement}</span>
+                                  </li>
+                                {/each}
+                                {#if job.achievements.length > 15}
+                                  <li>
+                                    <button
+                                      class="w-full text-left text-sm text-green-600 dark:text-green-400 font-medium hover:text-green-700 dark:hover:text-green-300 transition-colors duration-200 cursor-pointer"
+                                      on:click|stopPropagation={() => toggleSection(job.id || index.toString(), 'achievements')}
+                                      on:keydown={(e) => e.key === 'Enter' && toggleSection(job.id || index.toString(), 'achievements')}>
+                                      {isSectionExpanded(job.id || index.toString(), 'achievements') ? 'Show less' : `+${job.achievements.length - 4} more achievements`}
+                                    </button>
+                                  </li>
+                                {/if}
+                              </ul>
+                            </div>
+                      
+                            <div>
+                              <h4 class="font-semibold text-dark-900 dark:text-white mb-3 text-lg">Technologies</h4>
+                              <div class="flex flex-wrap gap-2">
+                                {#each job.technologies.slice(0, 25) as tech}
+                                  <span class="px-3 py-2 bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 text-sm rounded-lg hover:bg-primary-100 dark:hover:bg-primary-900/40 transition-colors duration-200 cursor-pointer">
+                                    {tech}
+                                  </span>
+                                {/each}
+                                {#if job.technologies.length > 25}
+                                  <span class="px-3 py-2 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 text-sm rounded-lg hover:bg-dark-200 dark:hover:bg-dark-700 transition-colors duration-200 cursor-pointer">
+                                    +{job.technologies.length - 25} more
+                                  </span>
+                                {/if}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  
+                        {#if job.majorProjects}
+                          <div class="mt-8 pt-6 border-t border-dark-200 dark:border-dark-700">
+                            <h4 class="font-semibold text-dark-900 dark:text-white mb-4 text-lg">Major Projects</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                              {#each job.majorProjects as project}
+                                <div class="p-4 bg-dark-50 dark:bg-dark-800 rounded-lg hover:bg-dark-100 dark:hover:bg-dark-700 transition-colors duration-200 cursor-pointer group">
+                                  <h5 class="font-medium text-dark-900 dark:text-white text-sm mb-2 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">{project.name}</h5>
+                                  <p class="text-xs text-dark-600 dark:text-dark-400 group-hover:text-dark-700 dark:group-hover:text-dark-300 transition-colors duration-200">{project.description}</p>
+                                </div>
+                              {/each}
+                            </div>
+                          </div>
+                        {/if}
+
+                        {#if job.testimonial}
+                          <div class="mt-8 pt-6 border-t border-dark-200 dark:border-dark-700">
+                            <h4 class="font-semibold text-dark-900 dark:text-white mb-4 text-lg">Recommendation</h4>
+                            <RecommendationCard
+                              testimonial={job.testimonial}
+                              company={job.company}
+                              showContext={false}
+                            />
+                          </div>
+                        {/if}
                       </div>
                     </div>
                   {/if}
@@ -266,3 +313,68 @@
     </div>
   </section>
 </div>
+
+<style>
+  .expand-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--expand-accent-color);
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 6px 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .expand-btn svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .expand-btn.open svg {
+    transform: rotate(180deg);
+  }
+
+  .expand-btn--mobile {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .expand-btn--desktop {
+      display: none;
+    }
+
+    .expand-btn--mobile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid color-mix(in srgb, var(--expand-accent-color) 40%, transparent);
+      background: color-mix(in srgb, var(--expand-accent-color) 8%, transparent);
+      cursor: pointer;
+      color: var(--expand-accent-color);
+      flex-shrink: 0;
+    }
+
+    .expand-btn--mobile svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .expand-btn--mobile.open svg {
+      transform: rotate(180deg);
+    }
+  }
+</style>

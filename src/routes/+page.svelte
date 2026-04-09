@@ -8,6 +8,7 @@
   import type { Skill, SkillCategory } from '$lib/types/portfolio';
   import type { Repository } from '$lib/types/github';
   import { Icon, ProjectCard } from '$lib/components';
+  import Recommendations from '$lib/components/sections/Recommendations.svelte';
   import { fetchGitHubRepos } from '$lib/github';
 
   type SkillWithStagger = Skill & { staggerIndex: number };
@@ -596,6 +597,9 @@
     </div>
   </div>
 </section>
+
+<!-- Recommendations Section -->
+<Recommendations />
 
 <!-- Domain Expertise Section -->
 <section class="py-20 bg-white dark:bg-dark-900">

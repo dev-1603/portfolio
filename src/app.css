@@ -159,3 +159,12 @@ html {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+/* Expand/toggle button accent — explicit per-mode, no cascade conflict */
+html:not(.dark) {
+  --expand-accent-color: #1e40af; /* blue-800: high contrast on white */
+}
+
+html.dark {
+  --expand-accent-color: #60a5fa; /* blue-400: readable on dark bg */
+}

@@ -42,3 +42,5 @@ package-lock.json
 # pnpm-lock.yaml — keep committed for reproducible CI/builds
 yarn.lock
 bun.lockb
+
+vital-report/*
