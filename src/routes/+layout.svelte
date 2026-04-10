@@ -61,7 +61,7 @@
 
 <div class="min-h-screen flex flex-col bg-white dark:bg-dark-900 text-dark-900 dark:text-white transition-colors duration-300">
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/20 dark:border-dark-600/30">
+  <nav class="fixed top-0 left-0 right-0 z-50 glass">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <!-- Logo -->
@@ -77,7 +77,7 @@
             {#each navItems as item}
               <a
                 href={item.href}
-                class="text-dark-700 dark:text-dark-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 focus-ring"
+                class="text-dark-600 dark:text-dark-300 hover:text-primary-600 dark:hover:text-primary-300 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 focus-ring"
                 class:text-primary-600={$page.url.pathname === item.href}
                 class:dark:text-primary-400={$page.url.pathname === item.href}
               >
@@ -146,7 +146,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-dark-50 dark:bg-dark-800 border-t border-dark-200 dark:border-dark-700">
+  <footer class="bg-white dark:bg-dark-900 border-t-2 border-dark-200 dark:border-dark-700">
     <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
         <div class="text-sm text-dark-600 dark:text-dark-400">

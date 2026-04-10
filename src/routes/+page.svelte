@@ -280,38 +280,38 @@
           <div class="mb-6">
             <span class="inline-flex items-center px-4 py-2 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded-full text-sm font-medium">
               <Icon name="briefcase" className="w-4 h-4 mr-2" />
-              {experienceText} Years Experience
+              {personalInfo.yearsOfExperience}+ Years of Experience
             </span>
           </div>
 
           <!-- Name & Title -->
-          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
+          <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-3">
             <span class="gradient-text">{personalInfo.name}</span>
           </h1>
           
-          <p class="text-xl md:text-2xl text-dark-600 dark:text-dark-300 mb-6">
+          <p class="text-2xl md:text-3xl font-semibold text-dark-800 dark:text-dark-100 mb-4 tracking-tight">
             {personalInfo.title}
           </p>
           
           <!-- Summary -->
-          <p class="text-lg text-dark-500 dark:text-dark-400 mb-8 max-w-3xl mx-auto lg:mx-0">
-            {personalInfo.summary}
+          <p class="text-base text-dark-500 dark:text-dark-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            Full-stack products across fintech, GenAI, telecom, SaaS, and CMS — {personalInfo.yearsOfExperience}+ years, every time starting from an empty repo.
           </p>
           
           <!-- Domain Highlights -->
-          <div class="flex flex-wrap gap-3 mb-8 justify-center lg:justify-start">
+          <div class="flex flex-wrap gap-2 mb-8 justify-center lg:justify-start">
             {#each personalInfo.domains as domain}
-              <span class="px-4 py-2 bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-300 rounded-full text-sm font-medium hover:bg-accent-200 dark:hover:bg-accent-900/50 transition-colors duration-200 cursor-pointer">
+              <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs rounded-full font-medium">
                 {domain}
               </span>
             {/each}
           </div>
 
-          <!-- CTA Buttons & Resume Download -->
+          <!-- CTA Buttons -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
             <a
               href="#projects"
-              class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-all duration-200 focus-ring transform hover:scale-105"
+              class="px-8 py-3.5 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-all duration-200 focus-ring"
             >
               <span class="flex items-center justify-center">
                 <Icon name="view-work" className="w-5 h-5 mr-2" />
@@ -320,7 +320,7 @@
             </a>
             <a
               href="/contact"
-              class="px-8 py-4 border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white font-semibold rounded-lg transition-all duration-200 focus-ring transform hover:scale-105"
+              class="px-8 py-3.5 border border-primary-600 text-primary-600 dark:text-primary-400 dark:border-primary-500 hover:bg-primary-50 dark:hover:bg-primary-900/20 font-semibold rounded-lg transition-all duration-200 focus-ring"
             >
               <span class="flex items-center justify-center">
                 <Icon name="envelope" className="w-5 h-5 mr-2" />
@@ -332,11 +332,11 @@
               download="Debjyoti Mohapatra-Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              class="px-8 py-4 bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-300 hover:bg-dark-200 dark:hover:bg-dark-700 font-semibold rounded-lg transition-all duration-200 focus-ring transform hover:scale-105"
+              class="px-8 py-3.5 border border-dark-300 dark:border-dark-600 text-dark-600 dark:text-dark-300 hover:bg-dark-50 dark:hover:bg-dark-800 font-medium rounded-lg transition-all duration-200 focus-ring"
             >
               <span class="flex items-center justify-center">
                 <Icon name="download" className="w-5 h-5 mr-2" />
-                Download Resume
+                Resume
               </span>
             </a>
           </div>
@@ -544,9 +544,9 @@
 <section id="about" class="py-20 bg-white dark:bg-dark-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4">About Me</h2>
-      <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        {experienceText} years building full-stack products from scratch across fintech, GenAI, SaaS, telecom, and more.
+      <h2 class="text-4xl font-bold mb-4"><span class="section-heading">About Me</span></h2>
+      <p class="text-lg text-dark-500 dark:text-dark-400 max-w-3xl mx-auto">
+        Building full-stack products from scratch across fintech, GenAI, SaaS, telecom, and more.
       </p>
     </div>
 
@@ -588,7 +588,7 @@
                 {personalInfo.title}
               </p>
               <p class="text-sm text-dark-500 dark:text-dark-400 mt-2">
-                {experienceText} experience
+                {personalInfo.yearsOfExperience}+ years of experience
               </p>
             </div>
           </div>
@@ -605,30 +605,26 @@
 <section class="py-20 bg-white dark:bg-dark-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <p class="text-sm uppercase tracking-[0.35em] text-primary-500 dark:text-primary-400 mb-3">Where I Deliver</p>
+      <p class="text-xs uppercase tracking-[0.35em] text-primary-500 dark:text-primary-400 mb-3">Where I Deliver</p>
       <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="gradient-text">Domain Expertise</span>
+        <span class="section-heading">Domain Expertise</span>
       </h2>
-      <p class="text-lg text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        Product domains where I have delivered scalable, high-quality solutions from architecture to release.
+      <p class="text-base text-dark-500 dark:text-dark-400 max-w-2xl mx-auto">
+        Product domains where I have delivered scalable solutions from architecture to release.
       </p>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {#each domainExpertiseViewModel as item, index}
-        <article class="bg-dark-50 dark:bg-dark-800 rounded-2xl p-6 border border-dark-200 dark:border-dark-700 animate-slide-up" style="animation-delay: {index * 0.05}s;">
+        <article class="bg-white dark:bg-dark-900 rounded-2xl p-6 border border-dark-100 dark:border-dark-700 animate-slide-up" style="animation-delay: {index * 0.05}s;">
           <div class="mb-4">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300">
-              {item.domain}
-            </span>
+            <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs rounded-full font-medium">{item.domain}</span>
           </div>
-          <h3 class="text-xl font-bold text-dark-900 dark:text-white mb-2">{item.title}</h3>
-          <p class="text-sm text-dark-600 dark:text-dark-300 mb-4">{item.description}</p>
+          <h3 class="text-lg font-semibold text-dark-900 dark:text-white mb-2">{item.title}</h3>
+          <p class="text-sm text-dark-500 dark:text-dark-400 mb-4">{item.description}</p>
           <div class="flex flex-wrap gap-2">
             {#each item.focusAreas as focusArea}
-              <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-white dark:bg-dark-900 text-dark-700 dark:text-dark-200 border border-dark-200 dark:border-dark-600">
-                {focusArea}
-              </span>
+              <span class="px-3 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs rounded-full font-medium">{focusArea}</span>
             {/each}
           </div>
         </article>
@@ -641,8 +637,8 @@
 <section class="py-20 bg-dark-50 dark:bg-dark-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4">Work Experience</h2>
-      <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
+      <h2 class="text-4xl font-bold mb-4"><span class="section-heading">Work Experience</span></h2>
+      <p class="text-base text-dark-500 dark:text-dark-400 max-w-2xl mx-auto">
         A timeline of my professional journey and key achievements.
       </p>
     </div>
@@ -720,12 +716,9 @@
     </div>
 
     <div class="text-center mt-12">
-      <a
-        href="/work-experience"
-        class="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors duration-200 focus-ring"
-      >
+      <a href="/work-experience" class="btn-ghost">
         View Full Experience
-        <Icon name="arrow-right" className="w-5 h-5 ml-2" />
+        <Icon name="arrow-right" className="w-4 h-4" />
       </a>
     </div>
   </div>
@@ -734,10 +727,10 @@
 <!-- Featured Projects Section -->
 <section id="projects" class="py-20 bg-white dark:bg-dark-900">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4">Featured Projects</h2>
-      <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        A showcase of my professional work and personal projects, demonstrating expertise across various technologies and domains.
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4"><span class="section-heading">Featured Projects</span></h2>
+      <p class="text-base text-dark-500 dark:text-dark-400 max-w-2xl mx-auto">
+        A showcase of professional work and personal projects.
       </p>
     </div>
 
@@ -759,12 +752,9 @@
       </div>
     </div>
     <div class="text-center">
-      <a
-        href="/projects?tab=professional"
-        class="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors duration-200 focus-ring"
-      >
-        View All Projects
-        <Icon name="arrow-right" className="w-5 h-5 ml-2" />
+      <a href="/projects?tab=professional" class="btn-ghost">
+        View All Professional Projects
+        <Icon name="arrow-right" className="w-4 h-4" />
       </a>
     </div>
 
@@ -787,100 +777,23 @@
     </div>
 
     <div class="text-center">
-      <a
-        href="/projects?tab=personal"
-        class="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition-colors duration-200 focus-ring"
-      >
-        View All Projects
-        <Icon name="arrow-right" className="w-5 h-5 ml-2" />
+      <a href="/projects?tab=personal" class="btn-ghost">
+        View All Personal Projects
+        <Icon name="arrow-right" className="w-4 h-4" />
       </a>
     </div>
   </div>
 </section>
 
-<!-- Skills Section -->
-<section id="skills" class="py-20 bg-dark-50 dark:bg-dark-800">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-16">
-      <p class="text-sm uppercase tracking-[0.35em] text-primary-500 dark:text-primary-400 mb-3">What I Know</p>
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="gradient-text">Technical Skills</span>
-      </h2>
-      <p class="text-lg text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        My toolkit for building scalable products, robust systems, and high quality user experiences.
-      </p>
-    </div>
 
-    <div class="skills-grid" role="region" aria-label="Skills" bind:this={skillsRegion}>
-      {#each skillsViewModel as category, cardIndex}
-        <section
-          aria-label={category.label}
-          data-skill-card-key={category.key}
-          class="skills-card bg-white dark:bg-dark-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-dark-200 dark:border-dark-700"
-          class:skills-card--full={category.key === 'backend-architecture'}
-          class:skills-card--ai={category.key === 'ai-ml'}
-          class:skills-card--visible={isSkillCardVisible(category.key)}
-          class:skills-card--reduced={prefersReducedMotion}
-          style="--card-delay: {cardIndex * 80}ms;"
-        >
-          <div class="flex items-start gap-4 mb-5">
-            <div class="w-11 h-11 rounded-xl bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-300 flex items-center justify-center text-lg">
-              {category.icon}
-            </div>
-            <div>
-              <h3 class="text-xl md:text-2xl font-bold text-dark-900 dark:text-white">{category.label}</h3>
-              <p class="text-sm text-dark-600 dark:text-dark-400 mt-1">{category.description}</p>
-            </div>
-          </div>
-
-          {#if category.subcategories?.length}
-            <div class="space-y-4">
-              {#each category.groups as group, groupIndex}
-                {#if groupIndex > 0}
-                  <div class="border-t border-dark-200 dark:border-dark-700 pt-4"></div>
-                {/if}
-                <p class="text-[10px] font-bold tracking-[0.06em] uppercase text-dark-500 dark:text-dark-400 mb-2.5">{group.label}</p>
-                <div class="flex flex-wrap gap-2.5">
-                  {#each group.items as skill}
-                    <span
-                      class="skills-pill inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-200 border border-dark-200 dark:border-dark-700 {category.key === 'backend-architecture' && skill.subcategory === 'patterns'
-                        ? 'bg-primary-100 dark:bg-primary-900/30 border-primary-300 dark:border-primary-700 text-primary-700 dark:text-primary-300'
-                        : ''}"
-                      class:skills-pill--visible={isSkillCardVisible(category.key)}
-                      style="--pill-delay: {skill.staggerIndex * 20}ms;"
-                    >
-                      {skill.name}
-                    </span>
-                  {/each}
-                </div>
-              {/each}
-            </div>
-          {:else}
-            <div class="flex flex-wrap gap-2.5">
-              {#each category.groups[0]?.items ?? [] as skill}
-                <span
-                  class="skills-pill inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-200 border border-dark-200 dark:border-dark-700"
-                  class:skills-pill--visible={isSkillCardVisible(category.key)}
-                  style="--pill-delay: {skill.staggerIndex * 20}ms;"
-                >
-                  {skill.name}
-                </span>
-              {/each}
-            </div>
-          {/if}
-        </section>
-      {/each}
-    </div>
-  </div>
-</section>
 
 <!-- GitHub Repositories Section -->
-<section class="py-20 bg-white dark:bg-dark-900">
+<section class="py-20 bg-dark-50 dark:bg-dark-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4">Latest GitHub Repositories</h2>
-      <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        Check out my latest work on GitHub. All repositories are automatically updated from my GitHub profile.
+      <h2 class="text-4xl font-bold mb-4"><span class="section-heading">Latest GitHub Repositories</span></h2>
+      <p class="text-base text-dark-500 dark:text-dark-400 max-w-2xl mx-auto">
+        Check out my latest open-source work, updated automatically from GitHub.
       </p>
     </div>
 
@@ -943,13 +856,94 @@
   </div>
 </section>
 
+<!-- Skills Section -->
+<section id="skills" class="py-20  bg-white dark:bg-dark-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <p class="text-xs uppercase tracking-[0.35em] text-primary-500 dark:text-primary-400 mb-3">What I Know</p>
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="section-heading">Technical Skills</span>
+      </h2>
+      <p class="text-base text-dark-500 dark:text-dark-400 max-w-2xl mx-auto">
+        My toolkit for building scalable products, robust systems, and high-quality user experiences.
+      </p>
+    </div>
+
+    <div class="skills-grid" role="region" aria-label="Skills" bind:this={skillsRegion}>
+      {#each skillsViewModel as category, cardIndex}
+        <section
+          aria-label={category.label}
+          data-skill-card-key={category.key}
+          class="skills-card bg-white dark:bg-dark-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-dark-200 dark:border-dark-700"
+          class:skills-card--full={category.key === 'backend-architecture'}
+          class:skills-card--ai={category.key === 'ai-ml'}
+          class:skills-card--visible={isSkillCardVisible(category.key)}
+          class:skills-card--reduced={prefersReducedMotion}
+          style="--card-delay: {cardIndex * 80}ms;"
+        >
+          <div class="flex items-start gap-4 mb-5">
+            <div class="w-11 h-11 rounded-xl bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-300 flex items-center justify-center text-sm font-bold border border-primary-100 dark:border-primary-800 flex-shrink-0">
+            {category.icon}
+              <!-- {category.key === 'frontend'            ? 'FE'
+               : category.key === 'backend-architecture' ? 'BE'
+               : category.key === 'data-infrastructure'  ? 'DB'
+               : category.key === 'testing-tooling'      ? 'QA'
+               : 'AI'} -->
+            </div>
+            <div>
+              <h3 class="text-xl md:text-2xl font-bold text-dark-900 dark:text-white">{category.label}</h3>
+              <p class="text-sm text-dark-500 dark:text-dark-400 mt-1">{category.description}</p>
+            </div>
+          </div>
+
+          {#if category.subcategories?.length}
+            <div class="space-y-4">
+              {#each category.groups as group, groupIndex}
+                {#if groupIndex > 0}
+                  <div class="border-t border-dark-200 dark:border-dark-700 pt-4"></div>
+                {/if}
+                <p class="text-[10px] font-bold tracking-[0.06em] uppercase text-dark-500 dark:text-dark-400 mb-2.5">{group.label}</p>
+                <div class="flex flex-wrap gap-2.5">
+                  {#each group.items as skill}
+                    <span
+                      class="skills-pill inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-200 border border-dark-200 dark:border-dark-700 {category.key === 'backend-architecture' && skill.subcategory === 'patterns'
+                        ? 'bg-primary-100 dark:bg-primary-900/30 border-primary-300 dark:border-primary-700 text-primary-700 dark:text-primary-300'
+                        : ''}"
+                      class:skills-pill--visible={isSkillCardVisible(category.key)}
+                      style="--pill-delay: {skill.staggerIndex * 20}ms;"
+                    >
+                      {skill.name}
+                    </span>
+                  {/each}
+                </div>
+              {/each}
+            </div>
+          {:else}
+            <div class="flex flex-wrap gap-2.5">
+              {#each category.groups[0]?.items ?? [] as skill}
+                <span
+                  class="skills-pill inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-dark-100 dark:bg-dark-800 text-dark-700 dark:text-dark-200 border border-dark-200 dark:border-dark-700"
+                  class:skills-pill--visible={isSkillCardVisible(category.key)}
+                  style="--pill-delay: {skill.staggerIndex * 20}ms;"
+                >
+                  {skill.name}
+                </span>
+              {/each}
+            </div>
+          {/if}
+        </section>
+      {/each}
+    </div>
+  </div>
+</section>
+
 <!-- Contact Section -->
 <section id="contact" class="py-20 bg-dark-50 dark:bg-dark-800">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
-      <p class="text-xl text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
-        I'm always interested in new opportunities and exciting projects. Let's work together!
+      <h2 class="text-4xl font-bold mb-4"><span class="section-heading">Get In Touch</span></h2>
+      <p class="text-base text-dark-500 dark:text-dark-400 max-w-2xl mx-auto">
+        I'm always interested in new opportunities. Let's work together.
       </p>
     </div>
 

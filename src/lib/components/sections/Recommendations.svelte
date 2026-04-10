@@ -10,9 +10,9 @@
     <div class="text-center mb-16">
       <p class="text-sm uppercase tracking-[0.35em] text-primary-500 dark:text-primary-400 mb-3">What They Say</p>
       <h2 class="text-4xl md:text-5xl font-bold mb-4">
-        <span class="gradient-text">Recommendations</span>
+        <span class="section-heading">Recommendations</span>
       </h2>
-      <p class="text-lg text-dark-600 dark:text-dark-300 max-w-3xl mx-auto">
+      <p class="text-base text-dark-500 dark:text-dark-400 max-w-2xl mx-auto">
         What colleagues and clients have said about working with me.
       </p>
     </div>

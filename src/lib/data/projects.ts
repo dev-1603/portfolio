@@ -178,7 +178,7 @@ export const personalProjects: Project[] = [
 		title: 'Celestial Auth',
 		description:
 			'Authentication-as-a-Service gateway built with Node.js and TypeScript. Supports multiple identity providers, SSO, JWT issuance, and role-based access control. Frontends in both React and Vue talk to the same auth layer. Designed to be dropped into any multi-tenant SaaS without rewriting auth from scratch.',
-		technologies: ['Nuxt 3', 'Node.js', 'Supabase ', 'Express', 'TypeScript', 'Prisma',   'Tailwind CSS', 'shadcn-vue', 'JWT', 'OAuth2', 'SSO', 'RBAC'],
+		technologies: ['Nuxt 3', 'Node.js', 'Supabase', 'Express', 'TypeScript', 'Prisma', 'Tailwind CSS', 'shadcn-vue', 'JWT', 'OAuth2', 'SSO', 'RBAC'],
 		githubUrl: 'https://github.com/dev-1603/celestial-auth-portal',
 		liveUrl: '',
 		underDevelopment: false,
@@ -231,7 +231,7 @@ export const personalProjects: Project[] = [
 		id: 'healthcare-ai',
 		title: 'Care Caddy',
 		description:
-			'An AI-powered healthcare companion that helps users take control of their medical life. Upload a prescription and it reads it — extracting every medication, dosage, and instruction using OCR and LLM processing. Log symptoms and get an AI risk assessment. Track medications, set reminders, and monitor vitals over time. Find doctors by specialty and availability and book appointments directly.Built as a full-stack product with a NestJS microservice handling all AI processing separately from the main API, keeping response times fast and the architecture clean.',
+			'An AI-powered healthcare companion that helps users take control of their medical life. Upload a prescription and it reads it — extracting every medication, dosage, and instruction using OCR and LLM processing. Log symptoms and get an AI risk assessment. Track medications, set reminders, and monitor vitals over time. Find doctors by specialty and availability and book appointments directly. Built as a full-stack product with a NestJS microservice handling all AI processing separately from the main API, keeping response times fast and the architecture clean.',
 		technologies: ['Next.js', 'Nuxt 4', 'NestJS', 'TypeScript', 'PostgreSQL', 'Supabase', 'Prisma', 'OpenAI GPT-4o', 'AWS Textract', 'Tailwind CSS', 'shadcn/ui', 'Docker', 'HIPAA-aware', 'RBAC'],
     // githubUrl: 'https://github.com/dev-1603/healthcare-ai',
 		liveUrl: '',
