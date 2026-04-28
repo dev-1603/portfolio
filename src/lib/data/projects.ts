@@ -36,7 +36,7 @@ export const professionalProjects: Project[] = [
     description:
       'Built a no-code platform letting business users design and launch web and mobile apps with drag-and-drop. Includes a schema builder, layout builder, and component library - cutting go-to-market time and reducing dependency on dev teams.',
     role: 'Frontend Developer',
-    company: 'KISAI (Ideanz IT Solutions)',
+    company: '',
     impact:
       'Reduced app delivery time by 50% - non-technical teams could launch complex apps without writing code.',
     technologies: [

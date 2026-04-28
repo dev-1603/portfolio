@@ -127,42 +127,42 @@ export const workExperience: WorkExperience[] = [
       link: "https://www.linkedin.com/in/debjyoti-mohapatra/details/recommendations/"
     },
   },
-  {
-    id: 'frontend-dev-kisai',
-    title: 'Frontend Developer',
-    company: 'KISAI (Ideanz IT Solutions)',
-    location: 'Hyderabad, India',
-    duration: 'May 2021 - Sep 2021',
-    startDate: '2021-05',
-    endDate: '2021-09',
-    current: false,
-    description: 'Built the core rendering engine for a No-Code platform and independently designed a headless component library — both grounded in atomic design principles and token-based theming.',
-    roles: [
-      'Built the core rendering logic for a No-Code platform using Vue 3 Composition API and XState for deterministic state management.',
-      'Developed a Schema Builder that parsed JSON/YAML metadata and produced fully functional, stateful UI components at runtime.',
-      'Built a Layout Builder with drag-and-drop mechanics allowing non-technical users to assemble application views without writing code.',
-      'Independently designed and built a headless component library following atomic design principles and token-based theming — consumed both as a standard library and as drag-and-drop building blocks in the No-Code platform via props.',
-      'Documented and previewed the component library via Storybook, covering core primitives, form elements, and layout components.'
-    ],
-    achievements: [
-      'Built the frontend engine that let users define application schemas, states, and events entirely through configuration.',
-      'Integrated XState into the core platform to guarantee predictable UI state transitions across complex component trees.',
-      'Delivered a fully headless component library solo — reused across both traditional consumption and the No-Code drag-and-drop interface without any structural changes.',
-      'Reduced time-to-market for enterprise clients using the No-Code toolset for web and mobile application delivery.'
-    ],
-    technologies: ['Vue 3 (Composition API)', 'JavaScript', 'XState', 'Tailwind CSS', 'Storybook', 'Gitlab'],
-    highlights: ['No-Code Engine', 'State Machines (XState)', 'Dynamic Schema Parsing', 'Headless Component Library'],
-    majorProjects: [
-      {
-        name: 'No-Code Application Builder',
-        description: 'A platform where users define application schemas, layouts, and state flows through configuration — no code required. Supported drag-and-drop assembly, dynamic component rendering, and complex state transitions.'
-      },
-      {
-        name: 'Headless Component Library & Design System',
-        description: 'A component library following atomic design principles and token-based theming. Served dual purpose — used as a standard library and as headless drag-and-drop building blocks inside the No-Code platform, configured entirely through props.'
-      }
-    ]
-  },
+  // {
+  //   id: 'frontend-dev-kisai',
+  //   title: 'Frontend Developer',
+  //   company: 'KISAI (Ideanz IT Solutions)',
+  //   location: 'Hyderabad, India',
+  //   duration: 'May 2021 - Sep 2021',
+  //   startDate: '2021-05',
+  //   endDate: '2021-09',
+  //   current: false,
+  //   description: 'Built the core rendering engine for a No-Code platform and independently designed a headless component library — both grounded in atomic design principles and token-based theming.',
+  //   roles: [
+  //     'Built the core rendering logic for a No-Code platform using Vue 3 Composition API and XState for deterministic state management.',
+  //     'Developed a Schema Builder that parsed JSON/YAML metadata and produced fully functional, stateful UI components at runtime.',
+  //     'Built a Layout Builder with drag-and-drop mechanics allowing non-technical users to assemble application views without writing code.',
+  //     'Independently designed and built a headless component library following atomic design principles and token-based theming — consumed both as a standard library and as drag-and-drop building blocks in the No-Code platform via props.',
+  //     'Documented and previewed the component library via Storybook, covering core primitives, form elements, and layout components.'
+  //   ],
+  //   achievements: [
+  //     'Built the frontend engine that let users define application schemas, states, and events entirely through configuration.',
+  //     'Integrated XState into the core platform to guarantee predictable UI state transitions across complex component trees.',
+  //     'Delivered a fully headless component library solo — reused across both traditional consumption and the No-Code drag-and-drop interface without any structural changes.',
+  //     'Reduced time-to-market for enterprise clients using the No-Code toolset for web and mobile application delivery.'
+  //   ],
+  //   technologies: ['Vue 3 (Composition API)', 'JavaScript', 'XState', 'Tailwind CSS', 'Storybook', 'Gitlab'],
+  //   highlights: ['No-Code Engine', 'State Machines (XState)', 'Dynamic Schema Parsing', 'Headless Component Library'],
+  //   majorProjects: [
+  //     {
+  //       name: 'No-Code Application Builder',
+  //       description: 'A platform where users define application schemas, layouts, and state flows through configuration — no code required. Supported drag-and-drop assembly, dynamic component rendering, and complex state transitions.'
+  //     },
+  //     {
+  //       name: 'Headless Component Library & Design System',
+  //       description: 'A component library following atomic design principles and token-based theming. Served dual purpose — used as a standard library and as headless drag-and-drop building blocks inside the No-Code platform, configured entirely through props.'
+  //     }
+  //   ]
+  // },
   {
     id: 'software-eng-kalsoft',
     title: 'Software Engineer',
